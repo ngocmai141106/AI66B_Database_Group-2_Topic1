@@ -1,0 +1,123 @@
+[
+  {
+    "pro_id": "p-phone-550e8400-e29b-41d4-a716-446655440000",
+    "pro_name": "iPhone 15",
+    "cat_id": "c1a7f2b0-9d3a-4e1f-8a2a-1f9d8a7b1234",
+    "brand": "Apple",
+    "attributes": { "RAM": "8GB", "CPU": "A17 Bionic", "Battery": "4000mAh" },
+    "reviews": [
+      { "rev_id": "r-phone-123e4567-e89b-12d3-a456-426614174000", "reviewer": "Alice", "rating": 5, "content": "Excellent performance" },
+      { "rev_id": "r-phone-123e4567-e89b-12d3-a456-426614174001", "reviewer": "Bob", "rating": 4, "content": "Battery could be better" }
+    ],
+    "price": 1200,
+    "stock": 30
+  },
+  {
+    "pro_id": "p-phone-550e8400-e29b-41d4-a716-446655440001",
+    "pro_name": "Galaxy S24",
+    "cat_id": "c1a7f2b0-9d3a-4e1f-8a2a-1f9d8a7b1234",
+    "brand": "Samsung",
+    "attributes": { "RAM": "12GB", "CPU": "Snapdragon 8 Gen 3", "Battery": "4500mAh" },
+    "reviews": [
+      { "rev_id": "r-phone-123e4567-e89b-12d3-a456-426614174002", "reviewer": "Charlie", "rating": 5, "content": "Amazing display quality" }
+    ],
+    "price": 1100,
+    "stock": 25
+  },
+  {
+    "pro_id": "p-phone-550e8400-e29b-41d4-a716-446655440002",
+    "pro_name": "Pixel 9",
+    "cat_id": "c1a7f2b0-9d3a-4e1f-8a2a-1f9d8a7b1234",
+    "brand": "Google",
+    "attributes": { "RAM": "8GB", "CPU": "Tensor G3", "Battery": "4200mAh" },
+    "reviews": [
+      { "rev_id": "r-phone-123e4567-e89b-12d3-a456-426614174003", "reviewer": "David", "rating": 4, "content": "Great camera" }
+    ],
+    "price": 950,
+    "stock": 40
+  },
+  {
+    "pro_id": "p-phone-550e8400-e29b-41d4-a716-446655440003",
+    "pro_name": "Xiaomi Mi 14",
+    "cat_id": "c1a7f2b0-9d3a-4e1f-8a2a-1f9d8a7b1234",
+    "brand": "Xiaomi",
+    "attributes": { "RAM": "12GB", "CPU": "Snapdragon 8 Gen 2", "Battery": "5000mAh" },
+    "reviews": [
+      { "rev_id": "r-phone-123e4567-e89b-12d3-a456-426614174004", "reviewer": "Emma", "rating": 5, "content": "Excellent value for money" }
+    ],
+    "price": 700,
+    "stock": 60
+  },
+  {
+    "pro_id": "p-phone-550e8400-e29b-41d4-a716-446655440004",
+    "pro_name": "OnePlus 12",
+    "cat_id": "c1a7f2b0-9d3a-4e1f-8a2a-1f9d8a7b1234",
+    "brand": "OnePlus",
+    "attributes": { "RAM": "16GB", "CPU": "Snapdragon 8 Gen 3", "Battery": "4800mAh" },
+    "reviews": [
+      { "rev_id": "r-phone-123e4567-e89b-12d3-a456-426614174005", "reviewer": "Sophia", "rating": 4, "content": "Fast and smooth" }
+    ],
+    "price": 850,
+    "stock": 35
+  },
+  {
+    "pro_id": "p-phone-550e8400-e29b-41d4-a716-446655440005",
+    "pro_name": "Huawei P70",
+    "cat_id": "c1a7f2b0-9d3a-4e1f-8a2a-1f9d8a7b1234",
+    "brand": "Huawei",
+    "attributes": { "RAM": "12GB", "CPU": "Kirin 9000", "Battery": "4700mAh" },
+    "reviews": [
+      { "rev_id": "r-phone-123e4567-e89b-12d3-a456-426614174006", "reviewer": "Liam", "rating": 3, "content": "Good but limited apps" }
+    ],
+    "price": 800,
+    "stock": 20
+  },
+  {
+    "pro_id": "p-phone-550e8400-e29b-41d4-a716-446655440006",
+    "pro_name": "Sony Xperia Z5",
+    "cat_id": "c1a7f2b0-9d3a-4e1f-8a2a-1f9d8a7b1234",
+    "brand": "Sony",
+    "attributes": { "RAM": "8GB", "CPU": "Snapdragon 8 Gen 1", "Battery": "4000mAh" },
+    "reviews": [
+      { "rev_id": "r-phone-123e4567-e89b-12d3-a456-426614174007", "reviewer": "Noah", "rating": 4, "content": "Solid build quality" }
+    ],
+    "price": 750,
+    "stock": 15
+  },
+  {
+    "pro_id": "p-phone-550e8400-e29b-41d4-a716-446655440007",
+    "pro_name": "Oppo Find X6",
+    "cat_id": "c1a7f2b0-9d3a-4e1f-8a2a-1f9d8a7b1234",
+    "brand": "Oppo",
+    "attributes": { "RAM": "12GB", "CPU": "Snapdragon 8 Gen 2", "Battery": "4600mAh" },
+    "reviews": [
+      { "rev_id": "r-phone-123e4567-e89b-12d3-a456-426614174008", "reviewer": "Ava", "rating": 5, "content": "Beautiful design" }
+    ],
+    "price": 780,
+    "stock": 50
+  },
+  {
+    "pro_id": "p-phone-550e8400-e29b-41d4-a716-446655440008",
+    "pro_name": "Realme GT Neo",
+    "cat_id": "c1a7f2b0-9d3a-4e1f-8a2a-1f9d8a7b1234",
+    "brand": "Realme",
+    "attributes": { "RAM": "8GB", "CPU": "Dimensity 9000", "Battery": "5000mAh" },
+    "reviews": [
+      { "rev_id": "r-phone-123e4567-e89b-12d3-a456-426614174009", "reviewer": "Isabella", "rating": 4, "content": "Good performance for price" }
+    ],
+    "price": 600,
+    "stock": 70
+  },
+  {
+    "pro_id": "p-phone-550e8400-e29b-41d4-a716-446655440009",
+    "pro_name": "Nokia XR20",
+    "cat_id": "c1a7f2b0-9d3a-4e1f-8a2a-1f9d8a7b1234",
+    "brand": "Nokia",
+    "attributes": { "RAM": "6GB", "CPU": "Snapdragon 480", "Battery": "4630mAh" },
+    "reviews": [
+      { "rev_id": "r-phone-123e4567-e89b-12d3-a456-426614174010", "reviewer": "Ethan", "rating": 3, "content": "Moderate phone, no comment" }
+    ],
+    "price": 600,
+    "stock": 70
+  }
+]

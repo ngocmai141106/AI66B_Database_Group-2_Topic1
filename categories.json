@@ -1,0 +1,14 @@
+[
+  {
+    "cat_id": "c1a7f2b0-9d3a-4e1f-8a2a-1f9d8a7b1234",
+    "cat_name": "phone"
+  },
+  {
+    "cat_id": "f2b9c4d1-7e6a-4a3b-9c2b-5d7e8f9a5678",
+    "cat_name": "fashion"
+  },
+  {
+    "cat_id": "b3c8d5e2-6f7a-4b4c-8d3c-7e9f0a1b9012",
+    "cat_name": "book"
+  }
+]

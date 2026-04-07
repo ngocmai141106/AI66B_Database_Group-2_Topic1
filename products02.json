@@ -1,0 +1,123 @@
+[
+  {
+    "pro_id": "p-fash-550e8400-e29b-41d4-a716-446655440010",
+    "pro_name": "Men's Cotton Shirt",
+    "cat_id": "f2b9c4d1-7e6a-4a3b-9c2b-5d7e8f9a5678",
+    "brand": "Uniqlo",
+    "attributes": { "Size": "L", "Color": "White", "Material": "Cotton" },
+    "reviews": [
+      { "rev_id": "r-fash-123e4567-e89b-12d3-a456-426614174010", "reviewer": "Emma", "rating": 5, "content": "Very comfortable" },
+      { "rev_id": "r-fash-123e4567-e89b-12d3-a456-426614174011", "reviewer": "John", "rating": 4, "content": "Good quality fabric" }
+    ],
+    "price": 40,
+    "stock": 100
+  },
+  {
+    "pro_id": "p-fash-550e8400-e29b-41d4-a716-446655440011",
+    "pro_name": "Women's Summer Dress",
+    "cat_id": "f2b9c4d1-7e6a-4a3b-9c2b-5d7e8f9a5678",
+    "brand": "Zara",
+    "attributes": { "Size": "M", "Color": "Red", "Material": "Silk" },
+    "reviews": [
+      { "rev_id": "r-fash-123e4567-e89b-12d3-a456-426614174012", "reviewer": "Sophia", "rating": 4, "content": "Beautiful design" }
+    ],
+    "price": 70,
+    "stock": 60
+  },
+  {
+    "pro_id": "p-fash-550e8400-e29b-41d4-a716-446655440012",
+    "pro_name": "Leather Jacket",
+    "cat_id": "f2b9c4d1-7e6a-4a3b-9c2b-5d7e8f9a5678",
+    "brand": "Levi's",
+    "attributes": { "Size": "XL", "Color": "Black", "Material": "Leather" },
+    "reviews": [
+      { "rev_id": "r-fash-123e4567-e89b-12d3-a456-426614174013", "reviewer": "Michael", "rating": 5, "content": "Stylish and warm" }
+    ],
+    "price": 150,
+    "stock": 40
+  },
+  {
+    "pro_id": "p-fash-550e8400-e29b-41d4-a716-446655440013",
+    "pro_name": "Denim Jeans",
+    "cat_id": "f2b9c4d1-7e6a-4a3b-9c2b-5d7e8f9a5678",
+    "brand": "Levi's",
+    "attributes": { "Size": "M", "Color": "Blue", "Material": "Denim" },
+    "reviews": [
+      { "rev_id": "r-fash-123e4567-e89b-12d3-a456-426614174014", "reviewer": "Olivia", "rating": 4, "content": "Comfortable fit" }
+    ],
+    "price": 60,
+    "stock": 80
+  },
+  {
+    "pro_id": "p-fash-550e8400-e29b-41d4-a716-446655440014",
+    "pro_name": "Wool Sweater",
+    "cat_id": "f2b9c4d1-7e6a-4a3b-9c2b-5d7e8f9a5678",
+    "brand": "H&M",
+    "attributes": { "Size": "L", "Color": "Gray", "Material": "Wool" },
+    "reviews": [
+      { "rev_id": "r-fash-123e4567-e89b-12d3-a456-426614174015", "reviewer": "Daniel", "rating": 5, "content": "Warm and cozy" }
+    ],
+    "price": 55,
+    "stock": 70
+  },
+  {
+    "pro_id": "p-fash-550e8400-e29b-41d4-a716-446655440015",
+    "pro_name": "Sports Shoes",
+    "cat_id": "f2b9c4d1-7e6a-4a3b-9c2b-5d7e8f9a5678",
+    "brand": "Nike",
+    "attributes": { "Size": "42", "Color": "Black", "Material": "Synthetic" },
+    "reviews": [
+      { "rev_id": "r-fash-123e4567-e89b-12d3-a456-426614174016", "reviewer": "Lucas", "rating": 5, "content": "Perfect for running" }
+    ],
+    "price": 90,
+    "stock": 120
+  },
+  {
+    "pro_id": "p-fash-550e8400-e29b-41d4-a716-446655440016",
+    "pro_name": "High Heels",
+    "cat_id": "f2b9c4d1-7e6a-4a3b-9c2b-5d7e8f9a5678",
+    "brand": "Gucci",
+    "attributes": { "Size": "38", "Color": "Red", "Material": "Leather" },
+    "reviews": [
+      { "rev_id": "r-fash-123e4567-e89b-12d3-a456-426614174017", "reviewer": "Sophia", "rating": 4, "content": "Elegant design" }
+    ],
+    "price": 300,
+    "stock": 20
+  },
+  {
+    "pro_id": "p-fash-550e8400-e29b-41d4-a716-446655440017",
+    "pro_name": "Casual T-Shirt",
+    "cat_id": "f2b9c4d1-7e6a-4a3b-9c2b-5d7e8f9a5678",
+    "brand": "Adidas",
+    "attributes": { "Size": "M", "Color": "Green", "Material": "Cotton" },
+    "reviews": [
+      { "rev_id": "r-fash-123e4567-e89b-12d3-a456-426614174018", "reviewer": "Ella", "rating": 5, "content": "Soft and breathable" }
+    ],
+    "price": 25,
+    "stock": 200
+  },
+  {
+    "pro_id": "p-fash-550e8400-e29b-41d4-a716-446655440018",
+    "pro_name": "Formal Suit",
+    "cat_id": "f2b9c4d1-7e6a-4a3b-9c2b-5d7e8f9a5678",
+    "brand": "Armani",
+    "attributes": { "Size": "L", "Color": "Navy", "Material": "Wool" },
+    "reviews": [
+      { "rev_id": "r-fash-123e4567-e89b-12d3-a456-426614174019", "reviewer": "James", "rating": 5, "content": "Professional look" }
+    ],
+    "price": 500,
+    "stock": 15
+  },
+  {
+    "pro_id": "p-fash-550e8400-e29b-41d4-a716-446655440019",
+    "pro_name": "Winter Coat",
+    "cat_id": "f2b9c4d1-7e6a-4a3b-9c2b-5d7e8f9a5678",
+    "brand": "Burberry",
+    "attributes": { "Size": "XL", "Color": "Brown", "Material": "Wool" },
+    "reviews": [
+      { "rev_id": "r-fash-123e4567-e89b-12d3-a456-426614174020", "reviewer": "Mia", "rating": 5, "content": "Keeps me warm in winter" }
+    ],
+    "price": 600,
+    "stock": 10
+  }
+]
