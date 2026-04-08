@@ -1,123 +1,143 @@
 [
   {
-    "pro_id": "p-fash-550e8400-e29b-41d4-a716-446655440010",
-    "pro_name": "Men's Cotton Shirt",
-    "cat_id": "f2b9c4d1-7e6a-4a3b-9c2b-5d7e8f9a5678",
-    "brand": "Uniqlo",
-    "attributes": { "Size": "L", "Color": "White", "Material": "Cotton" },
+    "pro_id": "p-book-550e8400-e29b-41d4-a716-446655440020",
+    "pro_name": "The Great Gatsby",
+    "cat_id": "b3c8d5e2-6f7a-4b4c-8d3c-7e9f0a1b9012",
+    "brand": "Penguin",
+    "attributes": { "Author_name": "F. Scott Fitzgerald", "Publisher": "Penguin Classics", "Genre": "Novel" },
+    "description": "Fitzgerald's classic novel of love, wealth, and the Jazz Age.",
     "reviews": [
-      { "rev_id": "r-fash-123e4567-e89b-12d3-a456-426614174010", "reviewer": "Emma", "rating": 5, "content": "Very comfortable" },
-      { "rev_id": "r-fash-123e4567-e89b-12d3-a456-426614174011", "reviewer": "John", "rating": 4, "content": "Good quality fabric" }
+      {"rev_id": "r-book-123e4567-e89b-12d3-a456-426614174030", "reviewer": "Charlotte", "rating": 4, "content": "Beautifully written, captures the era well"},
+      {"rev_id": "r-book-123e4567-e89b-12d3-a456-426614174031", "reviewer": "Henry", "rating": 5, "content": "A masterpiece of American literature"}
     ],
-    "price": 40,
-    "stock": 100
-  },
-  {
-    "pro_id": "p-fash-550e8400-e29b-41d4-a716-446655440011",
-    "pro_name": "Women's Summer Dress",
-    "cat_id": "f2b9c4d1-7e6a-4a3b-9c2b-5d7e8f9a5678",
-    "brand": "Zara",
-    "attributes": { "Size": "M", "Color": "Red", "Material": "Silk" },
-    "reviews": [
-      { "rev_id": "r-fash-123e4567-e89b-12d3-a456-426614174012", "reviewer": "Sophia", "rating": 4, "content": "Beautiful design" }
-    ],
-    "price": 70,
-    "stock": 60
-  },
-  {
-    "pro_id": "p-fash-550e8400-e29b-41d4-a716-446655440012",
-    "pro_name": "Leather Jacket",
-    "cat_id": "f2b9c4d1-7e6a-4a3b-9c2b-5d7e8f9a5678",
-    "brand": "Levi's",
-    "attributes": { "Size": "XL", "Color": "Black", "Material": "Leather" },
-    "reviews": [
-      { "rev_id": "r-fash-123e4567-e89b-12d3-a456-426614174013", "reviewer": "Michael", "rating": 5, "content": "Stylish and warm" }
-    ],
-    "price": 150,
-    "stock": 40
-  },
-  {
-    "pro_id": "p-fash-550e8400-e29b-41d4-a716-446655440013",
-    "pro_name": "Denim Jeans",
-    "cat_id": "f2b9c4d1-7e6a-4a3b-9c2b-5d7e8f9a5678",
-    "brand": "Levi's",
-    "attributes": { "Size": "M", "Color": "Blue", "Material": "Denim" },
-    "reviews": [
-      { "rev_id": "r-fash-123e4567-e89b-12d3-a456-426614174014", "reviewer": "Olivia", "rating": 4, "content": "Comfortable fit" }
-    ],
-    "price": 60,
-    "stock": 80
-  },
-  {
-    "pro_id": "p-fash-550e8400-e29b-41d4-a716-446655440014",
-    "pro_name": "Wool Sweater",
-    "cat_id": "f2b9c4d1-7e6a-4a3b-9c2b-5d7e8f9a5678",
-    "brand": "H&M",
-    "attributes": { "Size": "L", "Color": "Gray", "Material": "Wool" },
-    "reviews": [
-      { "rev_id": "r-fash-123e4567-e89b-12d3-a456-426614174015", "reviewer": "Daniel", "rating": 5, "content": "Warm and cozy" }
-    ],
-    "price": 55,
-    "stock": 70
-  },
-  {
-    "pro_id": "p-fash-550e8400-e29b-41d4-a716-446655440015",
-    "pro_name": "Sports Shoes",
-    "cat_id": "f2b9c4d1-7e6a-4a3b-9c2b-5d7e8f9a5678",
-    "brand": "Nike",
-    "attributes": { "Size": "42", "Color": "Black", "Material": "Synthetic" },
-    "reviews": [
-      { "rev_id": "r-fash-123e4567-e89b-12d3-a456-426614174016", "reviewer": "Lucas", "rating": 5, "content": "Perfect for running" }
-    ],
-    "price": 90,
-    "stock": 120
-  },
-  {
-    "pro_id": "p-fash-550e8400-e29b-41d4-a716-446655440016",
-    "pro_name": "High Heels",
-    "cat_id": "f2b9c4d1-7e6a-4a3b-9c2b-5d7e8f9a5678",
-    "brand": "Gucci",
-    "attributes": { "Size": "38", "Color": "Red", "Material": "Leather" },
-    "reviews": [
-      { "rev_id": "r-fash-123e4567-e89b-12d3-a456-426614174017", "reviewer": "Sophia", "rating": 4, "content": "Elegant design" }
-    ],
-    "price": 300,
-    "stock": 20
-  },
-  {
-    "pro_id": "p-fash-550e8400-e29b-41d4-a716-446655440017",
-    "pro_name": "Casual T-Shirt",
-    "cat_id": "f2b9c4d1-7e6a-4a3b-9c2b-5d7e8f9a5678",
-    "brand": "Adidas",
-    "attributes": { "Size": "M", "Color": "Green", "Material": "Cotton" },
-    "reviews": [
-      { "rev_id": "r-fash-123e4567-e89b-12d3-a456-426614174018", "reviewer": "Ella", "rating": 5, "content": "Soft and breathable" }
-    ],
-    "price": 25,
+    "price": 15,
     "stock": 200
   },
   {
-    "pro_id": "p-fash-550e8400-e29b-41d4-a716-446655440018",
-    "pro_name": "Formal Suit",
-    "cat_id": "f2b9c4d1-7e6a-4a3b-9c2b-5d7e8f9a5678",
-    "brand": "Armani",
-    "attributes": { "Size": "L", "Color": "Navy", "Material": "Wool" },
+    "pro_id": "p-book-550e8400-e29b-41d4-a716-446655440021",
+    "pro_name": "Clean Code",
+    "cat_id": "b3c8d5e2-6f7a-4b4c-8d3c-7e9f0a1b9012",
+    "brand": "Prentice Hall",
+    "attributes": { "Author_name": "Robert C. Martin", "Publisher": "Prentice Hall", "Genre": "Programming" },
+    "description": "Robert C. Martin's guide to writing clean, maintainable code.",
     "reviews": [
-      { "rev_id": "r-fash-123e4567-e89b-12d3-a456-426614174019", "reviewer": "James", "rating": 5, "content": "Professional look" }
+      {"rev_id": "r-book-123e4567-e89b-12d3-a456-426614174032", "reviewer": "Mark", "rating": 5, "content": "Essential reading for every developer"},
+      {"rev_id": "r-book-123e4567-e89b-12d3-a456-426614174033", "reviewer": "Anna", "rating": 4, "content": "Practical advice, though a bit dense"}
     ],
-    "price": 500,
-    "stock": 15
+    "price": 50,
+    "stock": 80
   },
   {
-    "pro_id": "p-fash-550e8400-e29b-41d4-a716-446655440019",
-    "pro_name": "Winter Coat",
-    "cat_id": "f2b9c4d1-7e6a-4a3b-9c2b-5d7e8f9a5678",
-    "brand": "Burberry",
-    "attributes": { "Size": "XL", "Color": "Brown", "Material": "Wool" },
+    "pro_id": "p-book-550e8400-e29b-41d4-a716-446655440022",
+    "pro_name": "1984",
+    "cat_id": "b3c8d5e2-6f7a-4b4c-8d3c-7e9f0a1b9012",
+    "brand": "Secker & Warburg",
+    "attributes": { "Author_name": "George Orwell", "Publisher": "Secker & Warburg", "Genre": "Dystopian" },
+    "description": "Orwell's dystopian masterpiece about surveillance and control.",
     "reviews": [
-      { "rev_id": "r-fash-123e4567-e89b-12d3-a456-426614174020", "reviewer": "Mia", "rating": 5, "content": "Keeps me warm in winter" }
+      {"rev_id": "r-book-123e4567-e89b-12d3-a456-426614174034", "reviewer": "Grace", "rating": 5, "content": "Chilling and thought-provoking"},
+      {"rev_id": "r-book-123e4567-e89b-12d3-a456-426614174035", "reviewer": "Leo","rating": 4, "content": "Still relevant in today's world"}
     ],
-    "price": 600,
-    "stock": 10
+    "price": 20,
+    "stock": 150
+  },
+
+  {
+    "pro_id": "p-book-550e8400-e29b-41d4-a716-446655440023",
+    "pro_name": "To Kill a Mockingbird",
+    "cat_id": "b3c8d5e2-6f7a-4b4c-8d3c-7e9f0a1b9012",
+    "brand": "HarperCollins",
+    "attributes": { "Author_name": "Harper Lee", "Publisher": "HarperCollins", "Genre": "Novel" },
+    "description": "Harper Lee's timeless story of justice and childhood in the South.",
+    "reviews": [
+      {"rev_id": "r-book-123e4567-e89b-12d3-a456-426614174036", "reviewer": "Ella", "rating": 5, "content": "Powerful story about justice and empathy"},
+      {"rev_id": "r-book-123e4567-e89b-12d3-a456-426614174037", "reviewer": "William", "rating": 4, "content": "A moving and important novel"}
+    ],
+    "price": 18,
+    "stock": 120
+  },
+  {
+    "pro_id": "p-book-550e8400-e29b-41d4-a716-446655440024",
+    "pro_name": "Harry Potter and the Sorcerer's Stone",
+    "cat_id": "b3c8d5e2-6f7a-4b4c-8d3c-7e9f0a1b9012",
+    "brand": "Bloomsbury",
+    "attributes": { "Author_name": "J.K. Rowling", "Publisher": "Bloomsbury", "Genre": "Fantasy" },
+    "description": "Rowling's magical tale introducing Harry Potter's world of wizardry.",
+    "reviews": [
+      {"rev_id": "r-book-123e4567-e89b-12d3-a456-426614174038", "reviewer": "Mia", "rating": 5, "content": "Magical and unforgettable start to the series"},
+      {"rev_id": "r-book-123e4567-e89b-12d3-a456-426614174039", "reviewer": "Jack", "rating": 4, "content": "Captivating for both kids and adults"}
+    ],
+    "price": 25,
+    "stock": 300
+  },
+  {
+    "pro_id": "p-book-550e8400-e29b-41d4-a716-446655440025",
+    "pro_name": "The Hobbit",
+    "cat_id": "b3c8d5e2-6f7a-4b4c-8d3c-7e9f0a1b9012",
+    "brand": "HarperCollins",
+    "attributes": { "Author_name": "J.R.R. Tolkien", "Publisher": "HarperCollins", "Genre": "Fantasy" },
+    "description": "Tolkien's fantasy adventure of Bilbo Baggins and his epic journey.",
+    "reviews": [
+      {"rev_id": "r-book-123e4567-e89b-12d3-a456-426614174040", "reviewer": "Lucas", "rating": 5, "content": "A delightful adventure full of charm"},
+      {"rev_id": "r-book-123e4567-e89b-12d3-a456-426614174041", "reviewer": "Sophie", "rating": 4, "content": "Engaging, though slower in parts"}      
+    ],
+    "price": 22,
+    "stock": 180
+  },
+  {
+    "pro_id": "p-book-550e8400-e29b-41d4-a716-446655440026",
+    "pro_name": "The Catcher in the Rye",
+    "cat_id": "b3c8d5e2-6f7a-4b4c-8d3c-7e9f0a1b9012",
+    "brand": "Little, Brown and Company",
+    "attributes": { "Author_name": "J.D. Salinger", "Publisher": "Little, Brown and Company", "Genre": "Novel" },
+    "description": "Salinger's iconic novel of teenage angst and alienation.",
+    "reviews": [
+      {"rev_id": "r-book-123e4567-e89b-12d3-a456-426614174042", "reviewer": "Noah", "rating": 4, "content": "Captures teenage struggles perfectly"},
+      {"rev_id": "r-book-123e4567-e89b-12d3-a456-426614174043", "reviewer": "Isabella", "rating": 3, "content": "Interesting but not for everyone"}      
+    ],
+    "price": 17,
+    "stock": 140
+  },
+  {
+    "pro_id": "p-book-550e8400-e29b-41d4-a716-446655440027",
+    "pro_name": "The Lord of the Rings",
+    "cat_id": "b3c8d5e2-6f7a-4b4c-8d3c-7e9f0a1b9012",
+    "brand": "Allen & Unwin",
+    "attributes": { "Author_name": "J.R.R. Tolkien", "Publisher": "Allen & Unwin", "Genre": "Fantasy" },
+    "description": "Tolkien's epic fantasy saga of Middle-earth and the One Ring.",
+    "reviews": [
+      {"rev_id": "r-book-123e4567-e89b-12d3-a456-426614174044", "reviewer": "Daniel", "rating": 5, "content": "Epic storytelling and world-building"},
+      {"rev_id": "r-book-123e4567-e89b-12d3-a456-426614174045", "reviewer": "Olivia", "rating": 5, "content": "A fantasy classic, truly immersive"}      
+    ],
+    "price": 60,
+    "stock": 100
+  },
+  {
+    "pro_id": "p-book-550e8400-e29b-41d4-a716-446655440028",
+    "pro_name": "Pride and Prejudice",
+    "cat_id": "b3c8d5e2-6f7a-4b4c-8d3c-7e9f0a1b9012",
+    "brand": "T. Egerton",
+    "attributes": { "Author_name": "Jane Austen", "Publisher": "T. Egerton", "Genre": "Romance" },
+    "description": "Jane Austen's romantic classic of wit, manners, and love.",
+    "reviews": [
+      { "rev_id": "r-book-123e4567-e89b-12d3-a456-426614174046", "reviewer": "Emily", "rating": 5, "content": "Witty and romantic, timeless charm"},
+      {"rev_id": "r-book-123e4567-e89b-12d3-a456-426614174047", "reviewer": "George", "rating": 4, "content": "A clever look at society and love"}
+    ],
+    "price": 19,
+    "stock": 160
+  },
+  {
+    "pro_id": "p-book-550e8400-e29b-41d4-a716-446655440029",
+    "pro_name": "The Alchemist",
+    "cat_id": "b3c8d5e2-6f7a-4b4c-8d3c-7e9f0a1b9012",
+    "brand": "HarperOne",
+    "attributes": { "Author_name": "Paulo Coelho", "Publisher": "HarperOne", "Genre": "Adventure" },
+    "description": "Paulo Coelho' s inspiring fable about destiny and self-discovery.",
+    "reviews": [
+      {"rev_id": "r-book-123e4567-e89b-12d3-a456-426614174048", "reviewer": "Sophia", "rating": 5, "content": "Inspirational and uplifting journey"},
+      {"rev_id": "r-book-123e4567-e89b-12d3-a456-426614174049", "reviewer": "Ethan", "rating": 4, "content": "Simple yet profound message"}
+    ],
+    "price": 21,
+    "stock": 130
   }
 ]
