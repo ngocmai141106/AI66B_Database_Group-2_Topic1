@@ -6,6 +6,13 @@
 #-D: Xóa 1 sản phẩm, hoặc 1 attribute hoặc review của 1 spham
 #chốt chế độ hiển thị mặc định là 3 bảng nhé ! nào bấm vào glb search thì mới trộn một (trừ khi search theo cat)
 
+#lần đầu tiên chạy file, ae chạy các dòng sau trong terminal:
+#pip install fastapi
+#pip install pymongo
+#cd code\API
+#uvicorn endpoints:app --reload
+#báo application startup complete là thành công.
+
 from fastapi import FastAPI
 from uuid import uuid4
 from pymongo import MongoClient
@@ -20,7 +27,6 @@ db = client["ecommerce_catalog"]
 def startup_event():
     db.products.create_index("pro_id", unique=True)
     db.products.create_index("reviews.rev_id", unique=True, sparse=True)
-    db.products.create_index([("pro_name", "text"), ("description", "text")])
     db.products.create_index([("pro_name", "text"), ("description", "text")])
     db.products.create_index([("cat_id", 1)])
     db.products.create_index([("brand", 1)])
