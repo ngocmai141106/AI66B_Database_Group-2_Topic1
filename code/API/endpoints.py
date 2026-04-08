@@ -14,11 +14,17 @@ app = FastAPI()
 client = MongoClient("mongodb://localhost:27017")
 db = client["ecommerce_catalog"]
 
-#create unique indes as starting the app
-app.on_event("startup")
+#create unique index as starting the app
+#create text index on prd's name and description too
+@app.on_event("startup")
 def startup_event():
     db.products.create_index("pro_id", unique=True)
     db.products.create_index("reviews.rev_id", unique=True, sparse=True)
+    db.products.create_index([("pro_name", "text"), ("description", "text")])
+    db.products.create_index([("pro_name", "text"), ("description", "text")])
+    db.products.create_index([("cat_id", 1)])
+    db.products.create_index([("brand", 1)])
+    db.products.create_index([("price", 1)])
 
 
 #C-type:
@@ -73,22 +79,43 @@ def add_review(id: str, review: dict):
 
 
 #R type (including searching)
+#this has been combined with avg computing
 #local view (view by each category's table/collection)
 @app.get("/products/by_category/{cat_id}")
-def get_products_by_category(cat_id: str):
-    products = list(db.products.find({"cat_id": cat_id}, {"_id": 0}))
+def list_products_by_category(cat_id: str):
+    pipeline = [
+        {"$match": {"cat_id": cat_id}},
+        {"$project": {
+            "_id": 0,
+            "pro_id": 1,
+            "pro_name": 1,
+            "description": 1,
+            "avg_rating": {"$avg": "$reviews.rating"}
+        }}
+    ]
+    products = list(db.products.aggregate(pipeline))
     return {"products": products}
 
 #view one product
-@app.get("/products/{id}")
-def get_product(id: str):
-    product = db.products.find_one({"pro_id": id}, {"_id": 0})
-    return {"product": product}
+@app.get("/products")
+def list_products():
+    pipeline = [
+        {"$project": {
+            "_id": 0,
+            "pro_id": 1,
+            "pro_name": 1,
+            "description": 1,
+            "avg_rating": {"$avg": "$reviews.rating"}
+        }}
+    ]
+    products = list(db.products.aggregate(pipeline))
+    return {"products": products}
 
 #local search
 @app.get("/products/search/local/{cat_id}")
-def search_local_products(
+def search_local(
     cat_id: str,
+    keyword: str,
     name: str = None,
     brand: str = None,
     attr_key: str = None,
@@ -96,22 +123,37 @@ def search_local_products(
     min_price: float = None,
     max_price: float = None
 ):
-    query = {"cat_id": cat_id}
+    match_stage = {
+        "cat_id": cat_id,
+        "$text": {"$search": keyword}
+    }
     if name:
-        query["pro_name"] = {"$regex": name, "$options": "i"}
+        match_stage["pro_name"] = {"$regex": name, "$options": "i"}
     if brand:
-        query["brand"] = {"$regex": brand, "$options": "i"}
+        match_stage["brand"] = {"$regex": brand, "$options": "i"}
     if attr_key and attr_value:
-        query[f"attributes.{attr_key}"] = {"$regex": attr_value, "$options": "i"}
+        match_stage[f"attributes.{attr_key}"] = {"$regex": attr_value, "$options": "i"}
     if min_price is not None and max_price is not None:
-        query["price"] = {"$gte": min_price, "$lte": max_price}
-
-    products = list(db.products.find(query, {"_id": 0}))
+        match_stage["price"] = {"$gte": min_price, "$lte": max_price}
+    pipeline = [
+        {"$match": match_stage},
+        {"$project": {
+            "_id": 0,
+            "pro_id": 1,
+            "pro_name": 1,
+            "description": 1,
+            "avg_rating": {"$avg": "$reviews.rating"},
+            "score": {"$meta": "textScore"}
+        }},
+        {"$sort": {"score": {"$meta": "textScore"}}}
+    ]
+    products = list(db.products.aggregate(pipeline))
     return {"products": products}
 
 #glb search
 @app.get("/products/search/global")
-def search_global_products(
+def search_global(
+    keyword: str,
     name: str = None,
     brand: str = None,
     attr_key: str = None,
@@ -119,18 +161,32 @@ def search_global_products(
     min_price: float = None,
     max_price: float = None
 ):
-    query = {}
-    if name:
-        query["pro_name"] = {"$regex": name, "$options": "i"}
-    if brand:
-        query["brand"] = {"$regex": brand, "$options": "i"}
-    if attr_key and attr_value:
-        query[f"attributes.{attr_key}"] = {"$regex": attr_value, "$options": "i"}
-    if min_price is not None and max_price is not None:
-        query["price"] = {"$gte": min_price, "$lte": max_price}
+    match_stage = {"$text": {"$search": keyword}}
 
-    products = list(db.products.find(query, {"_id": 0}))
+    if name:
+        match_stage["pro_name"] = {"$regex": name, "$options": "i"}
+    if brand:
+        match_stage["brand"] = {"$regex": brand, "$options": "i"}
+    if attr_key and attr_value:
+        match_stage[f"attributes.{attr_key}"] = {"$regex": attr_value, "$options": "i"}
+    if min_price is not None and max_price is not None:
+        match_stage["price"] = {"$gte": min_price, "$lte": max_price}
+    pipeline = [
+        {"$match": match_stage},
+        {"$project": {
+            "_id": 0,
+            "pro_id": 1,
+            "pro_name": 1,
+            "description": 1,
+            "avg_rating": {"$avg": "$reviews.rating"},
+            "score": {"$meta": "textScore"}
+        }},
+        {"$sort": {"score": {"$meta": "textScore"}}}
+    ]
+
+    products = list(db.products.aggregate(pipeline))
     return {"products": products}
+
 
 
 #U type
@@ -168,6 +224,7 @@ def update_category(id: str, update_data: dict):
     return {"message": "Category updated", "update": update_data}
 
 
+
 #D type
 #delete a product
 @app.delete("/products/{id}")
@@ -192,3 +249,16 @@ def delete_review(id: str, rev_id: str):
         {"$pull": {"reviews": {"rev_id": rev_id}}}
     )
     return {"message": "Review deleted", "rev_id": rev_id}
+
+
+
+#endpoints for advanced ft
+#full text search only bc computing avg rating has been included in searching ft
+@app.get("/products/search/text")
+def search_text(query: str):
+    products = list(db.products.find(
+        {"$text": {"$search": query}},
+        #include relevence score and sort by it
+        {"_id": 0, "score": {"$meta": "textScore"}}
+    ).sort([("score", {"$meta": "textScore"})]))
+    return {"products": products}
