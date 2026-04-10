@@ -102,6 +102,9 @@ def list_products_by_category(cat_id: str):
     products = list(db.products.aggregate(pipeline))
     return {"products": products}
 
+print(list_products_by_category("p-phone-550e8400-e29b-41d4-a716-446655440000"))
+
+
 #view one product
 @app.get("/products")
 def list_products():
