@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>UI Layout</title>
+
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: Arial, sans-serif;
+    }
+
+    body {
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+    }
+
+    /* ================= TOP BAR ================= */
+    .topbar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 8px;
+        border-bottom: 1px solid #ccc;
+    }
+
+    /* SEGMENT BUTTON GROUP (TOP) */
+    .left-group {
+        display: flex;
+        width: 320px;
+    }
+
+    .btn-tab {
+        flex: 1;
+        text-align: center;
+        padding: 6px 0;
+        border: 1px solid #aaa;
+        cursor: pointer;
+        user-select: none;
+    }
+
+    .btn-tab:not(:last-child) {
+        border-right: none;
+    }
+
+    /* RIGHT AREA */
+    .right-group {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .search-box {
+        display: flex;
+        align-items: center;
+        border: 1px solid #aaa;
+        padding: 4px 8px;
+        gap: 5px;
+    }
+
+    .search-box input {
+        border: none;
+        outline: none;
+    }
+
+    .icon-box {
+        width: 28px;
+        height: 28px;
+        border: 1px solid #aaa;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    /* ================= SUB BAR ================= */
+    .subbar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 8px;
+        border-bottom: 1px solid #ccc;
+    }
+
+    .sub-tabs {
+        display: flex;
+        width: 320px;
+    }
+
+    .btn-tab-sub {
+        flex: 1;
+        text-align: center;
+        padding: 6px 0;
+        border: 1px solid #aaa;
+        cursor: pointer;
+        user-select: none;
+    }
+
+    .btn-tab-sub:not(:last-child) {
+        border-right: none;
+    }
+
+    /* ================= MAIN ================= */
+    .main {
+        flex: 1;
+        display: flex;
+    }
+
+    .left-panel {
+        width: 35%;
+        border-right: 1px solid #ccc;
+        padding: 10px;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .form-area {
+        flex: 1;
+        border: 1px dashed #ccc;
+        margin-bottom: 10px;
+    }
+
+    .bottom-actions {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .btn {
+        padding: 6px 12px;
+        border: 1px solid #333;
+        background: white;
+        cursor: pointer;
+    }
+
+    .right-panel {
+        width: 65%;
+        padding: 10px;
+    }
+
+</style>
+</head>
+
+<body>
+
+<!-- ================= TOP BAR ================= -->
+<div class="topbar">
+
+    <div class="left-group">
+        <div class="btn-tab">Insert</div>
+        <div class="btn-tab">Update</div>
+        <div class="btn-tab">Delete</div>
+    </div>
+
+    <div class="right-group">
+        <div class="icon-box">🔍</div>
+
+        <div class="search-box">
+            <input placeholder="Search...">
+        </div>
+
+        <div class="icon-box">⋮</div>
+    </div>
+
+</div>
+
+<!-- ================= SUB BAR ================= -->
+<div class="subbar">
+
+    <div>Insert</div>
+
+    <div class="sub-tabs">
+        <div class="btn-tab-sub">Products</div>
+        <div class="btn-tab-sub">Attributes</div>
+        <div class="btn-tab-sub">Reviews</div>
+    </div>
+
+</div>
+
+<!-- ================= MAIN ================= -->
+<div class="main">
+
+    <div class="left-panel">
+        <div class="form-area"></div>
+
+        <div class="bottom-actions">
+            <button class="btn">Cancel</button>
+            <button class="btn">Confirm</button>
+        </div>
+    </div>
+
+    <div class="right-panel">
+        TABLE BEING QUERIED
+    </div>
+
+</div>
+
+</body>
+</html>
