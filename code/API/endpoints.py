@@ -24,7 +24,7 @@ db = client["ecommerce_catalog"]
 #create unique index as starting the app
 #create text index on prd's name and description too
 @app.on_event("startup")
-def startup_event():
+def startup_event():# event cho nút confirm if insert
     db.products.create_index("pro_id", unique=True)
     db.products.create_index("reviews.rev_id", unique=True, sparse=True)
     db.products.create_index([("pro_name", "text"), ("description", "text")])
@@ -33,8 +33,10 @@ def startup_event():
     db.products.create_index([("price", 1)])
 
 
+
 #C-type:
 #add new product
+#input: cat_id, pro_name, description, price, brand, attributes (dict), reviews (list of dict)
 @app.post("/products")
 def create_product(product: dict):
     product["pro_id"] = str(uuid4())
@@ -46,6 +48,20 @@ def create_product(product: dict):
         product["pro_id"] = str(uuid4())
         db.products.insert_one(product)
         return {"message": "Product created after retry", "product": product}
+    
+create_product({
+"pro_id": "p-phone-550e8400-e29b-41d4-a716-446655440012",
+"pro_name": "iPhone 9 plus",
+"cat_id": "c1a7f2b0-9d3a-4e1f-8a2a-1f9d8a7b1234",
+"brand": "Apple",
+"attributes": {
+        "RAM": "8GB",
+        "CPU": "A17 Bionic",
+        "Battery": "4000mAh"
+    },
+"price": 00,
+"stock": 30
+})
 
 #add new attribute for an existed product
 @app.post("/products/{id}/attributes")
