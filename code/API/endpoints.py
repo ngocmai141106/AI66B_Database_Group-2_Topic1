@@ -14,10 +14,22 @@
 #báo application startup complete là thành công.
 
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 from uuid import uuid4
 from pymongo import MongoClient
 
 app = FastAPI()
+
+# Allow browser requests from the HTML page during local development.
+# If you load gui_CUD_frame.html from file:// or another local origin,
+# this middleware allows the fetch() call to reach the FastAPI app.
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 client = MongoClient("mongodb://localhost:27017")
 db = client["ecommerce_catalog"]
 
@@ -49,19 +61,6 @@ def create_product(product: dict):
         db.products.insert_one(product)
         return {"message": "Product created after retry", "product": product}
     
-create_product({
-"pro_id": "p-phone-550e8400-e29b-41d4-a716-446655440012",
-"pro_name": "iPhone 9 plus",
-"cat_id": "c1a7f2b0-9d3a-4e1f-8a2a-1f9d8a7b1234",
-"brand": "Apple",
-"attributes": {
-        "RAM": "8GB",
-        "CPU": "A17 Bionic",
-        "Battery": "4000mAh"
-    },
-"price": 00,
-"stock": 30
-})
 
 #add new attribute for an existed product
 @app.post("/products/{id}/attributes")
@@ -118,8 +117,6 @@ def list_products_by_category(cat_id: str):
     products = list(db.products.aggregate(pipeline))
     return {"products": products}
 
-print(list_products_by_category("p-phone-550e8400-e29b-41d4-a716-446655440000"))
-
 
 #view one product
 @app.get("/products")
@@ -135,6 +132,7 @@ def list_products():
     ]
     products = list(db.products.aggregate(pipeline))
     return {"products": products}
+
 
 #local search
 @app.get("/products/search/local/{cat_id}")

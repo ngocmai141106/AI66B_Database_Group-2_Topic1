@@ -139,7 +139,7 @@
     }
 
     .left-panel {
-        width: 35%;
+        width: 50%;
         background: white;
         border-radius: 16px;
         border: 1px solid #d7e0ef;
@@ -227,9 +227,9 @@
     <div>Insert</div>
 
     <div class="sub-tabs">
-        <div class="btn-tab-sub">Phone</div>
-        <div class="btn-tab-sub">Fashion</div>
-        <div class="btn-tab-sub">Book</div>
+        <div class="btn-tab-sub" onclick = "changeContent('is Phone')">Phone</div>
+        <div class="btn-tab-sub" onclick = "changeContent('is Fashion')">Fashion</div>
+        <div class="btn-tab-sub" onclick = "changeContent('is Book')">Book</div>
     </div>
 
 </div>
@@ -246,11 +246,63 @@
         </div>
     </div>
 
-    <div class="right-panel">
+    <div class="right-panel" id="right-panel">
         TABLE BEING QUERIED
     </div>
 
 </div>
+
+<script>
+    const API_BASE_URL = "http://127.0.0.1:8000";
+    const CATEGORY_ID = "c1a7f2b0-9d3a-4e1f-8a2a-1f9d8a7b1234";
+
+    async function fetchProductsByCategory(catId) {
+        const panel = document.getElementById("right-panel");
+        panel.innerHTML = "Loading products...";
+
+        try {
+            const response = await fetch(`${API_BASE_URL}/products/by_category/${catId}`);
+            if (!response.ok) {
+                throw new Error(`HTTP ${response.status} - ${response.statusText}`);
+            }
+
+            const data = await response.json();
+            renderProducts(panel, data.products);
+        } catch (error) {
+            panel.innerHTML = `<div style="color: red;">Error loading products: ${error.message}</div>`;
+        }
+    }
+
+    function renderProducts(panel, products) {
+        if (!products || products.length === 0) {
+            panel.innerHTML = "No products found for this category.";
+            return;
+        }
+
+        const rows = products.map(product => {
+            return `
+                <div class="product-card" style="margin-bottom: 16px; padding: 12px; border: 1px solid #e4e9f2; border-radius: 12px; background: #f7f9ff;">
+                    <div><strong>Name:</strong> ${product.pro_name || "-"}</div>
+                    <div><strong>ID:</strong> ${product.brand || "-"}</div>
+                    <div><strong>Description:</strong> ${product.description || "-"}</div>
+                    <div><strong>Price:</strong> ${product.price ?? "0"}</div>
+                    <div><strong>Stock:</strong> ${product.stock ?? "0"}</div>
+                </div>
+            `;
+        }).join("");
+
+        panel.innerHTML = `<div>${rows}</div>`;
+    }
+
+    function changeContent(categories) {
+        const panel = document.getElementById("right-panel");
+        panel.innerHTML = "this " + categories;
+    }
+
+    window.addEventListener("DOMContentLoaded", () => {
+        fetchProductsByCategory(CATEGORY_ID);
+    });
+</script>
 
 </body>
 </html>
