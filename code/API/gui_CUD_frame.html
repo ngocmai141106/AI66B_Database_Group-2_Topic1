@@ -283,10 +283,11 @@
             return `
                 <div class="product-card" style="margin-bottom: 16px; padding: 12px; border: 1px solid #e4e9f2; border-radius: 12px; background: #f7f9ff;">
                     <div><strong>Name:</strong> ${product.pro_name || "-"}</div>
-                    <div><strong>ID:</strong> ${product.brand || "-"}</div>
+                    <div><strong>Brand:</strong> ${product.brand || "-"}</div>
                     <div><strong>Description:</strong> ${product.description || "-"}</div>
                     <div><strong>Price:</strong> ${product.price ?? "0"}</div>
                     <div><strong>Stock:</strong> ${product.stock ?? "0"}</div>
+                    <div><strong>Attributes:</strong> ${product.attributes || ""}</div>
                 </div>
             `;
         }).join("");
