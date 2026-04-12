@@ -198,6 +198,7 @@
         min-height: 0;
         overflow-y: auto;
     }
+    
 </style>
 </head>
 
@@ -230,9 +231,9 @@
     <div>Insert</div>
 
     <div class="sub-tabs">
-        <div class="btn-tab-sub" onclick = "changeContent('is Phone')">Phone</div>
-        <div class="btn-tab-sub" onclick = "changeContent('is Fashion')">Fashion</div>
-        <div class="btn-tab-sub" onclick = "changeContent('is Book')">Book</div>
+        <div class="btn-tab-sub" onclick = "changeContent('c1a7f2b0-9d3a-4e1f-8a2a-1f9d8a7b1234')">Phone</div>
+        <div class="btn-tab-sub" onclick = "changeContent('f2b9c4d1-7e6a-4a3b-9c2b-5d7e8f9a5678')">Fashion</div>
+        <div class="btn-tab-sub" onclick = "changeContent('b3c8d5e2-6f7a-4b4c-8d3c-7e9f0a1b9012')">Book</div>
     </div>
 
 </div>
@@ -257,7 +258,6 @@
 
 <script>
     const API_BASE_URL = "http://127.0.0.1:8000";
-    const CATEGORY_ID = "c1a7f2b0-9d3a-4e1f-8a2a-1f9d8a7b1234";
 
     async function fetchProductsByCategory(catId) {
         const panel = document.getElementById("right-panel");
@@ -317,11 +317,11 @@
 
     function changeContent(categories) {
         const panel = document.getElementById("right-panel");
-        panel.innerHTML = "this " + categories;
+        fetchProductsByCategory(categories);
     }
 
     window.addEventListener("DOMContentLoaded", () => {
-        fetchProductsByCategory(CATEGORY_ID);
+        fetchProductsByCategory("c1a7f2b0-9d3a-4e1f-8a2a-1f9d8a7b1234");
     });
 </script>
 
