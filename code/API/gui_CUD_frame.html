@@ -273,6 +273,15 @@
         }
     }
 
+    function renderStars(rating) {
+        if (rating === undefined || rating === null) return "-";
+        const fullStar = "★";
+        const emptyStar = "☆";
+        const maxStars = 5;
+        const safeRating = Math.max(0, Math.min(maxStars, Math.round(rating)));
+        return `<span style="color: gold; font-size: 18px;">${fullStar.repeat(safeRating)}${emptyStar.repeat(maxStars - safeRating)}</span>`;
+    }
+
     function renderProducts(panel, products) {
         if (!products || products.length === 0) {
             panel.innerHTML = "No products found for this category.";
@@ -280,14 +289,22 @@
         }
 
         const rows = products.map(product => {
+            const reviewEntries = Array.isArray(product.reviews)
+                ? product.reviews.filter(review => review && typeof review.rating === "number")
+                : [];
+            const ratingFromReviews = reviewEntries.length > 0
+                ? reviewEntries.reduce((sum, review) => sum + review.rating, 0) / reviewEntries.length
+                : null;
+            const rating = ratingFromReviews !== null
+                ? ratingFromReviews
+                : (typeof product.avg_rating === "number" ? product.avg_rating : null);
+
             return `
                 <div class="product-card" style="margin-bottom: 16px; padding: 12px; border: 1px solid #e4e9f2; border-radius: 12px; background: #f7f9ff;">
                     <div><strong>Name:</strong> ${product.pro_name || "-"}</div>
-                    <div><strong>Brand:</strong> ${product.brand || "-"}</div>
                     <div><strong>Description:</strong> ${product.description || "-"}</div>
                     <div><strong>Price:</strong> ${product.price ?? "0"}</div>
-                    <div><strong>Stock:</strong> ${product.stock ?? "0"}</div>
-                    <div><strong>Attributes:</strong> ${product.attributes || ""}</div>
+                    <div><strong>Rating:</strong> ${renderStars(rating)}</div>
                 </div>
             `;
         }).join("");

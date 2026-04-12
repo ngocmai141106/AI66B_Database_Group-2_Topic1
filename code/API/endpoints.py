@@ -111,6 +111,7 @@ def list_products_by_category(cat_id: str):
             "pro_id": 1,
             "pro_name": 1,
             "description": 1,
+            "price": 1,
             "avg_rating": {"$avg": "$reviews.rating"}
         }}
     ]
