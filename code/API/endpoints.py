@@ -290,3 +290,11 @@ def search_text(query: str):
         {"_id": 0, "score": {"$meta": "textScore"}}
     ).sort([("score", {"$meta": "textScore"})]))
     return {"products": products}
+
+
+#ae có phải chạy uvicorn trong terminal trước rồi mới chạy file này thì mới được không?
+#giờ tao thêm đoạn này vào thì sẽ không phải vậy nữa
+#ae cứ bấm chạy file endpoints.py này thôi, sau đó mở html bằng live server thì sẽ ngon nhé
+if __name__ == "__main__":
+    import uvicorn
+    uvicorn.run(app, host="127.0.0.1", port=8000)
