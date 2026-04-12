@@ -268,8 +268,12 @@
 <script>
     const API_BASE_URL = "http://127.0.0.1:8000";
 
+    let currentProducts = [];
+    let currentCategoryId = null;
+
     // gọi hàm ist_products_by_category, hiện sản phẩm theo category id, mặc định là Phone
     async function fetchProductsByCategory(catId) {
+        currentCategoryId = catId;
         const panel = document.getElementById("right-panel");
         panel.innerHTML = "Loading products...";
 
@@ -280,7 +284,8 @@
             }
 
             const data = await response.json();
-            renderProducts(panel, data.products);
+            currentProducts = data.products || [];
+            renderProducts(panel, currentProducts);
         } catch (error) {
             panel.innerHTML = `<div style="color: red;">Error loading products: ${error.message}</div>`;
         }
@@ -315,7 +320,7 @@
                 : (typeof product.avg_rating === "number" ? product.avg_rating : null);
 
             return `
-                <div class="product-card">
+                <div class="product-card" onclick = "showProductDetail('${product.pro_id}')">
                     <div><strong>Name:</strong> ${product.pro_name || "-"}</div>
                     <div><strong>Description:</strong> ${product.description || "-"}</div>
                     <div><strong>Price:</strong> ${product.price ?? "0"}</div>
@@ -326,6 +331,63 @@
 
         panel.innerHTML = `<div>${rows}</div>`;
     }
+
+    function renderAttributes(attributes) {
+        if (!attributes || typeof attributes !== "object" || Array.isArray(attributes)) return "-";
+        return Object.entries(attributes)
+            .map(([key, value]) => `<div>${key}: ${value}</div>`)
+            .join("");
+    }
+
+    function renderReviews(reviews) {
+        if (!Array.isArray(reviews) || reviews.length === 0) {
+            return `<div>No reviews available.</div>`;
+        }
+
+        return reviews.map(review => `
+            <div class="review-card">
+                <div><strong>Reviewer:</strong> ${review.reviewer || "-"}</div>
+                <div><strong>Rating:</strong> ${renderStars(review.rating ?? null)}</div>
+                <div><strong>Comment:</strong> ${review.content || "-"}</div>
+            </div>
+        `).join("");
+    }
+
+    function showProductDetail(productId) {
+        const panel = document.getElementById("right-panel");
+        const product = currentProducts.find(item => item.pro_id === productId);
+        if (!product) {
+            panel.innerHTML = "Product details not found.";
+            return;
+        }
+
+        const reviewEntries = Array.isArray(product.reviews)
+            ? product.reviews.filter(review => review && typeof review.rating === "number")
+            : [];
+        const averageRating = reviewEntries.length > 0
+            ? reviewEntries.reduce((sum, review) => sum + review.rating, 0) / reviewEntries.length
+            : null;
+
+        panel.innerHTML = `
+            <div class="detail-header">
+                
+                <h2>Product Details</h2>
+            </div>
+            <div class="detail-grid">
+                <div class="detail-row"><strong>Name:</strong> ${product.pro_name || "-"}</div>
+                <div class="detail-row"><strong>Brand:</strong> ${product.brand || "-"}</div>
+                <div class="detail-row"><strong>Price:</strong> ${product.price ?? "0"}</div>
+                <div class="detail-row"><strong>Stock:</strong> ${product.stock ?? "0"}</div>
+            </div>
+            <div class="detail-row"><strong>Description:</strong> ${product.description || "-"}</div>
+            <div class="detail-row"><strong>Attributes:</strong> ${renderAttributes(product.attributes)}</div>
+            <div class="detail-row"><strong>Average Rating:</strong> ${renderStars(averageRating)}</div>
+            <div style="margin-top: 18px;"><strong>Reviews</strong></div>
+            <div>${renderReviews(product.reviews)}</div>
+            <button class="btn secondary" onclick="renderProducts(document.getElementById('right-panel'), currentProducts)">Back</button>
+        `;
+    }
+    
 
     function changeContent(categories) {
         const panel = document.getElementById("right-panel");
