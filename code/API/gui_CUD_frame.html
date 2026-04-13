@@ -3,6 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <title>UI Layout</title>
+<link rel="stylesheet" href="css_style.css">
+
 
 <style>
     * {
@@ -334,9 +336,11 @@
 
     function renderAttributes(attributes) {
         if (!attributes || typeof attributes !== "object" || Array.isArray(attributes)) return "-";
-        return Object.entries(attributes)
-            .map(([key, value]) => `<div>${key}: ${value}</div>`)
-            .join("");
+        return `<div class="attributes">` + 
+            Object.entries(attributes)
+                .map(([key, value]) => `<div class="attribute-item">${key}: ${value}</div>`)
+                .join("") +
+            `</div>`;
     }
 
     function renderReviews(reviews) {
@@ -344,14 +348,17 @@
             return `<div>No reviews available.</div>`;
         }
 
-        return reviews.map(review => `
-            <div class="review-card">
-                <div><strong>Reviewer:</strong> ${review.reviewer || "-"}</div>
-                <div><strong>Rating:</strong> ${renderStars(review.rating ?? null)}</div>
-                <div><strong>Comment:</strong> ${review.content || "-"}</div>
-            </div>
-        `).join("");
+        return `<div class="reviews">` + 
+            reviews.map(review => `
+                <div class="review-card">
+                    <div><strong>Reviewer:</strong> ${review.reviewer || "-"}</div>
+                    <div><strong>Rating:</strong> ${renderStars(review.rating ?? null)}</div>
+                    <div><strong>Comment:</strong> ${review.content || "-"}</div>
+                </div>
+            `).join("") +
+            `</div>`;
     }
+
 
     function showProductDetail(productId) {
         const panel = document.getElementById("right-panel");

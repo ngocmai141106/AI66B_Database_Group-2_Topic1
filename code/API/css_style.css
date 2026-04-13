@@ -1,0 +1,23 @@
+/*thụt lề cho phần attribute và giãn cách từng cái nè*/
+.attributes {
+  margin-left: 20px;
+}
+.attribute-item {
+  margin-bottom: 5px;
+}
+
+/*thụt lề review và tách từng cái*/
+.reviews {
+  margin-left: 20px;
+}
+.review-card {
+  margin-bottom: 15px;
+  padding: 10px;
+  border-left: 2px solid #ccc;
+}
+
+/*điều chỉnh thông số ở line height để thu giãn kc dòng nhé*/
+body {
+  font-family: Arial, sans-serif;
+  line-height: 1.6;
+}
