@@ -17,12 +17,30 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from uuid import uuid4
 from pymongo import MongoClient
+from bson import ObjectId
+def convert_objectid(doc):
+    if isinstance(doc, list):
+        return [convert_objectid(d) for d in doc]
+    elif isinstance(doc, dict):
+        new_doc = {}
+        for k, v in doc.items():
+            if isinstance(v, ObjectId):
+                new_doc[k] = str(v)
+            elif isinstance(v, (dict, list)):
+                new_doc[k] = convert_objectid(v)
+            else:
+                new_doc[k] = v
+        return new_doc
+    else:
+        return doc
 
 app = FastAPI()
 
-# Allow browser requests from the HTML page during local development.
-# If you load gui_CUD_frame.html from file:// or another local origin,
-# this middleware allows the fetch() call to reach the FastAPI app.
+origins = [
+    "http://127.0.0.1:5500",
+    "http://localhost:5500"
+]
+
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
@@ -37,7 +55,6 @@ db = client["ecommerce_catalog"]
 #create text index on prd's name and description too
 @app.on_event("startup")
 def startup_event():# event cho nút confirm if insert
-    db.products.create_index("pro_id", unique=True)
     db.products.create_index("reviews.rev_id", unique=True, sparse=True)
     db.products.create_index([("pro_name", "text"), ("description", "text")])
     db.products.create_index([("cat_id", 1)])
@@ -51,16 +68,11 @@ def startup_event():# event cho nút confirm if insert
 #input: cat_id, pro_name, description, price, brand, attributes (dict), reviews (list of dict)
 @app.post("/products")
 def create_product(product: dict):
-    product["pro_id"] = str(uuid4())
-    try:
-        db.products.insert_one(product)
-        return {"message": "Product created", "product": product}
-    except DuplicateKeyError:
-        # Nếu trùng, sinh lại UUID và thử insert lại
-        product["pro_id"] = str(uuid4())
-        db.products.insert_one(product)
-        return {"message": "Product created after retry", "product": product}
-    
+    result = db.products.insert_one(product)
+    return {
+        "message": "Product created successfully",
+        "id": str(result.inserted_id)
+    }
 
 #add new attribute for an existed product
 @app.post("/products/{id}/attributes")
@@ -107,7 +119,7 @@ def list_products_by_category(cat_id: str):
     pipeline = [
         {"$match": {"cat_id": cat_id}},
         {"$project": {
-            "_id": 0,
+            "id": "$_id",
             "pro_id": 1,
             "pro_name": 1,
             "description": 1,
@@ -120,6 +132,7 @@ def list_products_by_category(cat_id: str):
         }}
     ]
     products = list(db.products.aggregate(pipeline))
+    products = convert_objectid(products)
     return {"products": products}
 
 

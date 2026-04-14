@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <title>UI Layout</title>
-<link rel="stylesheet" href="css_style.css">
+<link rel="stylesheet" href="./css_style.css">
 
 
 <style>
@@ -266,11 +266,14 @@
 
 </div>
 
+
 <!-- ================= SCRIPTS ================= -->
 <script>
     const API_BASE_URL = "http://127.0.0.1:8000";
 
     let currentProducts = [];
+    let reviewsArray = [];
+    let attributesArray = [];
     let currentCategoryId = null;
 
     // gọi hàm ist_products_by_category, hiện sản phẩm theo category id, mặc định là Phone
@@ -322,7 +325,7 @@
                 : (typeof product.avg_rating === "number" ? product.avg_rating : null);
 
             return `
-                <div class="product-card" onclick = "showProductDetail('${product.pro_id}')">
+                <div class="product-card" onclick = "showProductDetail('${product._id}')">
                     <div><strong>Name:</strong> ${product.pro_name || "-"}</div>
                     <div><strong>Description:</strong> ${product.description || "-"}</div>
                     <div><strong>Price:</strong> ${product.price ?? "0"}</div>
@@ -362,7 +365,7 @@
 
     function showProductDetail(productId) {
         const panel = document.getElementById("right-panel");
-        const product = currentProducts.find(item => item.pro_id === productId);
+        const product = currentProducts.find(item => item._id === productId);
         if (!product) {
             panel.innerHTML = "Product details not found.";
             return;
@@ -411,7 +414,7 @@
     insertBtn.addEventListener('click', async () => {
         const formArea = document.querySelector('.form-area');
         try {
-            const response = await fetch('insert.html');
+            const response = await fetch('./insert.html');
             const html = await response.text();
             formArea.innerHTML = html;
 
@@ -422,7 +425,37 @@
                 attributesArray = [];
                 reviewsArray = [];
             };
-
+            // gán sự kiện cho nút Add Attribute
+            const addAttrBtn = document.getElementById("btn-add-attribute");
+            addAttrBtn.onclick = () => {
+                const attrName = document.getElementById("attr-name").value.trim();
+                const attrValue = document.getElementById("attr-value").value.trim();
+                if (attrName && attrValue) {
+                    attributesArray.push({ name: attrName, value: attrValue });
+                    console.log("Attributes array:", attributesArray);
+                    document.getElementById("attr-name").value = "";
+                    document.getElementById("attr-value").value = "";
+                } else {
+                    alert("Please fill both attribute name and value!");
+                }
+            };
+            // gán sự kiện cho nút Add Review
+            const addReviewBtn = document.getElementById("btn-add-review");
+            addReviewBtn.onclick = () => {
+                const reviewer = document.getElementById("reviewer").value.trim();
+                const rating = document.getElementById("rating").value.trim();
+                const comment = document.getElementById("comment").value.trim();
+                if (reviewer && rating && comment) {
+                    reviewsArray.push({ reviewer, rating: parseInt(rating), comment });
+                    console.log("Reviews array:", reviewsArray);
+                    document.getElementById("reviewer").value = "";
+                    document.getElementById("rating").value = "";
+                    document.getElementById("comment").value = "";
+                } else {
+                    alert("Please fill all review fields!");
+                }
+            };
+                
             // gán sự kiện cho nút Confirm lớn
             const confirmBtn = document.querySelector('.bottom-actions .btn:nth-child(2)');
             confirmBtn.onclick = async () => {
@@ -459,14 +492,17 @@
                         reviews: reviewsArray
                     };
 
-                    const response = await fetch(`${API_BASE_URL}/products/insert`, {
+                    const response = await fetch(`${API_BASE_URL}/products`, {
                         method: "POST",
                         headers: { "Content-Type": "application/json" },
                         body: JSON.stringify(productData)
                     });
-
+            
                     if (response.ok) {
                         alert("Product added successfully!");
+                        //push data mới vào và render lại
+                        currentProducts.push(productData);
+                        renderProducts(currentProducts);
                     } else {
                         alert("Error: Cannot add product.");
                     }

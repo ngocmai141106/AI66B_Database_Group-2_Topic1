@@ -1,6 +1,5 @@
 [
   {
-    "pro_id": "p-phone-550e8400-e29b-41d4-a716-446655440000",
     "pro_name": "iPhone 15",
     "cat_id": "c1a7f2b0-9d3a-4e1f-8a2a-1f9d8a7b1234",
     "brand": "Apple",
@@ -14,7 +13,6 @@
     "stock": 30
   },
   {
-    "pro_id": "p-phone-550e8400-e29b-41d4-a716-446655440001",
     "pro_name": "Galaxy S24",
     "cat_id": "c1a7f2b0-9d3a-4e1f-8a2a-1f9d8a7b1234",
     "brand": "Samsung",
@@ -27,7 +25,6 @@
     "stock": 25
   },
   {
-    "pro_id": "p-phone-550e8400-e29b-41d4-a716-446655440002",
     "pro_name": "Pixel 9",
     "cat_id": "c1a7f2b0-9d3a-4e1f-8a2a-1f9d8a7b1234",
     "brand": "Google",
@@ -40,7 +37,6 @@
     "stock": 40
   },
   {
-    "pro_id": "p-phone-550e8400-e29b-41d4-a716-446655440003",
     "pro_name": "Xiaomi Mi 14",
     "cat_id": "c1a7f2b0-9d3a-4e1f-8a2a-1f9d8a7b1234",
     "brand": "Xiaomi",
@@ -53,7 +49,6 @@
     "stock": 60
   },
   {
-    "pro_id": "p-phone-550e8400-e29b-41d4-a716-446655440004",
     "pro_name": "OnePlus 12",
     "cat_id": "c1a7f2b0-9d3a-4e1f-8a2a-1f9d8a7b1234",
     "brand": "OnePlus",
@@ -66,7 +61,6 @@
     "stock": 35
   },
   {
-    "pro_id": "p-phone-550e8400-e29b-41d4-a716-446655440005",
     "pro_name": "Huawei P70",
     "cat_id": "c1a7f2b0-9d3a-4e1f-8a2a-1f9d8a7b1234",
     "brand": "Huawei",
@@ -79,7 +73,6 @@
     "stock": 20
   },
   {
-    "pro_id": "p-phone-550e8400-e29b-41d4-a716-446655440006",
     "pro_name": "Sony Xperia Z5",
     "cat_id": "c1a7f2b0-9d3a-4e1f-8a2a-1f9d8a7b1234",
     "brand": "Sony",
@@ -92,7 +85,6 @@
     "stock": 15
   },
   {
-    "pro_id": "p-phone-550e8400-e29b-41d4-a716-446655440007",
     "pro_name": "Oppo Find X6",
     "cat_id": "c1a7f2b0-9d3a-4e1f-8a2a-1f9d8a7b1234",
     "brand": "Oppo",
@@ -105,7 +97,6 @@
     "stock": 50
   },
   {
-    "pro_id": "p-phone-550e8400-e29b-41d4-a716-446655440008",
     "pro_name": "Realme GT Neo",
     "cat_id": "c1a7f2b0-9d3a-4e1f-8a2a-1f9d8a7b1234",
     "brand": "Realme",
@@ -118,7 +109,6 @@
     "stock": 70
   },
   {
-    "pro_id": "p-phone-550e8400-e29b-41d4-a716-446655440009",
     "pro_name": "Nokia XR20",
     "cat_id": "c1a7f2b0-9d3a-4e1f-8a2a-1f9d8a7b1234",
     "brand": "Nokia",

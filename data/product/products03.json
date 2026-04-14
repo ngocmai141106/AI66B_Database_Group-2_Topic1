@@ -1,6 +1,5 @@
 [
   {
-    "pro_id": "p-book-550e8400-e29b-41d4-a716-446655440020",
     "pro_name": "The Great Gatsby",
     "cat_id": "b3c8d5e2-6f7a-4b4c-8d3c-7e9f0a1b9012",
     "brand": "Penguin",
@@ -14,7 +13,6 @@
     "stock": 200
   },
   {
-    "pro_id": "p-book-550e8400-e29b-41d4-a716-446655440021",
     "pro_name": "Clean Code",
     "cat_id": "b3c8d5e2-6f7a-4b4c-8d3c-7e9f0a1b9012",
     "brand": "Prentice Hall",
@@ -28,7 +26,6 @@
     "stock": 80
   },
   {
-    "pro_id": "p-book-550e8400-e29b-41d4-a716-446655440022",
     "pro_name": "1984",
     "cat_id": "b3c8d5e2-6f7a-4b4c-8d3c-7e9f0a1b9012",
     "brand": "Secker & Warburg",
@@ -43,7 +40,6 @@
   },
 
   {
-    "pro_id": "p-book-550e8400-e29b-41d4-a716-446655440023",
     "pro_name": "To Kill a Mockingbird",
     "cat_id": "b3c8d5e2-6f7a-4b4c-8d3c-7e9f0a1b9012",
     "brand": "HarperCollins",
@@ -57,7 +53,6 @@
     "stock": 120
   },
   {
-    "pro_id": "p-book-550e8400-e29b-41d4-a716-446655440024",
     "pro_name": "Harry Potter and the Sorcerer's Stone",
     "cat_id": "b3c8d5e2-6f7a-4b4c-8d3c-7e9f0a1b9012",
     "brand": "Bloomsbury",
@@ -71,7 +66,6 @@
     "stock": 300
   },
   {
-    "pro_id": "p-book-550e8400-e29b-41d4-a716-446655440025",
     "pro_name": "The Hobbit",
     "cat_id": "b3c8d5e2-6f7a-4b4c-8d3c-7e9f0a1b9012",
     "brand": "HarperCollins",
@@ -85,7 +79,6 @@
     "stock": 180
   },
   {
-    "pro_id": "p-book-550e8400-e29b-41d4-a716-446655440026",
     "pro_name": "The Catcher in the Rye",
     "cat_id": "b3c8d5e2-6f7a-4b4c-8d3c-7e9f0a1b9012",
     "brand": "Little, Brown and Company",
@@ -99,7 +92,6 @@
     "stock": 140
   },
   {
-    "pro_id": "p-book-550e8400-e29b-41d4-a716-446655440027",
     "pro_name": "The Lord of the Rings",
     "cat_id": "b3c8d5e2-6f7a-4b4c-8d3c-7e9f0a1b9012",
     "brand": "Allen & Unwin",
@@ -113,7 +105,6 @@
     "stock": 100
   },
   {
-    "pro_id": "p-book-550e8400-e29b-41d4-a716-446655440028",
     "pro_name": "Pride and Prejudice",
     "cat_id": "b3c8d5e2-6f7a-4b4c-8d3c-7e9f0a1b9012",
     "brand": "T. Egerton",
@@ -127,7 +118,6 @@
     "stock": 160
   },
   {
-    "pro_id": "p-book-550e8400-e29b-41d4-a716-446655440029",
     "pro_name": "The Alchemist",
     "cat_id": "b3c8d5e2-6f7a-4b4c-8d3c-7e9f0a1b9012",
     "brand": "HarperOne",

@@ -1,6 +1,5 @@
 [
   {
-    "pro_id": "p-fash-550e8400-e29b-41d4-a716-446655440010",
     "pro_name": "Men's Cotton Shirt",
     "cat_id": "f2b9c4d1-7e6a-4a3b-9c2b-5d7e8f9a5678",
     "brand": "Uniqlo",
@@ -14,7 +13,6 @@
     "stock": 100
   },
   {
-    "pro_id": "p-fash-550e8400-e29b-41d4-a716-446655440011",
     "pro_name": "Women's Summer Dress",
     "cat_id": "f2b9c4d1-7e6a-4a3b-9c2b-5d7e8f9a5678",
     "brand": "Zara",
@@ -27,7 +25,6 @@
     "stock": 60
   },
   {
-    "pro_id": "p-fash-550e8400-e29b-41d4-a716-446655440012",
     "pro_name": "Leather Jacket",
     "cat_id": "f2b9c4d1-7e6a-4a3b-9c2b-5d7e8f9a5678",
     "brand": "Levi's",
@@ -40,7 +37,6 @@
     "stock": 40
   },
   {
-    "pro_id": "p-fash-550e8400-e29b-41d4-a716-446655440013",
     "pro_name": "Denim Jeans",
     "cat_id": "f2b9c4d1-7e6a-4a3b-9c2b-5d7e8f9a5678",
     "brand": "Levi's",
@@ -53,7 +49,6 @@
     "stock": 80
   },
   {
-    "pro_id": "p-fash-550e8400-e29b-41d4-a716-446655440014",
     "pro_name": "Wool Sweater",
     "cat_id": "f2b9c4d1-7e6a-4a3b-9c2b-5d7e8f9a5678",
     "brand": "H&M",
@@ -66,7 +61,6 @@
     "stock": 70
   },
   {
-    "pro_id": "p-fash-550e8400-e29b-41d4-a716-446655440015",
     "pro_name": "Sports Shoes",
     "cat_id": "f2b9c4d1-7e6a-4a3b-9c2b-5d7e8f9a5678",
     "brand": "Nike",
@@ -79,7 +73,6 @@
     "stock": 120
   },
   {
-    "pro_id": "p-fash-550e8400-e29b-41d4-a716-446655440016",
     "pro_name": "High Heels",
     "cat_id": "f2b9c4d1-7e6a-4a3b-9c2b-5d7e8f9a5678",
     "brand": "Gucci",
@@ -92,7 +85,6 @@
     "stock": 20
   },
   {
-    "pro_id": "p-fash-550e8400-e29b-41d4-a716-446655440017",
     "pro_name": "Casual T-Shirt",
     "cat_id": "f2b9c4d1-7e6a-4a3b-9c2b-5d7e8f9a5678",
     "brand": "Adidas",
@@ -105,7 +97,6 @@
     "stock": 200
   },
   {
-    "pro_id": "p-fash-550e8400-e29b-41d4-a716-446655440018",
     "pro_name": "Formal Suit",
     "cat_id": "f2b9c4d1-7e6a-4a3b-9c2b-5d7e8f9a5678",
     "brand": "Armani",
@@ -118,7 +109,6 @@
     "stock": 15
   },
   {
-    "pro_id": "p-fash-550e8400-e29b-41d4-a716-446655440019",
     "pro_name": "Winter Coat",
     "cat_id": "f2b9c4d1-7e6a-4a3b-9c2b-5d7e8f9a5678",
     "brand": "Burberry",
