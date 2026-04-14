@@ -406,18 +406,47 @@
     });
 
     //gán event cho nút insert, lket với file insert
-    //chọn nút insert
+        // gán event cho nút Insert
     const insertBtn = document.querySelector('.left-group .btn-tab:nth-child(1)');
-    //bắt đầu gắn
     insertBtn.addEventListener('click', async () => {
         const formArea = document.querySelector('.form-area');
         try {
             const response = await fetch('insert.html');
             const html = await response.text();
             formArea.innerHTML = html;
-            //gán event cho nút confirm
-            const confirmBtn = document.getElementById("btn-confirm");
-            confirmBtn.addEventListener("click", async () => {
+
+            // gán sự kiện cho nút Cancel lớn
+            const cancelBtn = document.querySelector('.bottom-actions .btn:nth-child(1)');
+            cancelBtn.onclick = () => {
+                formArea.innerHTML = ""; // xóa form, reset lại
+                attributesArray = [];
+                reviewsArray = [];
+            };
+
+            // gán sự kiện cho nút Confirm lớn
+            const confirmBtn = document.querySelector('.bottom-actions .btn:nth-child(2)');
+            confirmBtn.onclick = async () => {
+                //đoạn này để constraints không bỏ trống trường
+                const nameInput = document.getElementById("input-name");
+                const brandInput = document.getElementById("input-brand");
+                const priceInput = document.getElementById("input-price");
+                const stockInput = document.getElementById("input-stock");
+                const descriptionInput = document.getElementById("input-description");
+                const categoryInput = document.getElementById("input-category");
+                const inputs = [nameInput, brandInput, priceInput, stockInput, descriptionInput, categoryInput];
+                let valid = true;
+                inputs.forEach(input => input.style.border = "");
+                //kt từng trường, cái nào để trống thì sẽ bôi đỏ
+                inputs.forEach(input => {
+                    if (!input.value || input.value.trim() === "") {
+                        input.style.border = "2px solid red";
+                        valid = false;
+                    }
+                });
+                if (!valid) {
+                    alert("Please fill all required information!");
+                    return;
+                }
                 if (confirm("Do you want to add this product?")) {
                     const productData = {
                         pro_name: document.getElementById("input-name").value,
@@ -437,16 +466,18 @@
                     });
 
                     if (response.ok) {
-                        alert("Added product sucessfully!");
+                        alert("Product added successfully!");
                     } else {
-                        alert("Cannot add product.");
+                        alert("Error: Cannot add product.");
                     }
                 }
-            });
+            };
+
         } catch (err) {
             formArea.innerHTML = '<p style="color:red;">Error loading insert form.</p>';
         }
     });
+
 
 </script>
 
