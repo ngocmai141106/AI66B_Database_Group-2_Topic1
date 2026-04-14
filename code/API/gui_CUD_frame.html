@@ -404,6 +404,50 @@
     window.addEventListener("DOMContentLoaded", () => {
         fetchProductsByCategory("c1a7f2b0-9d3a-4e1f-8a2a-1f9d8a7b1234");
     });
+
+    //gán event cho nút insert, lket với file insert
+    //chọn nút insert
+    const insertBtn = document.querySelector('.left-group .btn-tab:nth-child(1)');
+    //bắt đầu gắn
+    insertBtn.addEventListener('click', async () => {
+        const formArea = document.querySelector('.form-area');
+        try {
+            const response = await fetch('insert.html');
+            const html = await response.text();
+            formArea.innerHTML = html;
+            //gán event cho nút confirm
+            const confirmBtn = document.getElementById("btn-confirm");
+            confirmBtn.addEventListener("click", async () => {
+                if (confirm("Do you want to add this product?")) {
+                    const productData = {
+                        pro_name: document.getElementById("input-name").value,
+                        brand: document.getElementById("input-brand").value,
+                        price: parseFloat(document.getElementById("input-price").value),
+                        stock: parseInt(document.getElementById("input-stock").value),
+                        description: document.getElementById("input-description").value,
+                        category: document.getElementById("input-category").value,
+                        attributes: attributesArray,
+                        reviews: reviewsArray
+                    };
+
+                    const response = await fetch(`${API_BASE_URL}/products/insert`, {
+                        method: "POST",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify(productData)
+                    });
+
+                    if (response.ok) {
+                        alert("Added product sucessfully!");
+                    } else {
+                        alert("Cannot add product.");
+                    }
+                }
+            });
+        } catch (err) {
+            formArea.innerHTML = '<p style="color:red;">Error loading insert form.</p>';
+        }
+    });
+
 </script>
 
 </body>
