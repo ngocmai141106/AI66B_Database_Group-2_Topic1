@@ -13,7 +13,7 @@
 #uvicorn endpoints:app --reload
 #báo application startup complete là thành công.
 
-from fastapi import FastAPI
+from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from uuid import uuid4
 from pymongo import MongoClient
@@ -62,12 +62,16 @@ def startup_event():# event cho nút confirm if insert
     db.products.create_index([("price", 1)])
 
 
-
 #C-type:
 #add new product
 #input: cat_id, pro_name, description, price, brand, attributes (dict), reviews (list of dict)
 @app.post("/products")
 def create_product(product: dict):
+    if "cat_id" not in product:
+        raise HTTPException(status_code=400, detail="cat_id is required")
+    product["cat_id"] = str(product["cat_id"])
+    if "category" in product:
+        product.pop("category")
     result = db.products.insert_one(product)
     return {
         "message": "Product created successfully",

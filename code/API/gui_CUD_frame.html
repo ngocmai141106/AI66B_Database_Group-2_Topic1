@@ -408,6 +408,14 @@
         fetchProductsByCategory("c1a7f2b0-9d3a-4e1f-8a2a-1f9d8a7b1234");
     });
 
+    //tạo const mapping category
+    const categoryMap = {
+        "Phone": "c1a7f2b0-9d3a-4e1f-8a2a-1f9d8a7b1234",
+        "Fashion": "f2b9c4d1-7e6a-4a3b-9c2b-5d7e8f9a5678",
+        "Book": "b3c8d5e2-6f7a-4b4c-8d3c-7e9f0a1b9012"
+    };
+
+
     //gán event cho nút insert, lket với file insert
         // gán event cho nút Insert
     const insertBtn = document.querySelector('.left-group .btn-tab:nth-child(1)');
@@ -461,11 +469,11 @@
             confirmBtn.onclick = async () => {
                 //đoạn này để constraints không bỏ trống trường
                 const nameInput = document.getElementById("input-name");
+                const categoryInput = document.getElementById("input-category");
                 const brandInput = document.getElementById("input-brand");
                 const priceInput = document.getElementById("input-price");
                 const stockInput = document.getElementById("input-stock");
                 const descriptionInput = document.getElementById("input-description");
-                const categoryInput = document.getElementById("input-category");
                 const inputs = [nameInput, brandInput, priceInput, stockInput, descriptionInput, categoryInput];
                 let valid = true;
                 inputs.forEach(input => input.style.border = "");
@@ -481,16 +489,20 @@
                     return;
                 }
                 if (confirm("Do you want to add this product?")) {
+                    const categoryName = document.getElementById("input-category").value.trim();
                     const productData = {
                         pro_name: document.getElementById("input-name").value,
+                        cat_id: categoryMap[categoryName],
                         brand: document.getElementById("input-brand").value,
                         price: parseFloat(document.getElementById("input-price").value),
                         stock: parseInt(document.getElementById("input-stock").value),
                         description: document.getElementById("input-description").value,
-                        category: document.getElementById("input-category").value,
                         attributes: attributesArray,
                         reviews: reviewsArray
                     };
+
+                    console.log("Category name:", categoryName);
+                    console.log("Mapped cat_id:", productData.cat_id);
 
                     const response = await fetch(`${API_BASE_URL}/products`, {
                         method: "POST",
@@ -501,8 +513,7 @@
                     if (response.ok) {
                         alert("Product added successfully!");
                         //push data mới vào và render lại
-                        currentProducts.push(productData);
-                        renderProducts(currentProducts);
+                        fetchProductsByCategory(productData.cat_id);
                     } else {
                         alert("Error: Cannot add product.");
                     }
