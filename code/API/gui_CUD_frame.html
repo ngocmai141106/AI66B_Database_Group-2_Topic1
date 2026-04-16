@@ -526,6 +526,78 @@
     });
 
 
+    //gán event cho nút dlt, lket với file dlt
+    const deleteBtn = document.querySelector('.left-group .btn-tab:nth-child(3)');
+    deleteBtn.addEventListener('click', async () => {
+        const formArea = document.querySelector('.form-area');
+        try {
+            const response = await fetch('./delete.html');
+            const html = await response.text();
+            formArea.innerHTML = html;
+
+            //load xong sk cho nút Delete to thì load combo box category
+            const categorySelect = document.getElementById("delete-category");
+            const resCat = await fetch(`${API_BASE_URL}/categories`);
+            const categories = await resCat.json();
+
+            categorySelect.innerHTML = "<option value=''>--Select Category--</option>";
+            categories.forEach(c => {
+            const opt = document.createElement("option");
+            opt.value = c.cat_id;     // dùng cat_id để lọc sản phẩm
+            opt.textContent = c.cat_name.charAt(0).toUpperCase() + c.cat_name.slice(1); // hiển thị tên category viết hoa
+            categorySelect.appendChild(opt);
+            });
+
+            const productSelect = document.getElementById("delete-product");
+            const infoDiv = document.getElementById("delete-product-info");
+
+            //chọn xong cat thì fetch in4 sp trong cat
+            categorySelect.onchange = async () => {
+                const catId = categorySelect.value;
+                if (!catId) return;
+
+                const res = await fetch(`${API_BASE_URL}/products/by_category/${catId}`);
+                const data = await res.json();
+
+                productSelect.innerHTML = "<option value=''>--Select Product--</option>";
+                data.products.forEach(p => {
+                    const opt = document.createElement("option");
+                    opt.value = p.id; //xóa bằng id í
+                    opt.textContent = p.pro_name; //nma hiển thị tên !
+                    productSelect.appendChild(opt);
+                });
+            };
+
+            //chọn sp xong thì hiện in4 chi tiết ra
+            productSelect.onchange = async () => {
+                const productId = productSelect.value;
+                if (!productId) return;
+
+                const res = await fetch(`${API_BASE_URL}/products/${productId}`);
+                const product = await res.json();
+
+                console.log(product); //thêm vào để check coi trả key ntn
+
+
+                infoDiv.innerHTML = `
+                    <p><strong>Name:</strong> ${product.pro_name}</p>
+                    <p><strong>Brand:</strong> ${product.brand}</p>
+                    <p><strong>Price:</strong> ${product.price}</p>
+                    <p><strong>Stock:</strong> ${product.stock}</p>
+                    <p><strong>Description:</strong> ${product.description}</p>
+                `;
+            };
+
+            //mốt bind sau
+            const cancelBtn = document.querySelector('.bottom-actions .btn:nth-child(1)');
+            const confirmBtn = document.querySelector('.bottom-actions .btn:nth-child(2)');
+
+        } catch (err) {
+            formArea.innerHTML = '<p style="color:red;">Error loading delete form.</p>';
+        }
+    });
+
+
 </script>
 
 </body>

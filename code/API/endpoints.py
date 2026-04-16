@@ -118,6 +118,12 @@ def add_review(id: str, review: dict):
 #R type (including searching)
 #this has been combined with avg computing
 #local view (view by each category's table/collection)
+#view cat
+@app.get("/categories")
+def get_categories():
+    return list(db.categories.find({}, {"_id":0}))
+
+#view products in a cat
 @app.get("/products/by_category/{cat_id}")
 def list_products_by_category(cat_id: str):
     pipeline = [
@@ -139,7 +145,6 @@ def list_products_by_category(cat_id: str):
     products = convert_objectid(products)
     return {"products": products}
 
-
 #view one product
 @app.get("/products")
 def list_products():
@@ -155,6 +160,20 @@ def list_products():
     products = list(db.products.aggregate(pipeline))
     return {"products": products}
 
+#view a product's in4
+from bson import ObjectId
+from fastapi import HTTPException
+
+@app.get("/products/{id}")
+def get_product(id: str):
+    try:
+        product = db.products.find_one({"_id": ObjectId(id)})
+    except Exception:
+        raise HTTPException(status_code=400, detail="Invalid ObjectId format")
+
+    if not product:
+        raise HTTPException(status_code=404, detail="Product not found")
+    return convert_objectid(product)
 
 #local search
 @app.get("/products/search/local/{cat_id}")
@@ -274,8 +293,14 @@ def update_category(id: str, update_data: dict):
 #delete a product
 @app.delete("/products/{id}")
 def delete_product(id: str):
-    db.products.delete_one({"pro_id": id})
-    return {"message": "Product deleted", "pro_id": id}
+    try:
+        result = db.products.delete_one({"_id": ObjectId(id)})
+    except Exception:
+        raise HTTPException(status_code=400, detail="Invalid ObjectId format")
+
+    if result.deleted_count == 0:
+        raise HTTPException(status_code=404, detail="Product not found")
+    return {"message": "Product deleted", "id": id}
 
 #delete a product's attribute
 @app.delete("/products/{id}/attributes/{attr_key}")
