@@ -1,3 +1,21 @@
+/*format màu theme lé biền*/
+/* Top bar nền */
+.topbar .right-group .icon-box{
+  background-color: #26CEAA;
+  color: white;
+}
+.topbar .left-group .btn-tab{
+  background-color: #26CEAA;
+  color: white;
+}
+.subbar .btn-tab-sub {
+  display: inline-block;
+  background-color: #98E8C1;
+  color: white;
+}
+
+
+/*format hiển thị in4 chi tiết bảng bên phải
 /*thụt lề cho phần attribute và giãn cách từng cái nè*/
 .attributes {
   margin-left: 20px;
@@ -5,7 +23,6 @@
 .attribute-item {
   margin-bottom: 5px;
 }
-
 /*thụt lề review và tách từng cái*/
 .reviews {
   margin-left: 20px;
@@ -15,9 +32,80 @@
   padding: 10px;
   border-left: 2px solid #ccc;
 }
-
 /*điều chỉnh thông số ở line height để thu giãn kc dòng nhé*/
 body {
   font-family: Arial, sans-serif;
   line-height: 1.6;
+}
+
+
+/*format insert tổng thể */
+#insert-form {
+  margin-left: 20px;  /*thụt lề trái*/
+  max-width: 675px;  /*limit chiều ngang*/
+}
+/*đống label và trường nhập*/
+#insert-form label {
+  display: block;  /*đặt label nằm trên trường nhập*/
+  margin-bottom: 2px;  /*kc label với trường nhập*/
+  font-weight: bold;
+}
+#insert-form input,
+#insert-form select,
+#insert-form textarea {
+  width: 100%;  /*kéo dài ngang trường nhập*/
+  padding: 8px;
+  margin-bottom: 10px; /*giãn cách giữa các trường*/
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box; /*chống tràn khung*/
+}
+/*mở rộng description và xuống dưới*/
+#insert-form textarea#input-description {
+  min-height: 100px;  /*ae set nhiêu thì set, cao hơn input là được nhé*/
+  resize: vertical;  /*allow mở xuống dưới*/
+}
+/*2 nút*/
+#insert-form button {
+  padding: 8px 16px;
+  border: none;
+  background-color: #7BADE2;
+  color: white;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+}
+#insert-form button:hover {
+  background-color: #0056b3;
+}
+#attributes-section {
+  display: flex;
+  gap: 10px;  /*kc giữa 2 ô*/
+}
+#attributes-section input {
+  flex: 1;  /*này để 2 ô chiếm size đều nhau*/
+}
+#reviews-section {
+  display: flex;
+  gap: 10px;
+}
+/*điều chỉnh tỉ lệ 3 trường trong rv ở đây*/
+#reviews-section input#reviewer {flex: 1;}
+#reviews-section input#rating {flex: 0.5;}
+#reviews-section input#content {flex: 2;}
+#attributes-section input,
+#reviews-section input,
+#attributes-section button,
+#reviews-section button {
+  height: 40px;
+  box-sizing: border-box;
+}
+
+/*chỉnh màu cho 2 nút cancel cf*/
+.btn {
+  background-color: #5049CC;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  cursor: pointer;
 }
