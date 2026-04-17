@@ -214,391 +214,209 @@
 
 <body>
 
-<!-- ================= TOP BAR ================= -->
-<div class="topbar">
+    <!-- ================= TOP BAR ================= -->
+    <div class="topbar">
 
-    <div class="left-group">
-        <div class="btn-tab">Insert</div>
-        <div class="btn-tab">Update</div>
-        <div class="btn-tab">Delete</div>
-    </div>
-
-    <div class="right-group">
-        <div class="icon-box">🔍</div>
-
-        <div class="search-box">
-            <input placeholder="Search...">
+        <div class="left-group">
+            <div class="btn-tab">Insert</div>
+            <div class="btn-tab">Update</div>
+            <div class="btn-tab">Delete</div>
         </div>
 
-        <div class="icon-box">⋮</div>
-    </div>
+        <div class="right-group">
+            <div class="icon-box">🔍</div>
 
-</div>
+            <div class="search-box">
+                <input placeholder="Search...">
+            </div>
 
-<!-- ================= SUB BAR ================= -->
-<div class="subbar">
-
-    <div>Insert</div>
-
-    <div class="sub-tabs">
-        <div class="btn-tab-sub" onclick = "changeContent('c1a7f2b0-9d3a-4e1f-8a2a-1f9d8a7b1234')">Phone</div>
-        <div class="btn-tab-sub" onclick = "changeContent('f2b9c4d1-7e6a-4a3b-9c2b-5d7e8f9a5678')">Fashion</div>
-        <div class="btn-tab-sub" onclick = "changeContent('b3c8d5e2-6f7a-4b4c-8d3c-7e9f0a1b9012')">Book</div>
-    </div>
-
-</div>
-
-<!-- ================= MAIN ================= -->
-<div class="main">
-
-    <div class="left-panel">
-        <div class="form-area"></div>
-
-        <div class="bottom-actions">
-            <button class="btn">Cancel</button>
-            <button class="btn">Confirm</button>
+            <div class="icon-box">⋮</div>
         </div>
+
     </div>
 
-    <div class="right-panel" id="right-panel">
-        TABLE BEING QUERIED
+    <!-- ================= SUB BAR ================= -->
+    <div class="subbar">
+
+        <div>Insert</div>
+
+        <div class="sub-tabs">
+            <div class="btn-tab-sub" onclick = "changeContent('c1a7f2b0-9d3a-4e1f-8a2a-1f9d8a7b1234')">Phone</div>
+            <div class="btn-tab-sub" onclick = "changeContent('f2b9c4d1-7e6a-4a3b-9c2b-5d7e8f9a5678')">Fashion</div>
+            <div class="btn-tab-sub" onclick = "changeContent('b3c8d5e2-6f7a-4b4c-8d3c-7e9f0a1b9012')">Book</div>
+        </div>
+
     </div>
 
-</div>
+    <!-- ================= MAIN ================= -->
+    <div class="main">
+
+        <div class="left-panel">
+            <div class="form-area"></div>
+
+            <div class="bottom-actions">
+                <button class="btn">Cancel</button>
+                <button class="btn">Confirm</button>
+            </div>
+        </div>
+
+        <div class="right-panel" id="right-panel">
+            TABLE BEING QUERIED
+        </div>
+
+    </div>
 
 
-<!-- ================= SCRIPTS ================= -->
-<script>
-    const API_BASE_URL = "http://127.0.0.1:8000";
+    <!-- ================= SCRIPTS ================= -->
+    <script>
+        const API_BASE_URL = "http://127.0.0.1:8000";
 
-    let currentProducts = [];
-    let reviewsArray = [];
-    let attributesArray = [];
-    let currentCategoryId = null;
+        let currentProducts = [];
+        let currentCategoryId = null;
 
-    // gọi hàm ist_products_by_category, hiện sản phẩm theo category id, mặc định là Phone
-    async function fetchProductsByCategory(catId) {
-        currentCategoryId = catId;
-        const panel = document.getElementById("right-panel");
-        panel.innerHTML = "Loading products...";
+        // gọi hàm ist_products_by_category, hiện sản phẩm theo category id, mặc định là Phone
+        async function fetchProductsByCategory(catId) {
+            currentCategoryId = catId;
+            const panel = document.getElementById("right-panel");
+            panel.innerHTML = "Loading products...";
 
-        try {
-            const response = await fetch(`${API_BASE_URL}/products/by_category/${catId}`);
-            if (!response.ok) {
-                throw new Error(`HTTP ${response.status} - ${response.statusText}`);
+            try {
+                const response = await fetch(`${API_BASE_URL}/products/by_category/${catId}`);
+                if (!response.ok) {
+                    throw new Error(`HTTP ${response.status} - ${response.statusText}`);
+                }
+
+                const data = await response.json();
+                currentProducts = data.products || [];
+                renderProducts(panel, currentProducts);
+            } catch (error) {
+                panel.innerHTML = `<div style="color: red;">Error loading products: ${error.message}</div>`;
+            }
+        }
+
+        // đổi rating số thành sao
+        function renderStars(rating) {
+            if (rating === undefined || rating === null) return "-";
+            const fullStar = "★";
+            const emptyStar = "☆";
+            const maxStars = 5;
+            const safeRating = Math.max(0, Math.min(maxStars, Math.round(rating)));
+            return `<span style="color: gold; font-size: 18px;">${fullStar.repeat(safeRating)}${emptyStar.repeat(maxStars - safeRating)}</span>`;
+        }
+
+        // hiển thị sản phẩm lên panel-right
+        function renderProducts(panel, products) {
+            if (!products || products.length === 0) {
+                panel.innerHTML = "No products found for this category.";
+                return;
             }
 
-            const data = await response.json();
-            currentProducts = data.products || [];
-            renderProducts(panel, currentProducts);
-        } catch (error) {
-            panel.innerHTML = `<div style="color: red;">Error loading products: ${error.message}</div>`;
+            const rows = products.map(product => {
+                const reviewEntries = Array.isArray(product.reviews)
+                    ? product.reviews.filter(review => review && typeof review.rating === "number")
+                    : [];
+                const ratingFromReviews = reviewEntries.length > 0
+                    ? reviewEntries.reduce((sum, review) => sum + review.rating, 0) / reviewEntries.length
+                    : null;
+                const rating = ratingFromReviews !== null
+                    ? ratingFromReviews
+                    : (typeof product.avg_rating === "number" ? product.avg_rating : null);
+
+                return `
+                    <div class="product-card" onclick = "showProductDetail('${product._id}')">
+                        <div><strong>Name:</strong> ${product.pro_name || "-"}</div>
+                        <div><strong>Description:</strong> ${product.description || "-"}</div>
+                        <div><strong>Price:</strong> ${product.price ?? "0"}</div>
+                        <div><strong>Rating:</strong> ${renderStars(rating)}</div>
+                    </div>
+                `;
+            }).join("");
+
+            panel.innerHTML = `<div>${rows}</div>`;
         }
-    }
 
-    // đổi rating số thành sao
-    function renderStars(rating) {
-        if (rating === undefined || rating === null) return "-";
-        const fullStar = "★";
-        const emptyStar = "☆";
-        const maxStars = 5;
-        const safeRating = Math.max(0, Math.min(maxStars, Math.round(rating)));
-        return `<span style="color: gold; font-size: 18px;">${fullStar.repeat(safeRating)}${emptyStar.repeat(maxStars - safeRating)}</span>`;
-    }
-
-    // hiển thị sản phẩm lên panel-right
-    function renderProducts(panel, products) {
-        if (!products || products.length === 0) {
-            panel.innerHTML = "No products found for this category.";
-            return;
+        function renderAttributes(attributes) {
+            if (!attributes || typeof attributes !== "object" || Array.isArray(attributes)) return "-";
+            return `<div class="attributes">` + 
+                Object.entries(attributes)
+                    .map(([key, value]) => `<div class="attribute-item">${key}: ${value}</div>`)
+                    .join("") +
+                `</div>`;
         }
 
-        const rows = products.map(product => {
+        function renderReviews(reviews) {
+            if (!Array.isArray(reviews) || reviews.length === 0) {
+                return `<div>No reviews available.</div>`;
+            }
+
+            return `<div class="reviews">` + 
+                reviews.map(review => `
+                    <div class="review-card">
+                        <div><strong>Reviewer:</strong> ${review.reviewer || "-"}</div>
+                        <div><strong>Rating:</strong> ${renderStars(review.rating ?? null)}</div>
+                        <div><strong>Comment:</strong> ${review.content || "-"}</div>
+                    </div>
+                `).join("") +
+                `</div>`;
+        }
+
+        function showProductDetail(productId) {
+            const panel = document.getElementById("right-panel");
+            const product = currentProducts.find(item => item._id === productId);
+            if (!product) {
+                panel.innerHTML = "Product details not found.";
+                return;
+            }
+
             const reviewEntries = Array.isArray(product.reviews)
                 ? product.reviews.filter(review => review && typeof review.rating === "number")
                 : [];
-            const ratingFromReviews = reviewEntries.length > 0
+            const averageRating = reviewEntries.length > 0
                 ? reviewEntries.reduce((sum, review) => sum + review.rating, 0) / reviewEntries.length
                 : null;
-            const rating = ratingFromReviews !== null
-                ? ratingFromReviews
-                : (typeof product.avg_rating === "number" ? product.avg_rating : null);
 
-            return `
-                <div class="product-card" onclick = "showProductDetail('${product._id}')">
-                    <div><strong>Name:</strong> ${product.pro_name || "-"}</div>
-                    <div><strong>Description:</strong> ${product.description || "-"}</div>
-                    <div><strong>Price:</strong> ${product.price ?? "0"}</div>
-                    <div><strong>Rating:</strong> ${renderStars(rating)}</div>
+            panel.innerHTML = `
+                <div class="detail-header">
+                    
+                    <h2>Product Details</h2>
                 </div>
+                <div class="detail-grid">
+                    <div class="detail-row"><strong>Name:</strong> ${product.pro_name || "-"}</div>
+                    <div class="detail-row"><strong>Brand:</strong> ${product.brand || "-"}</div>
+                    <div class="detail-row"><strong>Price:</strong> ${product.price ?? "0"}</div>
+                    <div class="detail-row"><strong>Stock:</strong> ${product.stock ?? "0"}</div>
+                </div>
+                <div class="detail-row"><strong>Description:</strong> ${product.description || "-"}</div>
+                <div class="detail-row"><strong>Attributes:</strong> ${renderAttributes(product.attributes)}</div>
+                <div class="detail-row"><strong>Average Rating:</strong> ${renderStars(averageRating)}</div>
+                <div style="margin-top: 18px;"><strong>Reviews</strong></div>
+                <div>${renderReviews(product.reviews)}</div>
+                <button class="btn secondary" onclick="renderProducts(document.getElementById('right-panel'), currentProducts)">Back</button>
             `;
-        }).join("");
-
-        panel.innerHTML = `<div>${rows}</div>`;
-    }
-
-    function renderAttributes(attributes) {
-        if (!attributes || typeof attributes !== "object" || Array.isArray(attributes)) return "-";
-        return `<div class="attributes">` + 
-            Object.entries(attributes)
-                .map(([key, value]) => `<div class="attribute-item">${key}: ${value}</div>`)
-                .join("") +
-            `</div>`;
-    }
-
-    function renderReviews(reviews) {
-        if (!Array.isArray(reviews) || reviews.length === 0) {
-            return `<div>No reviews available.</div>`;
+        }
+        
+        function changeContent(categories) {
+            const panel = document.getElementById("right-panel");
+            fetchProductsByCategory(categories);
         }
 
-        return `<div class="reviews">` + 
-            reviews.map(review => `
-                <div class="review-card">
-                    <div><strong>Reviewer:</strong> ${review.reviewer || "-"}</div>
-                    <div><strong>Rating:</strong> ${renderStars(review.rating ?? null)}</div>
-                    <div><strong>Comment:</strong> ${review.content || "-"}</div>
-                </div>
-            `).join("") +
-            `</div>`;
-    }
+        window.addEventListener("DOMContentLoaded", () => {
+            fetchProductsByCategory("c1a7f2b0-9d3a-4e1f-8a2a-1f9d8a7b1234");
+        });
 
+        //tạo const mapping category
+        const categoryMap = {
+            "Phone": "c1a7f2b0-9d3a-4e1f-8a2a-1f9d8a7b1234",
+            "Fashion": "f2b9c4d1-7e6a-4a3b-9c2b-5d7e8f9a5678",
+            "Book": "b3c8d5e2-6f7a-4b4c-8d3c-7e9f0a1b9012"
+        };
 
-    function showProductDetail(productId) {
-        const panel = document.getElementById("right-panel");
-        const product = currentProducts.find(item => item._id === productId);
-        if (!product) {
-            panel.innerHTML = "Product details not found.";
-            return;
-        }
+    </script>
 
-        const reviewEntries = Array.isArray(product.reviews)
-            ? product.reviews.filter(review => review && typeof review.rating === "number")
-            : [];
-        const averageRating = reviewEntries.length > 0
-            ? reviewEntries.reduce((sum, review) => sum + review.rating, 0) / reviewEntries.length
-            : null;
-
-        panel.innerHTML = `
-            <div class="detail-header">
-                
-                <h2>Product Details</h2>
-            </div>
-            <div class="detail-grid">
-                <div class="detail-row"><strong>Name:</strong> ${product.pro_name || "-"}</div>
-                <div class="detail-row"><strong>Brand:</strong> ${product.brand || "-"}</div>
-                <div class="detail-row"><strong>Price:</strong> ${product.price ?? "0"}</div>
-                <div class="detail-row"><strong>Stock:</strong> ${product.stock ?? "0"}</div>
-            </div>
-            <div class="detail-row"><strong>Description:</strong> ${product.description || "-"}</div>
-            <div class="detail-row"><strong>Attributes:</strong> ${renderAttributes(product.attributes)}</div>
-            <div class="detail-row"><strong>Average Rating:</strong> ${renderStars(averageRating)}</div>
-            <div style="margin-top: 18px;"><strong>Reviews</strong></div>
-            <div>${renderReviews(product.reviews)}</div>
-            <button class="btn secondary" onclick="renderProducts(document.getElementById('right-panel'), currentProducts)">Back</button>
-        `;
-    }
-    
-
-    function changeContent(categories) {
-        const panel = document.getElementById("right-panel");
-        fetchProductsByCategory(categories);
-    }
-
-    window.addEventListener("DOMContentLoaded", () => {
-        fetchProductsByCategory("c1a7f2b0-9d3a-4e1f-8a2a-1f9d8a7b1234");
-    });
-
-    //tạo const mapping category
-    const categoryMap = {
-        "Phone": "c1a7f2b0-9d3a-4e1f-8a2a-1f9d8a7b1234",
-        "Fashion": "f2b9c4d1-7e6a-4a3b-9c2b-5d7e8f9a5678",
-        "Book": "b3c8d5e2-6f7a-4b4c-8d3c-7e9f0a1b9012"
-    };
-
-
-    //gán event cho nút insert, lket với file insert
-        // gán event cho nút Insert
-    const insertBtn = document.querySelector('.left-group .btn-tab:nth-child(1)');
-    insertBtn.addEventListener('click', async () => {
-        const formArea = document.querySelector('.form-area');
-        try {
-            const response = await fetch('./insert.html');
-            const html = await response.text();
-            formArea.innerHTML = html;
-
-            // gán sự kiện cho nút Cancel lớn
-            const cancelBtn = document.querySelector('.bottom-actions .btn:nth-child(1)');
-            cancelBtn.onclick = () => {
-                formArea.innerHTML = ""; // xóa form, reset lại
-                attributesArray = [];
-                reviewsArray = [];
-            };
-            // gán sự kiện cho nút Add Attribute
-            const addAttrBtn = document.getElementById("btn-add-attribute");
-            addAttrBtn.onclick = () => {
-                const attrName = document.getElementById("attr-name").value.trim();
-                const attrValue = document.getElementById("attr-value").value.trim();
-                if (attrName && attrValue) {
-                    attributesArray.push({ name: attrName, value: attrValue });
-                    console.log("Attributes array:", attributesArray);
-                    document.getElementById("attr-name").value = "";
-                    document.getElementById("attr-value").value = "";
-                } else {
-                    alert("Please fill both attribute name and value!");
-                }
-            };
-            // gán sự kiện cho nút Add Review
-            const addReviewBtn = document.getElementById("btn-add-review");
-            addReviewBtn.onclick = () => {
-                const reviewer = document.getElementById("reviewer").value.trim();
-                const rating = document.getElementById("rating").value.trim();
-                const comment = document.getElementById("comment").value.trim();
-                if (reviewer && rating && comment) {
-                    reviewsArray.push({ reviewer, rating: parseInt(rating), comment });
-                    console.log("Reviews array:", reviewsArray);
-                    document.getElementById("reviewer").value = "";
-                    document.getElementById("rating").value = "";
-                    document.getElementById("comment").value = "";
-                } else {
-                    alert("Please fill all review fields!");
-                }
-            };
-                
-            // gán sự kiện cho nút Confirm lớn
-            const confirmBtn = document.querySelector('.bottom-actions .btn:nth-child(2)');
-            confirmBtn.onclick = async () => {
-                //đoạn này để constraints không bỏ trống trường
-                const nameInput = document.getElementById("input-name");
-                const categoryInput = document.getElementById("input-category");
-                const brandInput = document.getElementById("input-brand");
-                const priceInput = document.getElementById("input-price");
-                const stockInput = document.getElementById("input-stock");
-                const descriptionInput = document.getElementById("input-description");
-                const inputs = [nameInput, brandInput, priceInput, stockInput, descriptionInput, categoryInput];
-                let valid = true;
-                inputs.forEach(input => input.style.border = "");
-                //kt từng trường, cái nào để trống thì sẽ bôi đỏ
-                inputs.forEach(input => {
-                    if (!input.value || input.value.trim() === "") {
-                        input.style.border = "2px solid red";
-                        valid = false;
-                    }
-                });
-                if (!valid) {
-                    alert("Please fill all required information!");
-                    return;
-                }
-                if (confirm("Do you want to add this product?")) {
-                    const categoryName = document.getElementById("input-category").value.trim();
-                    const productData = {
-                        pro_name: document.getElementById("input-name").value,
-                        cat_id: categoryMap[categoryName],
-                        brand: document.getElementById("input-brand").value,
-                        price: parseFloat(document.getElementById("input-price").value),
-                        stock: parseInt(document.getElementById("input-stock").value),
-                        description: document.getElementById("input-description").value,
-                        attributes: attributesArray,
-                        reviews: reviewsArray
-                    };
-
-                    console.log("Category name:", categoryName);
-                    console.log("Mapped cat_id:", productData.cat_id);
-
-                    const response = await fetch(`${API_BASE_URL}/products`, {
-                        method: "POST",
-                        headers: { "Content-Type": "application/json" },
-                        body: JSON.stringify(productData)
-                    });
-            
-                    if (response.ok) {
-                        alert("Product added successfully!");
-                        //push data mới vào và render lại
-                        fetchProductsByCategory(productData.cat_id);
-                    } else {
-                        alert("Error: Cannot add product.");
-                    }
-                }
-            };
-
-        } catch (err) {
-            formArea.innerHTML = '<p style="color:red;">Error loading insert form.</p>';
-        }
-    });
-
-
-    //gán event cho nút dlt, lket với file dlt
-    const deleteBtn = document.querySelector('.left-group .btn-tab:nth-child(3)');
-    deleteBtn.addEventListener('click', async () => {
-        const formArea = document.querySelector('.form-area');
-        try {
-            const response = await fetch('./delete.html');
-            const html = await response.text();
-            formArea.innerHTML = html;
-
-            //load xong sk cho nút Delete to thì load combo box category
-            const categorySelect = document.getElementById("delete-category");
-            const resCat = await fetch(`${API_BASE_URL}/categories`);
-            const categories = await resCat.json();
-
-            categorySelect.innerHTML = "<option value=''>--Select Category--</option>";
-            categories.forEach(c => {
-            const opt = document.createElement("option");
-            opt.value = c.cat_id;     // dùng cat_id để lọc sản phẩm
-            opt.textContent = c.cat_name.charAt(0).toUpperCase() + c.cat_name.slice(1); // hiển thị tên category viết hoa
-            categorySelect.appendChild(opt);
-            });
-
-            const productSelect = document.getElementById("delete-product");
-            const infoDiv = document.getElementById("delete-product-info");
-
-            //chọn xong cat thì fetch in4 sp trong cat
-            categorySelect.onchange = async () => {
-                const catId = categorySelect.value;
-                if (!catId) return;
-
-                const res = await fetch(`${API_BASE_URL}/products/by_category/${catId}`);
-                const data = await res.json();
-
-                productSelect.innerHTML = "<option value=''>--Select Product--</option>";
-                data.products.forEach(p => {
-                    const opt = document.createElement("option");
-                    opt.value = p.id; //xóa bằng id í
-                    opt.textContent = p.pro_name; //nma hiển thị tên !
-                    productSelect.appendChild(opt);
-                });
-            };
-
-            //chọn sp xong thì hiện in4 chi tiết ra
-            productSelect.onchange = async () => {
-                const productId = productSelect.value;
-                if (!productId) return;
-
-                const res = await fetch(`${API_BASE_URL}/products/${productId}`);
-                const product = await res.json();
-
-                console.log(product); //thêm vào để check coi trả key ntn
-
-
-                infoDiv.innerHTML = `
-                    <p><strong>Name:</strong> ${product.pro_name}</p>
-                    <p><strong>Brand:</strong> ${product.brand}</p>
-                    <p><strong>Price:</strong> ${product.price}</p>
-                    <p><strong>Stock:</strong> ${product.stock}</p>
-                    <p><strong>Description:</strong> ${product.description}</p>
-                `;
-            };
-
-            //mốt bind sau
-            const cancelBtn = document.querySelector('.bottom-actions .btn:nth-child(1)');
-            const confirmBtn = document.querySelector('.bottom-actions .btn:nth-child(2)');
-
-        } catch (err) {
-            formArea.innerHTML = '<p style="color:red;">Error loading delete form.</p>';
-        }
-    });
-
-
-</script>
+    <!--Đặt các file js chức năng ở đây-->
+    <script src="gui_CUD_frame.js"></script>
+    <script src="insert.js"></script>
+    <script src="delete.js"></script>
 
 </body>
 </html>
