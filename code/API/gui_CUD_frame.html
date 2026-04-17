@@ -336,12 +336,10 @@
         }
 
         function renderAttributes(attributes) {
-            if (!attributes || typeof attributes !== "object" || Array.isArray(attributes)) return "-";
-            return `<div class="attributes">` + 
-                Object.entries(attributes)
-                    .map(([key, value]) => `<div class="attribute-item">${key}: ${value}</div>`)
-                    .join("") +
-                `</div>`;
+            if (!attributes || attributes.length === 0) {
+                return "-";
+            }
+            return `<ul>${attributes.map(attr => `<li>${attr.name}: ${attr.value}</li>`).join("")}</ul>`;
         }
 
         function renderReviews(reviews) {

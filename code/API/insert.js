@@ -25,13 +25,13 @@ document.addEventListener("DOMContentLoaded", () => {
             // Add Attribute
             const addAttrBtn = document.getElementById("btn-add-attribute");
             addAttrBtn.onclick = () => {
-                const attrName = document.getElementById("attr-name").value.trim();
-                const attrValue = document.getElementById("attr-value").value.trim();
+                const attrName = document.getElementById("name").value.trim();
+                const attrValue = document.getElementById("value").value.trim();
                 if (attrName && attrValue) {
                     attributesArray.push({ name: attrName, value: attrValue });
                     console.log("Attributes array:", attributesArray);
-                    document.getElementById("attr-name").value = "";
-                    document.getElementById("attr-value").value = "";
+                    document.getElementById("name").value = "";
+                    document.getElementById("value").value = "";
                 } else {
                     alert("Please fill both attribute name and value!");
                 }
@@ -42,13 +42,13 @@ document.addEventListener("DOMContentLoaded", () => {
             addReviewBtn.onclick = () => {
                 const reviewer = document.getElementById("reviewer").value.trim();
                 const rating = document.getElementById("rating").value.trim();
-                const comment = document.getElementById("comment").value.trim();
-                if (reviewer && rating && comment) {
-                    reviewsArray.push({ reviewer, rating: parseInt(rating), comment });
+                const content = document.getElementById("content").value.trim();
+                if (reviewer && rating && content) {
+                    reviewsArray.push({ reviewer, rating: parseInt(rating), content });
                     console.log("Reviews array:", reviewsArray);
                     document.getElementById("reviewer").value = "";
                     document.getElementById("rating").value = "";
-                    document.getElementById("comment").value = "";
+                    document.getElementById("content").value = "";
                 } else {
                     alert("Please fill all review fields!");
                 }

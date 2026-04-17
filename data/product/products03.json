@@ -3,7 +3,11 @@
     "pro_name": "The Great Gatsby",
     "cat_id": "b3c8d5e2-6f7a-4b4c-8d3c-7e9f0a1b9012",
     "brand": "Penguin",
-    "attributes": { "Author_name": "F. Scott Fitzgerald", "Publisher": "Penguin Classics", "Genre": "Novel" },
+    "attributes": [
+      { "name": "Author_name", "value": "F. Scott Fitzgerald" },
+      { "name": "Publisher", "value": "Penguin Classics" },
+      { "name": "Genre", "value": "Novel" }
+    ],
     "description": "Fitzgerald's classic novel of love, wealth, and the Jazz Age.",
     "reviews": [
       {"rev_id": "r-book-123e4567-e89b-12d3-a456-426614174030", "reviewer": "Charlotte", "rating": 4, "content": "Beautifully written, captures the era well"},
@@ -16,7 +20,11 @@
     "pro_name": "Clean Code",
     "cat_id": "b3c8d5e2-6f7a-4b4c-8d3c-7e9f0a1b9012",
     "brand": "Prentice Hall",
-    "attributes": { "Author_name": "Robert C. Martin", "Publisher": "Prentice Hall", "Genre": "Programming" },
+    "attributes": [
+      { "name": "Author_name", "value": "Robert C. Martin" },
+      { "name": "Publisher", "value": "Prentice Hall" },
+      { "name": "Genre", "value": "Programming" }
+    ],
     "description": "Robert C. Martin's guide to writing clean, maintainable code.",
     "reviews": [
       {"rev_id": "r-book-123e4567-e89b-12d3-a456-426614174032", "reviewer": "Mark", "rating": 5, "content": "Essential reading for every developer"},
@@ -29,7 +37,11 @@
     "pro_name": "1984",
     "cat_id": "b3c8d5e2-6f7a-4b4c-8d3c-7e9f0a1b9012",
     "brand": "Secker & Warburg",
-    "attributes": { "Author_name": "George Orwell", "Publisher": "Secker & Warburg", "Genre": "Dystopian" },
+    "attributes": [
+      { "name": "Author_name", "value": "George Orwell" },
+      { "name": "Publisher", "value": "Secker & Warburg" },
+      { "name": "Genre", "value": "Dystopian" }
+    ],
     "description": "Orwell's dystopian masterpiece about surveillance and control.",
     "reviews": [
       {"rev_id": "r-book-123e4567-e89b-12d3-a456-426614174034", "reviewer": "Grace", "rating": 5, "content": "Chilling and thought-provoking"},
@@ -43,7 +55,11 @@
     "pro_name": "To Kill a Mockingbird",
     "cat_id": "b3c8d5e2-6f7a-4b4c-8d3c-7e9f0a1b9012",
     "brand": "HarperCollins",
-    "attributes": { "Author_name": "Harper Lee", "Publisher": "HarperCollins", "Genre": "Novel" },
+    "attributes": [
+      { "name": "Author_name", "value": "Harper Lee" },
+      { "name": "Publisher", "value": "HarperCollins" },
+      { "name": "Genre", "value": "Novel" }
+    ],
     "description": "Harper Lee's timeless story of justice and childhood in the South.",
     "reviews": [
       {"rev_id": "r-book-123e4567-e89b-12d3-a456-426614174036", "reviewer": "Ella", "rating": 5, "content": "Powerful story about justice and empathy"},
@@ -56,7 +72,11 @@
     "pro_name": "Harry Potter and the Sorcerer's Stone",
     "cat_id": "b3c8d5e2-6f7a-4b4c-8d3c-7e9f0a1b9012",
     "brand": "Bloomsbury",
-    "attributes": { "Author_name": "J.K. Rowling", "Publisher": "Bloomsbury", "Genre": "Fantasy" },
+    "attributes": [
+      { "name": "Author_name", "value": "J.K. Rowling" },
+      { "name": "Publisher", "value": "Bloomsbury" },
+      { "name": "Genre", "value": "Fantasy" }
+    ],
     "description": "Rowling's magical tale introducing Harry Potter's world of wizardry.",
     "reviews": [
       {"rev_id": "r-book-123e4567-e89b-12d3-a456-426614174038", "reviewer": "Mia", "rating": 5, "content": "Magical and unforgettable start to the series"},
@@ -69,7 +89,11 @@
     "pro_name": "The Hobbit",
     "cat_id": "b3c8d5e2-6f7a-4b4c-8d3c-7e9f0a1b9012",
     "brand": "HarperCollins",
-    "attributes": { "Author_name": "J.R.R. Tolkien", "Publisher": "HarperCollins", "Genre": "Fantasy" },
+    "attributes": [
+      { "name": "Author_name", "value": "J.R.R. Tolkien" },
+      { "name": "Publisher", "value": "HarperCollins" },
+      { "name": "Genre", "value": "Fantasy" }
+    ],
     "description": "Tolkien's fantasy adventure of Bilbo Baggins and his epic journey.",
     "reviews": [
       {"rev_id": "r-book-123e4567-e89b-12d3-a456-426614174040", "reviewer": "Lucas", "rating": 5, "content": "A delightful adventure full of charm"},
@@ -82,7 +106,11 @@
     "pro_name": "The Catcher in the Rye",
     "cat_id": "b3c8d5e2-6f7a-4b4c-8d3c-7e9f0a1b9012",
     "brand": "Little, Brown and Company",
-    "attributes": { "Author_name": "J.D. Salinger", "Publisher": "Little, Brown and Company", "Genre": "Novel" },
+    "attributes": [
+      { "name": "Author_name", "value": "J.D. Salinger" },
+      { "name": "Publisher", "value": "Little, Brown and Company" },
+      { "name": "Genre", "value": "Novel" }
+    ],
     "description": "Salinger's iconic novel of teenage angst and alienation.",
     "reviews": [
       {"rev_id": "r-book-123e4567-e89b-12d3-a456-426614174042", "reviewer": "Noah", "rating": 4, "content": "Captures teenage struggles perfectly"},
@@ -95,7 +123,11 @@
     "pro_name": "The Lord of the Rings",
     "cat_id": "b3c8d5e2-6f7a-4b4c-8d3c-7e9f0a1b9012",
     "brand": "Allen & Unwin",
-    "attributes": { "Author_name": "J.R.R. Tolkien", "Publisher": "Allen & Unwin", "Genre": "Fantasy" },
+    "attributes": [
+      { "name": "Author_name", "value": "J.R.R. Tolkien" },
+      { "name": "Publisher", "value": "Allen & Unwin" },
+      { "name": "Genre", "value": "Fantasy" }
+    ],
     "description": "Tolkien's epic fantasy saga of Middle-earth and the One Ring.",
     "reviews": [
       {"rev_id": "r-book-123e4567-e89b-12d3-a456-426614174044", "reviewer": "Daniel", "rating": 5, "content": "Epic storytelling and world-building"},
@@ -108,7 +140,11 @@
     "pro_name": "Pride and Prejudice",
     "cat_id": "b3c8d5e2-6f7a-4b4c-8d3c-7e9f0a1b9012",
     "brand": "T. Egerton",
-    "attributes": { "Author_name": "Jane Austen", "Publisher": "T. Egerton", "Genre": "Romance" },
+    "attributes": [
+      { "name": "Author_name", "value": "Jane Austen" },
+      { "name": "Publisher", "value": "T. Egerton" },
+      { "name": "Genre", "value": "Romance" }
+    ],
     "description": "Jane Austen's romantic classic of wit, manners, and love.",
     "reviews": [
       { "rev_id": "r-book-123e4567-e89b-12d3-a456-426614174046", "reviewer": "Emily", "rating": 5, "content": "Witty and romantic, timeless charm"},
@@ -121,7 +157,11 @@
     "pro_name": "The Alchemist",
     "cat_id": "b3c8d5e2-6f7a-4b4c-8d3c-7e9f0a1b9012",
     "brand": "HarperOne",
-    "attributes": { "Author_name": "Paulo Coelho", "Publisher": "HarperOne", "Genre": "Adventure" },
+    "attributes": [
+      { "name": "Author_name", "value": "Paulo Coelho" },
+      { "name": "Publisher", "value": "HarperOne" },
+      { "name": "Genre", "value": "Adventure" }
+    ],
     "description": "Paulo Coelho' s inspiring fable about destiny and self-discovery.",
     "reviews": [
       {"rev_id": "r-book-123e4567-e89b-12d3-a456-426614174048", "reviewer": "Sophia", "rating": 5, "content": "Inspirational and uplifting journey"},

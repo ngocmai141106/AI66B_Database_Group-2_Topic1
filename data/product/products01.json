@@ -3,7 +3,11 @@
     "pro_name": "iPhone 15",
     "cat_id": "c1a7f2b0-9d3a-4e1f-8a2a-1f9d8a7b1234",
     "brand": "Apple",
-    "attributes": { "RAM": "8GB", "CPU": "A17 Bionic", "Battery": "4000mAh" },
+    "attributes": [
+      { "name": "RAM", "value": "8GB" },
+      { "name": "CPU", "value": "A17 Bionic" },
+      { "name": "Battery", "value": "4000mAh" }
+    ],
     "description": "Apple’s flagship with A17 Bionic, sleek design, and smooth performance.",
     "reviews": [
       { "rev_id": "r-phone-123e4567-e89b-12d3-a456-426614174000", "reviewer": "Alice", "rating": 5, "content": "Excellent performance" },
@@ -16,7 +20,11 @@
     "pro_name": "Galaxy S24",
     "cat_id": "c1a7f2b0-9d3a-4e1f-8a2a-1f9d8a7b1234",
     "brand": "Samsung",
-    "attributes": { "RAM": "12GB", "CPU": "Snapdragon 8 Gen 3", "Battery": "4500mAh" },
+    "attributes": [
+      { "name": "RAM", "value": "12GB" },
+      { "name": "CPU", "value": "Snapdragon 8 Gen 3" },
+      { "name": "Battery", "value": "4500mAh" }
+    ],
     "description":"Premium Samsung phone with vivid display and Snapdragon 8 Gen 3 power.",
     "reviews": [
       { "rev_id": "r-phone-123e4567-e89b-12d3-a456-426614174002", "reviewer": "Charlie", "rating": 5, "content": "Amazing display quality" }
@@ -28,7 +36,11 @@
     "pro_name": "Pixel 9",
     "cat_id": "c1a7f2b0-9d3a-4e1f-8a2a-1f9d8a7b1234",
     "brand": "Google",
-    "attributes": { "RAM": "8GB", "CPU": "Tensor G3", "Battery": "4200mAh" },
+    "attributes": [
+      { "name": "RAM", "value": "8GB" },
+      { "name": "CPU", "value": "Tensor G3" },
+      { "name": "Battery", "value": "4200mAh" }
+    ],
     "description":"Google’s latest Pixel featuring AI-driven camera and clean Android.",
     "reviews": [
       { "rev_id": "r-phone-123e4567-e89b-12d3-a456-426614174003", "reviewer": "David", "rating": 4, "content": "Great camera" }
@@ -40,7 +52,11 @@
     "pro_name": "Xiaomi Mi 14",
     "cat_id": "c1a7f2b0-9d3a-4e1f-8a2a-1f9d8a7b1234",
     "brand": "Xiaomi",
-    "attributes": { "RAM": "12GB", "CPU": "Snapdragon 8 Gen 2", "Battery": "5000mAh" },
+    "attributes": [
+      { "name": "RAM", "value": "12GB" },
+      { "name": "CPU", "value": "Snapdragon 8 Gen 2" },
+      { "name": "Battery", "value": "5000mAh" }
+    ],
     "description":"High-performance Xiaomi device offering great value and long battery.",
     "reviews": [
       { "rev_id": "r-phone-123e4567-e89b-12d3-a456-426614174004", "reviewer": "Emma", "rating": 5, "content": "Excellent value for money" }
@@ -52,7 +68,11 @@
     "pro_name": "OnePlus 12",
     "cat_id": "c1a7f2b0-9d3a-4e1f-8a2a-1f9d8a7b1234",
     "brand": "OnePlus",
-    "attributes": { "RAM": "16GB", "CPU": "Snapdragon 8 Gen 3", "Battery": "4800mAh" },
+    "attributes": [
+      { "name": "RAM", "value": "12GB" },
+      { "name": "CPU", "value": "Kirin 9000" },
+      { "name": "Battery", "value": "4700mAh" }
+    ],
     "description": "Fast, fluid OnePlus flagship with Snapdragon 8 Gen 3 and 16GB RAM.",
     "reviews": [
       { "rev_id": "r-phone-123e4567-e89b-12d3-a456-426614174005", "reviewer": "Sophia", "rating": 4, "content": "Fast and smooth" }
@@ -64,7 +84,11 @@
     "pro_name": "Huawei P70",
     "cat_id": "c1a7f2b0-9d3a-4e1f-8a2a-1f9d8a7b1234",
     "brand": "Huawei",
-    "attributes": { "RAM": "12GB", "CPU": "Kirin 9000", "Battery": "4700mAh" },
+    "attributes": [
+      { "name": "RAM", "value": "8GB" },
+      { "name": "CPU", "value": "Snapdragon 8 Gen 1" },
+      { "name": "Battery", "value": "4000mAh" }
+    ],
     "description":"Elegant Huawei phone powered by Kirin 9000 and strong cameras.",
     "reviews": [
       { "rev_id": "r-phone-123e4567-e89b-12d3-a456-426614174006", "reviewer": "Liam", "rating": 3, "content": "Good but limited apps" }
@@ -76,7 +100,11 @@
     "pro_name": "Sony Xperia Z5",
     "cat_id": "c1a7f2b0-9d3a-4e1f-8a2a-1f9d8a7b1234",
     "brand": "Sony",
-    "attributes": { "RAM": "8GB", "CPU": "Snapdragon 8 Gen 1", "Battery": "4000mAh" },
+    "attributes": [
+      { "name": "RAM", "value": "8GB" },
+      { "name": "CPU", "value": "Snapdragon 8 Gen 1" },
+      { "name": "Battery", "value": "4000mAh" }
+    ],
     "description":"Durable Sony smartphone with solid build and reliable performance.",
     "reviews": [
       { "rev_id": "r-phone-123e4567-e89b-12d3-a456-426614174007", "reviewer": "Noah", "rating": 4, "content": "Solid build quality" }
@@ -88,7 +116,11 @@
     "pro_name": "Oppo Find X6",
     "cat_id": "c1a7f2b0-9d3a-4e1f-8a2a-1f9d8a7b1234",
     "brand": "Oppo",
-    "attributes": { "RAM": "12GB", "CPU": "Snapdragon 8 Gen 2", "Battery": "4600mAh" },
+    "attributes": [
+      { "name": "RAM", "value": "12GB" },
+      { "name": "CPU", "value": "Snapdragon 8 Gen 2" },
+      { "name": "Battery", "value": "4600mAh" }
+    ],
     "description":"Stylish Oppo handset combining Snapdragon 8 Gen 2 with sleek design.",
     "reviews": [
       { "rev_id": "r-phone-123e4567-e89b-12d3-a456-426614174008", "reviewer": "Ava", "rating": 5, "content": "Beautiful design" }
@@ -100,7 +132,11 @@
     "pro_name": "Realme GT Neo",
     "cat_id": "c1a7f2b0-9d3a-4e1f-8a2a-1f9d8a7b1234",
     "brand": "Realme",
-    "attributes": { "RAM": "8GB", "CPU": "Dimensity 9000", "Battery": "5000mAh" },
+    "attributes": [
+      { "name": "RAM", "value": "8GB" },
+      { "name": "CPU", "value": "Dimensity 9000" },
+      { "name": "Battery", "value": "5000mAh" }
+    ],
     "description":  "Affordable Realme phone delivering strong performance and big battery.",
     "reviews": [
       { "rev_id": "r-phone-123e4567-e89b-12d3-a456-426614174009", "reviewer": "Isabella", "rating": 4, "content": "Good performance for price" }
@@ -112,7 +148,11 @@
     "pro_name": "Nokia XR20",
     "cat_id": "c1a7f2b0-9d3a-4e1f-8a2a-1f9d8a7b1234",
     "brand": "Nokia",
-    "attributes": { "RAM": "6GB", "CPU": "Snapdragon 480", "Battery": "4630mAh" },
+    "attributes": [
+      { "name": "RAM", "value": "6GB" },
+      { "name": "CPU", "value": "Snapdragon 480" },
+      { "name": "Battery", "value": "4630mAh" }
+    ],
     "description": "Rugged Nokia device built for durability with dependable battery life.",
     "reviews": [
       { "rev_id": "r-phone-123e4567-e89b-12d3-a456-426614174010", "reviewer": "Ethan", "rating": 3, "content": "Moderate phone, no comment" }

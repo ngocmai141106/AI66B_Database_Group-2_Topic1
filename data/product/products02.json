@@ -3,7 +3,11 @@
     "pro_name": "Men's Cotton Shirt",
     "cat_id": "f2b9c4d1-7e6a-4a3b-9c2b-5d7e8f9a5678",
     "brand": "Uniqlo",
-    "attributes": { "Size": "L", "Color": "White", "Material": "Cotton" },
+    "attributes": [
+      { "name": "Size", "value": "L" },
+      { "name": "Color", "value": "White" },
+      { "name": "Material", "value": "Cotton" }
+    ],
     "description": "Classic white cotton shirt, breathable and comfortable for daily wear.",
     "reviews": [
       { "rev_id": "r-fash-123e4567-e89b-12d3-a456-426614174010", "reviewer": "Emma", "rating": 5, "content": "Very comfortable" },
@@ -16,7 +20,11 @@
     "pro_name": "Women's Summer Dress",
     "cat_id": "f2b9c4d1-7e6a-4a3b-9c2b-5d7e8f9a5678",
     "brand": "Zara",
-    "attributes": { "Size": "M", "Color": "Red", "Material": "Silk" },
+    "attributes": [
+      { "name": "Size", "value": "M" },
+      { "name": "Color", "value": "Red" },
+      { "name": "Material", "value": "Silk" }
+    ],
     "description":  "Light silk dress in red, stylish and perfect for warm days.",
     "reviews": [
       { "rev_id": "r-fash-123e4567-e89b-12d3-a456-426614174012", "reviewer": "Sophia", "rating": 4, "content": "Beautiful design" }
@@ -28,7 +36,11 @@
     "pro_name": "Leather Jacket",
     "cat_id": "f2b9c4d1-7e6a-4a3b-9c2b-5d7e8f9a5678",
     "brand": "Levi's",
-    "attributes": { "Size": "XL", "Color": "Black", "Material": "Leather" },
+    "attributes": [
+      { "name": "Size", "value": "XL" },
+      { "name": "Color", "value": "Black" },
+      { "name": "Material", "value": "Leather" }
+    ],
     "description": "Black leather jacket, durable and fashionable with a warm fit.",
     "reviews": [
       { "rev_id": "r-fash-123e4567-e89b-12d3-a456-426614174013", "reviewer": "Michael", "rating": 5, "content": "Stylish and warm" }
@@ -40,7 +52,11 @@
     "pro_name": "Denim Jeans",
     "cat_id": "f2b9c4d1-7e6a-4a3b-9c2b-5d7e8f9a5678",
     "brand": "Levi's",
-    "attributes": { "Size": "M", "Color": "Blue", "Material": "Denim" },
+    "attributes": [
+      { "name": "Size", "value": "M" },
+      { "name": "Color", "value": "Blue" },
+      { "name": "Material", "value": "Denim" }
+    ],
     "description": "Blue denim jeans offering a comfortable fit and timeless style.",
     "reviews": [
       { "rev_id": "r-fash-123e4567-e89b-12d3-a456-426614174014", "reviewer": "Olivia", "rating": 4, "content": "Comfortable fit" }
@@ -52,7 +68,11 @@
     "pro_name": "Wool Sweater",
     "cat_id": "f2b9c4d1-7e6a-4a3b-9c2b-5d7e8f9a5678",
     "brand": "H&M",
-    "attributes": { "Size": "L", "Color": "Gray", "Material": "Wool" },
+    "attributes": [
+      { "name": "Size", "value": "L" },
+      { "name": "Color", "value": "Gray" },
+      { "name": "Material", "value": "Wool" }
+    ],
     "description": "Gray wool sweater, cozy and warm for cooler seasons.",
     "reviews": [
       { "rev_id": "r-fash-123e4567-e89b-12d3-a456-426614174015", "reviewer": "Daniel", "rating": 5, "content": "Warm and cozy" }
@@ -64,7 +84,11 @@
     "pro_name": "Sports Shoes",
     "cat_id": "f2b9c4d1-7e6a-4a3b-9c2b-5d7e8f9a5678",
     "brand": "Nike",
-    "attributes": { "Size": "42", "Color": "Black", "Material": "Synthetic" },
+    "attributes": [
+      { "name": "Size", "value": "42" },
+      { "name": "Color", "value": "Black" },
+      { "name": "Material", "value": "Synthetic" }
+    ],
     "description": "Black synthetic running shoes, lightweight and supportive for sports.",
     "reviews": [
       { "rev_id": "r-fash-123e4567-e89b-12d3-a456-426614174016", "reviewer": "Lucas", "rating": 5, "content": "Perfect for running" }
@@ -76,7 +100,11 @@
     "pro_name": "High Heels",
     "cat_id": "f2b9c4d1-7e6a-4a3b-9c2b-5d7e8f9a5678",
     "brand": "Gucci",
-    "attributes": { "Size": "38", "Color": "Red", "Material": "Leather" },
+    "attributes": [
+      { "name": "Size", "value": "38" },
+      { "name": "Color", "value": "Red" },
+      { "name": "Material", "value": "Leather" }
+    ],
     "description": "Elegant red leather heels, stylish choice for formal occasions.",
     "reviews": [
       { "rev_id": "r-fash-123e4567-e89b-12d3-a456-426614174017", "reviewer": "Sophia", "rating": 4, "content": "Elegant design" }
@@ -88,7 +116,11 @@
     "pro_name": "Casual T-Shirt",
     "cat_id": "f2b9c4d1-7e6a-4a3b-9c2b-5d7e8f9a5678",
     "brand": "Adidas",
-    "attributes": { "Size": "M", "Color": "Green", "Material": "Cotton" },
+    "attributes": [
+      { "name": "Size", "value": "M" },
+      { "name": "Color", "value": "Green" },
+      { "name": "Material", "value": "Cotton" }
+    ],
     "description": "Green cotton T-shirt, soft, breathable, and ideal for casual wear.",
     "reviews": [
       { "rev_id": "r-fash-123e4567-e89b-12d3-a456-426614174018", "reviewer": "Ella", "rating": 5, "content": "Soft and breathable" }
@@ -100,7 +132,11 @@
     "pro_name": "Formal Suit",
     "cat_id": "f2b9c4d1-7e6a-4a3b-9c2b-5d7e8f9a5678",
     "brand": "Armani",
-    "attributes": { "Size": "L", "Color": "Navy", "Material": "Wool" },
+    "attributes": [
+      { "name": "Size", "value": "L" },
+      { "name": "Color", "value": "Navy" },
+      { "name": "Material", "value": "Wool" }
+    ],
     "description": "Navy wool suit, tailored for a sharp and professional look.",
     "reviews": [
       { "rev_id": "r-fash-123e4567-e89b-12d3-a456-426614174019", "reviewer": "James", "rating": 5, "content": "Professional look" }
@@ -112,7 +148,11 @@
     "pro_name": "Winter Coat",
     "cat_id": "f2b9c4d1-7e6a-4a3b-9c2b-5d7e8f9a5678",
     "brand": "Burberry",
-    "attributes": { "Size": "XL", "Color": "Brown", "Material": "Wool" },
+    "attributes": [
+      { "name": "Size", "value": "XL" },
+      { "name": "Color", "value": "Brown" },
+      { "name": "Material", "value": "Wool" }
+    ],
     "description":  "Brown wool coat, premium design that keeps you warm in winter.",
     "reviews": [
       { "rev_id": "r-fash-123e4567-e89b-12d3-a456-426614174020", "reviewer": "Mia", "rating": 5, "content": "Keeps me warm in winter" }

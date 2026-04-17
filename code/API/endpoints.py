@@ -129,11 +129,10 @@ def list_products_by_category(cat_id: str):
     pipeline = [
         {"$match": {"cat_id": cat_id}},
         {"$project": {
-            "id": "$_id",
-            "pro_id": 1,
+            "_id": {"$toString": "$_id"},
             "pro_name": 1,
-            "description": 1,
             "brand": 1,
+            "description": 1,
             "price": 1,
             "stock": 1,
             "attributes": 1,
@@ -142,7 +141,7 @@ def list_products_by_category(cat_id: str):
         }}
     ]
     products = list(db.products.aggregate(pipeline))
-    products = convert_objectid(products)
+    #products = convert_objectid(products)
     return {"products": products}
 
 #view one product
@@ -150,11 +149,17 @@ def list_products_by_category(cat_id: str):
 def list_products():
     pipeline = [
         {"$project": {
-            "_id": 0,
+            "_id": {"$toString": "$_id"},
             "pro_id": 1,
             "pro_name": 1,
             "description": 1,
-            "avg_rating": {"$avg": "$reviews.rating"}
+            "brand": 1,
+            "price": 1,
+            "stock": 1,
+            "attributes": 1,
+            "reviews": 1,
+            "avg_rating": {"$avg": "$reviews.rating"},
+            #"score": {"$meta": "textScore"}
         }}
     ]
     products = list(db.products.aggregate(pipeline))
@@ -196,16 +201,22 @@ def search_local(
     if brand:
         match_stage["brand"] = {"$regex": brand, "$options": "i"}
     if attr_key and attr_value:
-        match_stage[f"attributes.{attr_key}"] = {"$regex": attr_value, "$options": "i"}
+        match_stage["attributes"] = {
+            "$elemMatch": {"name": attr_key, "value": {"$regex": attr_value, "$options": "i"}}
+        }
     if min_price is not None and max_price is not None:
         match_stage["price"] = {"$gte": min_price, "$lte": max_price}
     pipeline = [
         {"$match": match_stage},
         {"$project": {
-            "_id": 0,
-            "pro_id": 1,
+            "_id": {"$toString": "$_id"},
             "pro_name": 1,
             "description": 1,
+            "brand": 1,
+            "price": 1,
+            "stock": 1,
+            "attributes": 1,
+            "reviews": 1,
             "avg_rating": {"$avg": "$reviews.rating"},
             "score": {"$meta": "textScore"}
         }},
@@ -232,16 +243,22 @@ def search_global(
     if brand:
         match_stage["brand"] = {"$regex": brand, "$options": "i"}
     if attr_key and attr_value:
-        match_stage[f"attributes.{attr_key}"] = {"$regex": attr_value, "$options": "i"}
+        match_stage["attributes"] = {
+            "$elemMatch": {"name": attr_key, "value": {"$regex": attr_value, "$options": "i"}}
+        }
     if min_price is not None and max_price is not None:
         match_stage["price"] = {"$gte": min_price, "$lte": max_price}
     pipeline = [
         {"$match": match_stage},
         {"$project": {
-            "_id": 0,
-            "pro_id": 1,
+            "_id": {"$toString": "$_id"},
             "pro_name": 1,
             "description": 1,
+            "brand": 1,
+            "price": 1,
+            "stock": 1,
+            "attributes": 1,
+            "reviews": 1,
             "avg_rating": {"$avg": "$reviews.rating"},
             "score": {"$meta": "textScore"}
         }},
