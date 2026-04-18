@@ -156,8 +156,9 @@ document.addEventListener("DOMContentLoaded", () => {
                 }
             };
 
-            // update category
-            document.getElementById("btn-update-category").onclick = async () => {
+            // bottom actions
+            const confirmBtn = document.querySelector('.bottom-actions .btn:nth-child(2)');
+            confirmBtn.onclick = async () => {
                 const catId = categorySelect.value;
                 if (!catId) return;
                 const description = document.getElementById("cat-description").value;
@@ -170,29 +171,6 @@ document.addEventListener("DOMContentLoaded", () => {
                     alert("Category updated successfully!");
                 } else {
                     alert("Error updating category.");
-                }
-            };
-
-            // bottom actions
-            const confirmBtn = document.querySelector('.bottom-actions .btn:nth-child(2)');
-            confirmBtn.onclick = async () => {
-                if (!currentProductId) return;
-                const updateData = {
-                    pro_name: document.getElementById("prod-name").value,
-                    brand: document.getElementById("prod-brand").value,
-                    price: parseFloat(document.getElementById("prod-price").value),
-                    stock: parseInt(document.getElementById("prod-stock").value),
-                    description: document.getElementById("prod-description").value
-                };
-                const res = await fetch(`${API_BASE_URL}/products/${currentProductId}`, {
-                    method: "PUT",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify(updateData)
-                });
-                if (res.ok) {
-                    alert("Product updated successfully!");
-                } else {
-                    alert("Error updating product.");
                 }
             };
 
