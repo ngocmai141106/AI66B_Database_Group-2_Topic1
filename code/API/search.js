@@ -9,7 +9,7 @@ window.addEventListener("DOMContentLoaded", () => {
     const input = document.querySelector(".search-box input");
 
     // FIX: đúng selector icon
-    const searchIcon = document.querySelectorAll(".right-group .icon-box")[0];
+    const searchIcon = document.querySelector(".right-group .icon-box");
 
     if (!input) return;
 
@@ -59,23 +59,32 @@ function handleSearch(query) {
 // ================= FUZZY SEARCH =================
 function fuzzySearch(query) {
     const panel = document.getElementById("right-panel");
+
     const products = window.currentProducts || [];
+
+    if (!Array.isArray(products) || products.length === 0) {
+        console.warn("Products not ready yet");
+        return;
+    }
 
     const q = query.toLowerCase();
 
     const results = products.filter(p => {
-        return [
-            p.pro_name,
-            p.description,
-            p.brand,
-            ...(p.attributes || []).map(a => a.name + " " + a.value),
-            ...(p.reviews || []).map(r => r.content + " " + r.reviewer),
-            String(p.price),
-            String(p.stock)
-        ]
-        .join(" ")
-        .toLowerCase()
-        .includes(q);
+        return (
+            (p.pro_name || "").toLowerCase().includes(q) ||
+            (p.description || "").toLowerCase().includes(q) ||
+            (p.brand || "").toLowerCase().includes(q) ||
+            (p.price + "").includes(q) ||
+            (p.stock + "").includes(q) ||
+            (p.attributes || []).some(a =>
+                (a.name || "").toLowerCase().includes(q) ||
+                (a.value || "").toLowerCase().includes(q)
+            ) ||
+            (p.reviews || []).some(r =>
+                (r.content || "").toLowerCase().includes(q) ||
+                (r.reviewer || "").toLowerCase().includes(q)
+            )
+        );
     });
 
     window.renderProducts(panel, results);
@@ -124,5 +133,9 @@ function onCategoryChanged(newProducts) {
 window.selectSuggestion = selectSuggestion;
 window.onCategoryChanged = onCategoryChanged;
 
+window.addEventListener("productsReady", () => {
+    console.log("Products loaded:", window.currentProducts);
+});
+
 console.log("CURRENT PRODUCTS:", window.currentProducts);
-console.log("QUERY:", query);
+console.log("LAST QUERY:", lastQuery);
