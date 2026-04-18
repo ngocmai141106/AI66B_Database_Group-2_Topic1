@@ -23,7 +23,7 @@ document.addEventListener("DOMContentLoaded", () => {
             });
 
             const productSelect = document.getElementById("update-product");
-            const updateForm = document.getElementById("update-form");
+            const infoDiv = document.getElementById("update-product-info");
 
             let currentProductId = null;
 
@@ -61,7 +61,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 const prodId = productSelect.value;
                 currentProductId = prodId;
                 if (!prodId) {
-                    updateForm.style.display = "none";
+                    infoDiv.style.display = "none";
                     return;
                 }
 
@@ -73,7 +73,8 @@ document.addEventListener("DOMContentLoaded", () => {
                 document.getElementById("prod-brand").value = product.brand || "";
                 document.getElementById("prod-price").value = product.price || "";
                 document.getElementById("prod-stock").value = product.stock || "";
-                updateForm.style.display = "block";
+                document.getElementById("prod-description").value = product.description || "";
+                infoDiv.style.display = "block";
 
                 // populate attributes
                 const attrList = document.getElementById("attributes-list");
@@ -109,11 +110,33 @@ document.addEventListener("DOMContentLoaded", () => {
                 }
             };
 
+            // update product
+            document.getElementById("btn-update-product").onclick = async () => {
+                if (!currentProductId) return;
+                const updateData = {
+                    pro_name: document.getElementById("prod-name").value,
+                    brand: document.getElementById("prod-brand").value,
+                    price: parseFloat(document.getElementById("prod-price").value),
+                    stock: parseInt(document.getElementById("prod-stock").value),
+                    description: document.getElementById("prod-description").value
+                };
+                const res = await fetch(`${API_BASE_URL}/products/${currentProductId}`, {
+                    method: "PUT",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify(updateData)
+                });
+                if (res.ok) {
+                    alert("Product updated successfully!");
+                } else {
+                    alert("Error updating product.");
+                }
+            };
+
             // add attribute
             document.getElementById("btn-add-attribute").onclick = () => {
                 if (!currentProductId) return;
-                const name = document.getElementById("name").value.trim();
-                const value = document.getElementById("value").value.trim();
+                const name = document.getElementById("new-attr-name").value.trim();
+                const value = document.getElementById("new-attr-value").value.trim();
                 if (name && value) {
                     fetch(`${API_BASE_URL}/products/${currentProductId}/attributes`, {
                         method: "POST",
@@ -135,9 +158,9 @@ document.addEventListener("DOMContentLoaded", () => {
             // add review
             document.getElementById("btn-add-review").onclick = () => {
                 if (!currentProductId) return;
-                const reviewer = document.getElementById("reviewer").value.trim();
-                const rating = parseInt(document.getElementById("rating").value);
-                const content = document.getElementById("content").value.trim();
+                const reviewer = document.getElementById("new-reviewer").value.trim();
+                const rating = parseInt(document.getElementById("new-rating").value);
+                const content = document.getElementById("new-content").value.trim();
                 if (reviewer && rating && content) {
                     fetch(`${API_BASE_URL}/products/${currentProductId}/reviews`, {
                         method: "POST",
@@ -156,9 +179,8 @@ document.addEventListener("DOMContentLoaded", () => {
                 }
             };
 
-            // bottom actions
-            const confirmBtn = document.querySelector('.bottom-actions .btn:nth-child(2)');
-            confirmBtn.onclick = async () => {
+            // update category
+            document.getElementById("btn-update-category").onclick = async () => {
                 const catId = categorySelect.value;
                 if (!catId) return;
                 const description = document.getElementById("cat-description").value;
@@ -172,11 +194,6 @@ document.addEventListener("DOMContentLoaded", () => {
                 } else {
                     alert("Error updating category.");
                 }
-            };
-
-            const cancelBtn = document.querySelector('.bottom-actions .btn:nth-child(1)');
-            cancelBtn.onclick = () => {
-                formArea.innerHTML = "";
             };
 
         } catch (err) {
