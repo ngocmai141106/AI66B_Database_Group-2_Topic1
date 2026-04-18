@@ -7,70 +7,74 @@
 </head>
 <body>
 
-<h2>Update Product</h2>
+  <h2>Update Product</h2>
 
   <div class="form-area update-form">
-    <label for="update-category">Category:</label>
-    <select id="update-category">
-      <option value="">--Select Category--</option>
-      <!--load option cat từ js-->
-    </select>
+    <div>
+      <label for="update-category">Category:</label>
+      <select id="update-category">
+        <option value="">--Select Category--</option>
+        <!--load option cat từ js-->
+      </select>
+    </div>
 
-    <label for="update-product">Product:</label>
-    <select id="update-product">
-      <option value="">--Select Product--</option>
-      <!--load option spham từ js-->
-    </select>
+    <div>
+      <label for="update-product">Product:</label>
+      <select id="update-product">
+        <option value="">--Select Product--</option>
+        <!--load option spham từ js-->
+      </select>
+    </div>
 
     <div id="update-product-info" style="display: none;">
       <h3>Product Details</h3>
-      <label for="prod-name">Name:</label>
-      <input id="prod-name" type="text">
 
-      <label for="prod-brand">Brand:</label>
-      <input id="prod-brand" type="text">
+      <div>
+        <label for="prod-name">Product Name:</label>
+        <input id="prod-name" type="text">
+      </div>
 
-      <label for="prod-price">Price:</label>
-      <input id="prod-price" type="number">
+      <div>
+        <label for="prod-brand">Brand:</label>
+        <input id="prod-brand" type="text">
+      </div>
 
-      <label for="prod-stock">Stock:</label>
-      <input id="prod-stock" type="number">
+      <div>
+        <label for="prod-price">Price:</label>
+        <input id="prod-price" type="number" min="1">
+      </div>
 
-      <label for="prod-description">Description:</label>
-      <textarea id="prod-description"></textarea>
+      <div>
+        <label for="prod-stock">Stock:</label>
+        <input id="prod-stock" type="number" min="0">
+      </div>
 
-      <button id="btn-update-product">Update Product</button>
+      <div>
+        <label for="prod-description">Description:</label>
+        <textarea id="prod-description"></textarea>
+      </div>
+
+      <button id="btn-update-product" type="button">Update Product</button>
+
+      <h3>Attributes</h3>
+      <div id="attributes-list"></div>
+      <div id="add-attribute-section">
+        <input type="text" id="new-attr-name" placeholder="Attribute name (e.g. color)">
+        <input type="text" id="new-attr-value" placeholder="Attribute value (e.g. purple)">
+        <button type="button" id="btn-add-attribute">Add Attribute</button>
+      </div>
+
+      <h3>Reviews</h3>
+      <div id="reviews-list"></div>
+      <div id="add-review-section">
+        <input type="text" id="new-reviewer" placeholder="Reviewer">
+        <input type="number" id="new-rating" min="1" max="5" placeholder="Rating">
+        <input type="text" id="new-content" placeholder="Content">
+        <button type="button" id="btn-add-review">Add Review</button>
+      </div>
     </div>
 
-    <!-- Attributes section -->
-    <h3>Attributes</h3>
-    <div id="attributes-list">
-      <!-- Existing attributes will be listed here -->
-    </div>
-    <div id="add-attribute-section">
-      <input type="text" id="new-attr-name" placeholder="Attribute name">
-      <input type="text" id="new-attr-value" placeholder="Attribute value">
-      <button id="btn-add-attribute">Add Attribute</button>
-    </div>
-
-    <!-- Reviews section -->
-    <h3>Reviews</h3>
-    <div id="reviews-list">
-      <!-- Existing reviews will be listed here -->
-    </div>
-    <div id="add-review-section">
-      <input type="text" id="new-reviewer" placeholder="Reviewer">
-      <input type="number" id="new-rating" min="1" max="5" placeholder="Rating">
-      <input type="text" id="new-content" placeholder="Content">
-      <button id="btn-add-review">Add Review</button>
-    </div>
-
-    <!-- Category update -->
-    <h3>Update Category Description</h3>
-    <label for="cat-description">Description:</label>
-    <textarea id="cat-description"></textarea>
-    <button id="btn-update-category">Update Category</button>
-
+    <button id="btn-update-category" type="button">Update Category</button>
   </div>
 
 </body>
