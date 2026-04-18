@@ -275,27 +275,35 @@ def search_global(
 #update a product
 @app.put("/products/{id}")
 def update_product(id: str, update_data: dict):
-    if "pro_id" in update_data:
-        update_data.pop("pro_id")
-    db.products.update_one({"pro_id": id}, {"$set": update_data})
-    return {"message": "Product updated", "update": update_data}
+    try:
+        db.products.update_one({"_id": ObjectId(id)}, {"$set": update_data})
+    except Exception:
+        raise HTTPException(status_code=400, detail="Invalid ObjectId format")
+    return {"message": "Product updated"}
 
 #update a product's attribute
 @app.put("/products/{id}/attributes/{attr_key}")
-def update_attribute(id: str, attr_key: str, value: str):
-    db.products.update_one(
-        {"pro_id": id},
-        {"$set": {f"attributes.{attr_key}": value}}
-    )
+def update_attribute(id: str, attr_key: str, data: dict):
+    try:
+        value = data.get("value")
+        db.products.update_one(
+            {"_id": ObjectId(id)},
+            {"$set": {f"attributes.{attr_key}": value}}
+        )
+    except Exception:
+        raise HTTPException(status_code=400, detail="Invalid ObjectId format")
     return {"message": "Attribute updated", "attribute": {attr_key: value}}
 
 #update a product's review
 @app.put("/products/{id}/reviews/{rev_id}")
 def update_review(id: str, rev_id: str, update_data: dict):
-    db.products.update_one(
-        {"pro_id": id, "reviews.rev_id": rev_id},
-        {"$set": {f"reviews.$.{k}": v for k, v in update_data.items()}}
-    )
+    try:
+        db.products.update_one(
+            {"_id": ObjectId(id), "reviews.rev_id": rev_id},
+            {"$set": {f"reviews.$.{k}": v for k, v in update_data.items()}}
+        )
+    except Exception:
+        raise HTTPException(status_code=400, detail="Invalid ObjectId format")
     return {"message": "Review updated", "update": update_data}
 
 #update a category's description
