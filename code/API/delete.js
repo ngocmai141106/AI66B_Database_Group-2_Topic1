@@ -59,6 +59,24 @@ document.addEventListener("DOMContentLoaded", () => {
                     <p><strong>Stock:</strong> ${product.stock}</p>
                     <p><strong>Description:</strong> ${product.description}</p>
                 `;
+                //render attributes
+                const attrContainer = document.createElement("div");
+                attrContainer.innerHTML = "<h3>Attributes</h3>";
+                product.attributes.forEach(attr => {
+                    const p = document.createElement("p");
+                    p.textContent = `${attr.name}: ${attr.value}`;
+                    attrContainer.appendChild(p);
+                });
+                infoDiv.appendChild(attrContainer);
+                //render reviews
+                const reviewContainer = document.createElement("div");
+                reviewContainer.innerHTML = "<h3>Reviews</h3>";
+                product.reviews.forEach(review => {
+                    const p = document.createElement("p");
+                    p.textContent = `${review.reviewer} (${review.rating}/5): ${review.content}`;
+                    reviewContainer.appendChild(p);
+                });
+                infoDiv.appendChild(reviewContainer);
             };
 
             // Cancel & Confirm
