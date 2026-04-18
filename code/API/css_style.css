@@ -109,3 +109,75 @@ body {
   padding: 8px 16px;
   cursor: pointer;
 }
+
+
+/* format update tổng thể */
+#update-form {
+  margin-left: 20px;
+  max-width: 675px;
+}
+
+/* label và trường nhập */
+#update-form label {
+  display: block;
+  margin-bottom: 2px;
+  font-weight: bold;
+}
+
+#update-form input,
+#update-form select,
+#update-form textarea {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  line-height: 1.4;
+}
+/* description mở rộng xún*/
+#update-form textarea#update-description {
+  min-height: 120px;
+  resize: vertical;
+}
+
+/* nút hành động */
+#update-form button {
+  padding: 8px 16px;
+  border: none;
+  background-color: #7BADE2;
+  color: white;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+  margin-right: 8px;
+}
+#update-form button:hover {
+  background-color: #0056b3;
+}
+
+/* attributes section */
+#update-attributes-section {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+#update-attributes-section input {
+  flex: 1;
+  height: 40px;
+  box-sizing: border-box;
+}
+/* reviews section */
+#update-reviews-section {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+#update-reviews-section input#update-reviewer { flex: 1; }
+#update-reviews-section input#update-rating { flex: 0.5; }
+#update-reviews-section input#update-content { flex: 2; }
+#update-reviews-section input,
+#update-reviews-section button {
+  height: 40px;
+  box-sizing: border-box;
+}
