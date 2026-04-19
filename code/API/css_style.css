@@ -17,12 +17,15 @@
 
 /*format hiển thị in4 chi tiết bảng bên phải
 /*thụt lề cho phần attribute và giãn cách từng cái nè*/
-.attributes {
-  margin-left: 20px;
+.detail-row ul {   /* bỏ chấm đầu dòng */
+  padding-left: 20px;      /* thụt lề toàn bộ nội dung */
+  margin: 0;
 }
-.attribute-item {
+.detail-row li {
   margin-bottom: 5px;
 }
+
+
 /*thụt lề review và tách từng cái*/
 .reviews {
   margin-left: 20px;
