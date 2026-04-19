@@ -179,7 +179,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 document.querySelectorAll("#attributes-list input").forEach(input => {
                     const key = input.id.replace("attr-", ""); // lấy tên attr từ id
                     const value = input.value;
-                    attributes.push({ key, value });
+                    attributes.push({ name: key, value: value });
                 });
             
                 // 3. Lấy reviews
