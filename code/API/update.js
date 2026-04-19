@@ -1,3 +1,6 @@
+let update_attributesArray = [];
+let update_reviewsArray = [];
+
 document.addEventListener("DOMContentLoaded", () => {
     const updateBtn = document.querySelector('.left-group .btn-tab:nth-child(2)');
     if (!updateBtn) return;
@@ -82,8 +85,6 @@ document.addEventListener("DOMContentLoaded", () => {
                         div.innerHTML = `
                             <label>${attr.name}:</label>
                             <input type="text" value="${attr.value}" id="attr-${attr.name}">
-                            <button onclick="updateAttribute('${prodId}', '${attr.key}')">Update</button>
-                            <button onclick="deleteAttribute('${prodId}', '${attr.key}')">Delete</button>
                         `;
                         attrList.appendChild(div);
                     });
@@ -99,124 +100,136 @@ document.addEventListener("DOMContentLoaded", () => {
                             <input type="text" value="${review.reviewer}" id="rev-reviewer-${review.rev_id}">
                             <input type="number" min="1" max="5" value="${review.rating}" id="rev-rating-${review.rev_id}">
                             <input type="text" value="${review.content}" id="rev-content-${review.rev_id}">
-                            <button onclick="updateReview('${prodId}', '${review.rev_id}')">Update</button>
-                            <button onclick="deleteReview('${prodId}', '${review.rev_id}')">Delete</button>
                         `;
                         revList.appendChild(div);
                     });
                 }
             };
 
-            // add attribute
-            document.getElementById("btn-add-attribute").onclick = () => {
-                if (!currentProductId) return;
-                const name = document.getElementById("name").value.trim();
-                const value = document.getElementById("value").value.trim();
-                if (name && value) {
-                    fetch(`${API_BASE_URL}/products/${currentProductId}/attributes`, {
-                        method: "POST",
-                        headers: { "Content-Type": "application/json" },
-                        body: JSON.stringify({ [name]: value })
-                    }).then(res => {
-                        if (res.ok) {
-                            alert("Attribute added!");
-                            productSelect.onchange(); // refresh
-                        } else {
-                            alert("Error adding attribute.");
-                        }
-                    });
+            // Cancel
+            const cancelBtn = document.querySelector('.bottom-actions .btn:nth-child(1)');
+            cancelBtn.onclick = () => {
+                formArea.innerHTML = "";
+                update_attributesArray = [];
+                update_reviewsArray = [];
+            };
+
+            // Add Attribute
+            const addAttrBtn = document.getElementById("btn-add-attribute");
+            addAttrBtn.onclick = () => {
+                const attrName = document.getElementById("name").value.trim();
+                const attrValue = document.getElementById("value").value.trim();
+                if (attrName && attrValue) {
+                    update_attributesArray.push({ name: attrName, value: attrValue });
+
+                    const attrList = document.getElementById("attributes-list");
+                    const div = document.createElement("div");
+                    div.innerHTML = `
+                        <label>${attrName}:</label>
+                        <input type="text" value="${attrValue}" id="attr-${attrName}">
+                    `;
+                    attrList.appendChild(div);
+
+                    console.log("Attributes array:", update_attributesArray);
+                    document.getElementById("name").value = "";
+                    document.getElementById("value").value = "";
                 } else {
-                    alert("Please fill both name and value.");
+                    alert("Please fill both attribute name and value!");
                 }
             };
 
-            // add review
-            document.getElementById("btn-add-review").onclick = () => {
-                if (!currentProductId) return;
+            // Add Review
+            const addReviewBtn = document.getElementById("btn-add-review");
+            addReviewBtn.onclick = () => {
                 const reviewer = document.getElementById("reviewer").value.trim();
-                const rating = parseInt(document.getElementById("rating").value);
+                const rating = document.getElementById("rating").value.trim();
                 const content = document.getElementById("content").value.trim();
                 if (reviewer && rating && content) {
-                    fetch(`${API_BASE_URL}/products/${currentProductId}/reviews`, {
-                        method: "POST",
-                        headers: { "Content-Type": "application/json" },
-                        body: JSON.stringify({ reviewer, rating, content })
-                    }).then(res => {
-                        if (res.ok) {
-                            alert("Review added!");
-                            productSelect.onchange(); // refresh
-                        } else {
-                            alert("Error adding review.");
-                        }
-                    });
+                    update_reviewsArray.push({ reviewer, rating: parseInt(rating), content });
+
+                    const revList = document.getElementById("reviews-list");
+                    const div = document.createElement("div");
+                    div.innerHTML = `
+                        <input type="text" value="${reviewer}" id="rev-reviewer-temp-${update_reviewsArray.length}">
+                        <input type="number" min="1" max="5" value="${rating}" id="rev-rating-temp-${update_reviewsArray.length}">
+                        <input type="text" value="${content}" id="rev-content-temp-${update_reviewsArray.length}">
+                    `;
+                    revList.appendChild(div);
+
+                    console.log("Reviews array:", update_reviewsArray);
+                    document.getElementById("reviewer").value = "";
+                    document.getElementById("rating").value = "";
+                    document.getElementById("content").value = "";
                 } else {
-                    alert("Please fill all review fields.");
+                    alert("Please fill all review fields!");
                 }
-            };           
+            };          
+            
+            const confirmBtn = document.querySelector('.bottom-actions .btn:nth-child(2)');
+            confirmBtn.onclick = async () => {
+                // 1. Lấy thông tin sản phẩm
+                const name = document.getElementById("prod-name").value.trim();
+                const brand = document.getElementById("prod-brand").value.trim();
+                const price = parseFloat(document.getElementById("prod-price").value);
+                const stock = parseInt(document.getElementById("prod-stock").value);
+                const description = document.getElementById("prod-description").value.trim();
+            
+                // 2. Lấy attributes
+                const attributes = [];
+                document.querySelectorAll("#attributes-list input").forEach(input => {
+                    const key = input.id.replace("attr-", ""); // lấy tên attr từ id
+                    const value = input.value;
+                    attributes.push({ key, value });
+                });
+            
+                // 3. Lấy reviews
+                const reviews = [];
+                document.querySelectorAll("#reviews-list div").forEach(div => {
+                    const reviewerInput = div.querySelector("[id^='rev-reviewer']");
+                    const ratingInput = div.querySelector("[id^='rev-rating']");
+                    const contentInput = div.querySelector("[id^='rev-content']");
+                
+                    if (reviewerInput && ratingInput && contentInput) {
+                        const revId = reviewerInput.id.replace("rev-reviewer-", "");
+                        reviews.push({
+                            rev_id: revId,
+                            reviewer: reviewerInput.value,
+                            rating: parseInt(ratingInput.value),
+                            content: contentInput.value
+                        });
+                    }
+                });
+            
+                // 4. Gom tất cả vào object
+                if (confirm("Do you want to update this product?")) {
+                    const updateData = {
+                        pro_name: name,
+                        brand,
+                        price,
+                        stock,
+                        description,
+                        attributes,
+                        reviews
+                    };
+            
+                    // 5. Gửi lên API
+                    const res = await fetch(`${API_BASE_URL}/products/${currentProductId}`, {
+                        method: "PUT",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify(updateData)
+                    });
+                
+                    if (res.ok) {
+                        alert("Product updated successfully!");
+                    } else {
+                        alert("Error updating product.");
+                    }
+                }
+            };
+
         } catch (err) {
             formArea.innerHTML = '<p style="color:red;">Error loading update form.</p>';
         }
     });
 });
 
-// global functions for attributes and reviews
-function updateAttribute(prodId, attrKey) {
-    const value = document.getElementById(`attr-${attrKey}`).value;
-    fetch(`${API_BASE_URL}/products/${prodId}/attributes/${attrKey}`, {
-        method: "PUT",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({value})
-    }).then(res => {
-        if (res.ok) {
-            alert("Attribute updated!");
-        } else {
-            alert("Error updating attribute.");
-        }
-    });
-}
-
-function deleteAttribute(prodId, attrKey) {
-    fetch(`${API_BASE_URL}/products/${prodId}/attributes/${attrKey}`, {
-        method: "DELETE"
-    }).then(res => {
-        if (res.ok) {
-            alert("Attribute deleted!");
-            // refresh product info
-            document.getElementById("update-product").onchange();
-        } else {
-            alert("Error deleting attribute.");
-        }
-    });
-}
-
-function updateReview(prodId, revId) {
-    const reviewer = document.getElementById(`rev-reviewer-${revId}`).value;
-    const rating = parseInt(document.getElementById(`rev-rating-${revId}`).value);
-    const content = document.getElementById(`rev-content-${revId}`).value;
-    const updateData = { reviewer, rating, content };
-    fetch(`${API_BASE_URL}/products/${prodId}/reviews/${revId}`, {
-        method: "PUT",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(updateData)
-    }).then(res => {
-        if (res.ok) {
-            alert("Review updated!");
-        } else {
-            alert("Error updating review.");
-        }
-    });
-}
-
-function deleteReview(prodId, revId) {
-    fetch(`${API_BASE_URL}/products/${prodId}/reviews/${revId}`, {
-        method: "DELETE"
-    }).then(res => {
-        if (res.ok) {
-            alert("Review deleted!");
-            // refresh product info
-            document.getElementById("update-product").onchange();
-        } else {
-            alert("Error deleting review.");
-        }
-    });
-}
