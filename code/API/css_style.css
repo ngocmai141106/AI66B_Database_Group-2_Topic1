@@ -1,8 +1,18 @@
-/*format màu theme lé biền*/
-/* Top bar nền */
+/*format màu xay ganh*/
+/*top bar nền*/
 .topbar .right-group .icon-box{
   background-color: #26CEAA;
   color: white;
+  width: 40px;
+  height: 40px;
+  font-size: 22px;
+}
+/*thanh search*/
+.topbar .right-group .search-box input {
+  height: 30px;
+  font-size: 18px;
+  padding: 0 12px;
+  margin-left: 10px;  /*cách cái kính lúp ra*/
 }
 .topbar .left-group .btn-tab{
   background-color: #26CEAA;
@@ -183,4 +193,30 @@ body {
 #update-reviews-section button {
   height: 40px;
   box-sizing: border-box;
+}
+
+
+/*format delete*/
+#delete-product-info {
+  margin-left: 20px;
+  font-size: 18px;
+}
+#delete-product-info .attributes {
+  margin-left: 20px;
+}
+#delete-product-info .attributes p {
+  margin-bottom: 5px;
+  list-style-type: disc;
+  padding-left: 20px;
+}
+.attributes .attribute-item {
+  position: relative;
+  padding-left: 20px;
+  margin-bottom: 5px;
+}
+.attributes .attribute-item::before {
+  content: "•"; /*kí tự bullet... hết cách rồi nên phải làm ntn*/
+  position: absolute;
+  left: 0;
+  color: #333;
 }
