@@ -12,6 +12,76 @@ document.addEventListener("DOMContentLoaded", () => {
             const html = await response.text();
             formArea.innerHTML = html;
 
+            // Add event listener for delete buttons
+            formArea.addEventListener('click', async (e) => {
+                if (e.target.classList.contains('delete-attr')) {
+                    const attrName = e.target.dataset.attr;
+                    const existing = e.target.dataset.existing === 'true';
+                    if (existing) {
+                        try {
+                            const res = await fetch(`${API_BASE_URL}/products/${currentProductId}/attributes/${encodeURIComponent(attrName)}`, { method: 'DELETE' });
+                            if (!res.ok) {
+                                alert('Error deleting attribute');
+                                return;
+                            }
+                            // Update currentProducts
+                            const updatedRes = await fetch(`${API_BASE_URL}/products/${currentProductId}`);
+                            if (updatedRes.ok) {
+                                const updatedProduct = await updatedRes.json();
+                                const index = window.currentProducts.findIndex(p => p._id === currentProductId);
+                                if (index !== -1) {
+                                    window.currentProducts[index] = updatedProduct;
+                                }
+                                // Refresh right-panel if showing detail
+                                const panel = document.getElementById("right-panel");
+                                if (panel.innerHTML.includes("Product Details")) {
+                                    showProductDetail(currentProductId);
+                                }
+                            }
+                        } catch (err) {
+                            alert('Error deleting attribute');
+                            return;
+                        }
+                    } else {
+                        update_attributesArray = update_attributesArray.filter(a => a.name !== attrName);
+                    }
+                    e.target.closest('div').remove();
+                }
+                if (e.target.classList.contains('delete-review')) {
+                    const revId = e.target.dataset.rev;
+                    const existing = e.target.dataset.existing === 'true';
+                    if (existing) {
+                        try {
+                            const res = await fetch(`${API_BASE_URL}/products/${currentProductId}/reviews/${revId}`, { method: 'DELETE' });
+                            if (!res.ok) {
+                                alert('Error deleting review');
+                                return;
+                            }
+                            // Update currentProducts
+                            const updatedRes = await fetch(`${API_BASE_URL}/products/${currentProductId}`);
+                            if (updatedRes.ok) {
+                                const updatedProduct = await updatedRes.json();
+                                const index = window.currentProducts.findIndex(p => p._id === currentProductId);
+                                if (index !== -1) {
+                                    window.currentProducts[index] = updatedProduct;
+                                }
+                                // Refresh right-panel if showing detail
+                                const panel = document.getElementById("right-panel");
+                                if (panel.innerHTML.includes("Product Details")) {
+                                    showProductDetail(currentProductId);
+                                }
+                            }
+                        } catch (err) {
+                            alert('Error deleting review');
+                            return;
+                        }
+                    } else {
+                        update_reviewsArray = update_reviewsArray.filter(r => r.rev_id !== revId);
+                    }
+                    e.target.closest('div').remove();
+                }
+            });
+
             // load combo box category
             const categorySelect = document.getElementById("update-category");
             const resCat = await fetch(`${API_BASE_URL}/categories`);
@@ -68,6 +138,11 @@ document.addEventListener("DOMContentLoaded", () => {
                 const product = await res.json();
                 console.log(product); // kiểm tra object trả về
 
+                // Convert attributes from dict to array if needed
+                if (product.attributes && typeof product.attributes === 'object' && !Array.isArray(product.attributes)) {
+                    product.attributes = Object.entries(product.attributes).map(([name, value]) => ({ name, value }));
+                }
+
                 // populate product fields
                 document.getElementById("prod-name").value = product.pro_name || "";
                 document.getElementById("prod-brand").value = product.brand || "";
@@ -85,6 +160,7 @@ document.addEventListener("DOMContentLoaded", () => {
                         div.innerHTML = `
                             <label>${attr.name}:</label>
                             <input type="text" value="${attr.value}" id="attr-${attr.name}">
+                            <button class="delete-attr" data-attr="${attr.name}" data-existing="true">❌</button>
                         `;
                         attrList.appendChild(div);
                     });
@@ -100,6 +176,7 @@ document.addEventListener("DOMContentLoaded", () => {
                             <input type="text" value="${review.reviewer}" id="rev-reviewer-${review.rev_id}">
                             <input type="number" min="1" max="5" value="${review.rating}" id="rev-rating-${review.rev_id}">
                             <input type="text" value="${review.content}" id="rev-content-${review.rev_id}">
+                            <button class="delete-review" data-rev="${review.rev_id}" data-existing="true">❌</button>
                         `;
                         revList.appendChild(div);
                     });
@@ -127,6 +204,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     div.innerHTML = `
                         <label>${attrName}:</label>
                         <input type="text" value="${attrValue}" id="attr-${attrName}">
+                        <button class="delete-attr" data-attr="${attrName}">❌</button>
                     `;
                     attrList.appendChild(div);
 
@@ -145,14 +223,16 @@ document.addEventListener("DOMContentLoaded", () => {
                 const rating = document.getElementById("rating").value.trim();
                 const content = document.getElementById("content").value.trim();
                 if (reviewer && rating && content) {
-                    update_reviewsArray.push({ reviewer, rating: parseInt(rating), content });
+                    const rev_id = `temp-${Date.now()}`;
+                    update_reviewsArray.push({ rev_id, reviewer, rating: parseInt(rating), content });
 
                     const revList = document.getElementById("reviews-list");
                     const div = document.createElement("div");
                     div.innerHTML = `
-                        <input type="text" value="${reviewer}" id="rev-reviewer-temp-${update_reviewsArray.length}">
-                        <input type="number" min="1" max="5" value="${rating}" id="rev-rating-temp-${update_reviewsArray.length}">
-                        <input type="text" value="${content}" id="rev-content-temp-${update_reviewsArray.length}">
+                        <input type="text" value="${reviewer}" id="rev-reviewer-${rev_id}">
+                        <input type="number" min="1" max="5" value="${rating}" id="rev-rating-${rev_id}">
+                        <input type="text" value="${content}" id="rev-content-${rev_id}">
+                        <button class="delete-review" data-rev="${rev_id}">❌</button>
                     `;
                     revList.appendChild(div);
 
@@ -208,7 +288,7 @@ document.addEventListener("DOMContentLoaded", () => {
                         price,
                         stock,
                         description,
-                        attributes,
+                        attributes: Object.fromEntries(attributes.map(a => [a.name, a.value])),
                         reviews
                     };
             
