@@ -327,7 +327,7 @@
                     : (typeof product.avg_rating === "number" ? product.avg_rating : null);
 
                 return `
-                    <div class="product-card" onclick="renderProducts(document.getElementById('right-panel'), window.currentProducts)">
+                    <div class="product-card" onclick="showProductDetail('${product._id}')">
                         <div><strong>Name:</strong> ${product.pro_name || "-"}</div>
                         <div><strong>Description:</strong> ${product.description || "-"}</div>
                         <div><strong>Price:</strong> ${product.price ?? "0"}</div>

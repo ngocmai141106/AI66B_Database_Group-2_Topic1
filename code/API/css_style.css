@@ -136,7 +136,7 @@ body {
   line-height: 1.4;
 }
 /* description mở rộng xún*/
-#update-form textarea#update-description {
+#update-form textarea#prod-description {
   min-height: 120px;
   resize: vertical;
 }
