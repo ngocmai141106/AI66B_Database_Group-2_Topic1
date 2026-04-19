@@ -61,18 +61,23 @@ document.addEventListener("DOMContentLoaded", () => {
                 `;
                 //render attributes
                 const attrContainer = document.createElement("div");
+                attrContainer.className = "attributes"; // thêm class
                 attrContainer.innerHTML = "<h3>Attributes</h3>";
                 product.attributes.forEach(attr => {
                     const p = document.createElement("p");
+                    p.className = "attribute-item"; // thêm class
                     p.textContent = `${attr.name}: ${attr.value}`;
                     attrContainer.appendChild(p);
                 });
                 infoDiv.appendChild(attrContainer);
+
                 //render reviews
                 const reviewContainer = document.createElement("div");
+                reviewContainer.className = "reviews"; // thêm class
                 reviewContainer.innerHTML = "<h3>Reviews</h3>";
                 product.reviews.forEach(review => {
-                    const p = document.createElement("p");
+                    const p = document.createElement("div");
+                    p.className = "review-card"; // thêm class
                     p.textContent = `${review.reviewer} (${review.rating}/5): ${review.content}`;
                     reviewContainer.appendChild(p);
                 });
