@@ -221,6 +221,11 @@ document.addEventListener("DOMContentLoaded", () => {
                 
                     if (res.ok) {
                         alert("Product updated successfully!");
+                        const catId = categorySelect.value;
+                        if (catId) {
+                            fetchProductsByCategory(catId);
+                        }
+                        formArea.innerHTML = "";
                     } else {
                         alert("Error updating product.");
                     }
