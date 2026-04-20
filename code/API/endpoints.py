@@ -330,25 +330,19 @@ def delete_product(id: str):
 #delete a product's attribute
 @app.delete("/products/{id}/attributes/{attr_key}")
 def delete_attribute(id: str, attr_key: str):
-    try:
-        db.products.update_one(
-            {"_id": ObjectId(id)},
-            {"$unset": {f"attributes.{attr_key}": ""}}
-        )
-    except Exception:
-        raise HTTPException(status_code=400, detail="Invalid ObjectId format")
+    db.products.update_one(
+        {"pro_id": id},
+        {"$unset": {f"attributes.{attr_key}": ""}}
+    )
     return {"message": "Attribute deleted", "attr_key": attr_key}
 
 #delete a product's review
 @app.delete("/products/{id}/reviews/{rev_id}")
 def delete_review(id: str, rev_id: str):
-    try:
-        db.products.update_one(
-            {"_id": ObjectId(id)},
-            {"$pull": {"reviews": {"rev_id": rev_id}}}
-        )
-    except Exception:
-        raise HTTPException(status_code=400, detail="Invalid ObjectId format")
+    db.products.update_one(
+        {"pro_id": id},
+        {"$pull": {"reviews": {"rev_id": rev_id}}}
+    )
     return {"message": "Review deleted", "rev_id": rev_id}
 
 
