@@ -17,7 +17,6 @@ from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from uuid import uuid4
 from pymongo import MongoClient
-from pymongo.errors import DuplicateKeyError
 from bson import ObjectId
 def convert_objectid(doc):
     if isinstance(doc, list):
@@ -85,20 +84,14 @@ def add_attribute(id: str, attribute: dict):
     #get the key and value from the attribute dict to check if it exists yet
     attr_key = list(attribute.keys())[0]
     attr_value = list(attribute.values())[0]
-    try:
-        product = db.products.find_one({"_id": ObjectId(id)}, {"attributes": 1})
-    except Exception:
-        raise HTTPException(status_code=400, detail="Invalid ObjectId format")
-    if not product:
-        raise HTTPException(status_code=404, detail="Product not found")
-    if product.get("attributes"):
-        for attr in product["attributes"]:
-            if attr["name"] == attr_key:
-                raise HTTPException(status_code=400, detail=f"Attribute '{attr_key}' already exists for this product")
+    product = db.products.find_one({"pro_id": id}, {"_id": 0, f"attributes.{attr_key}": 1})
+    if product and "attributes" in product and attr_key in product["attributes"]:
+        #if already exists, do not allow
+        raise HTTPException(status_code=400, detail=f"Attribute '{attr_key}' already exists for this product")
     #if no, allow the system to create this attribute
     db.products.update_one(
-        {"_id": ObjectId(id)},
-        {"$push": {"attributes": {"name": attr_key, "value": attr_value}}}
+        {"pro_id": id},
+        {"$set": {f"attributes.{attr_key}": attr_value}}
     )
     return {"message": "Attribute added", "attribute": {attr_key: attr_value}}
 
@@ -293,15 +286,10 @@ def update_product(id: str, update_data: dict):
 def update_attribute(id: str, attr_key: str, data: dict):
     try:
         value = data.get("value")
-        result = db.products.update_one(
+        db.products.update_one(
             {"_id": ObjectId(id)},
-            {"$set": {"attributes.$[elem].value": value}},
-            array_filters=[{"elem.name": attr_key}]
+            {"$set": {f"attributes.{attr_key}": value}}
         )
-        if result.matched_count == 0:
-            raise HTTPException(status_code=404, detail="Product not found")
-        if result.modified_count == 0:
-            raise HTTPException(status_code=404, detail="Attribute not found")
     except Exception:
         raise HTTPException(status_code=400, detail="Invalid ObjectId format")
     return {"message": "Attribute updated", "attribute": {attr_key: value}}
@@ -343,14 +331,10 @@ def delete_product(id: str):
 @app.delete("/products/{id}/attributes/{attr_key}")
 def delete_attribute(id: str, attr_key: str):
     try:
-        result = db.products.update_one(
+        db.products.update_one(
             {"_id": ObjectId(id)},
-            {"$pull": {"attributes": {"name": attr_key}}}
+            {"$unset": {f"attributes.{attr_key}": ""}}
         )
-        if result.matched_count == 0:
-            raise HTTPException(status_code=404, detail="Product not found")
-        if result.modified_count == 0:
-            raise HTTPException(status_code=404, detail="Attribute not found")
     except Exception:
         raise HTTPException(status_code=400, detail="Invalid ObjectId format")
     return {"message": "Attribute deleted", "attr_key": attr_key}
