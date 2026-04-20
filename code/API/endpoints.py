@@ -73,9 +73,6 @@ def create_product(product: dict):
     product["cat_id"] = str(product["cat_id"])
     if "category" in product:
         product.pop("category")
-    # Convert attributes from dict to list if necessary
-    if "attributes" in product and isinstance(product["attributes"], dict):
-        product["attributes"] = [{"name": k, "value": v} for k, v in product["attributes"].items()]
     result = db.products.insert_one(product)
     return {
         "message": "Product created successfully",
