@@ -24,20 +24,6 @@ document.addEventListener("DOMContentLoaded", () => {
                                 alert('Error deleting attribute');
                                 return;
                             }
-                            // Update currentProducts
-                            const updatedRes = await fetch(`${API_BASE_URL}/products/${currentProductId}`);
-                            if (updatedRes.ok) {
-                                const updatedProduct = await updatedRes.json();
-                                const index = window.currentProducts.findIndex(p => p._id === currentProductId);
-                                if (index !== -1) {
-                                    window.currentProducts[index] = updatedProduct;
-                                }
-                                // Refresh right-panel if showing detail
-                                const panel = document.getElementById("right-panel");
-                                if (panel.innerHTML.includes("Product Details")) {
-                                    showProductDetail(currentProductId);
-                                }
-                            }
                         } catch (err) {
                             alert('Error deleting attribute');
                             return;
@@ -56,20 +42,6 @@ document.addEventListener("DOMContentLoaded", () => {
                             if (!res.ok) {
                                 alert('Error deleting review');
                                 return;
-                            }
-                            // Update currentProducts
-                            const updatedRes = await fetch(`${API_BASE_URL}/products/${currentProductId}`);
-                            if (updatedRes.ok) {
-                                const updatedProduct = await updatedRes.json();
-                                const index = window.currentProducts.findIndex(p => p._id === currentProductId);
-                                if (index !== -1) {
-                                    window.currentProducts[index] = updatedProduct;
-                                }
-                                // Refresh right-panel if showing detail
-                                const panel = document.getElementById("right-panel");
-                                if (panel.innerHTML.includes("Product Details")) {
-                                    showProductDetail(currentProductId);
-                                }
                             }
                         } catch (err) {
                             alert('Error deleting review');
@@ -160,7 +132,7 @@ document.addEventListener("DOMContentLoaded", () => {
                         div.innerHTML = `
                             <label>${attr.name}:</label>
                             <input type="text" value="${attr.value}" id="attr-${attr.name}">
-                            <button class="delete-attr" data-attr="${attr.name}" data-existing="true">Delete</button>
+                            <button type="button" class="delete-attr" data-attr="${attr.name}" data-existing="true">Delete</button>
                         `;
                         attrList.appendChild(div);
                     });
@@ -176,7 +148,7 @@ document.addEventListener("DOMContentLoaded", () => {
                             <input type="text" value="${review.reviewer}" id="rev-reviewer-${review.rev_id}">
                             <input type="number" min="1" max="5" value="${review.rating}" id="rev-rating-${review.rev_id}">
                             <input type="text" value="${review.content}" id="rev-content-${review.rev_id}">
-                            <button class="delete-review" data-rev="${review.rev_id}" data-existing="true">Delete</button>
+                            <button type="button" class="delete-review" data-rev="${review.rev_id}" data-existing="true">Delete</button>
                         `;
                         revList.appendChild(div);
                     });
@@ -204,7 +176,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     div.innerHTML = `
                         <label>${attrName}:</label>
                         <input type="text" value="${attrValue}" id="attr-${attrName}">
-                        <button class="delete-attr" data-attr="${attrName}">Delete</button>
+                        <button type="button" class="delete-attr" data-attr="${attrName}">Delete</button>
                     `;
                     attrList.appendChild(div);
 
@@ -232,7 +204,7 @@ document.addEventListener("DOMContentLoaded", () => {
                         <input type="text" value="${reviewer}" id="rev-reviewer-${rev_id}">
                         <input type="number" min="1" max="5" value="${rating}" id="rev-rating-${rev_id}">
                         <input type="text" value="${content}" id="rev-content-${rev_id}">
-                        <button class="delete-review" data-rev="${rev_id}">Delete</button>
+                        <button type="button" class="delete-review" data-rev="${rev_id}">Delete</button>
                     `;
                     revList.appendChild(div);
 
@@ -288,7 +260,7 @@ document.addEventListener("DOMContentLoaded", () => {
                         price,
                         stock,
                         description,
-                        attributes: Object.fromEntries(attributes.map(a => [a.name, a.value])),
+                        attributes,
                         reviews
                     };
             

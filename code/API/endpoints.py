@@ -56,7 +56,7 @@ db = client["ecommerce_catalog"]
 #create text index on prd's name and description too
 @app.on_event("startup")
 def startup_event():# event cho nút confirm if insert
-    db.products.create_index("reviews.rev_id", unique=True, sparse=True)
+    db.products.create_index("reviews.rev_id", sparse=True)
     db.products.create_index([("pro_name", "text"), ("description", "text")])
     db.products.create_index([("cat_id", 1)])
     db.products.create_index([("brand", 1)])
