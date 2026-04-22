@@ -368,6 +368,11 @@
                 return;
             }
 
+            // Convert attributes to array if dict
+            if (product.attributes && typeof product.attributes === 'object' && !Array.isArray(product.attributes)) {
+                product.attributes = Object.entries(product.attributes).map(([name, value]) => ({ name, value }));
+            }
+            
             const reviewEntries = Array.isArray(product.reviews)
                 ? product.reviews.filter(review => review && typeof review.rating === "number")
                 : [];
