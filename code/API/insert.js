@@ -100,6 +100,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     if (response.ok) {
                         alert("Product added successfully!");
                         fetchProductsByCategory(productData.cat_id);
+                        formArea.innerHTML = "";
                     } else {
                         alert("Error: Cannot add product.");
                     }
