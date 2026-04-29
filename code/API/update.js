@@ -12,7 +12,7 @@ document.addEventListener("DOMContentLoaded", () => {
             const html = await response.text();
             formArea.innerHTML = html;
 
-             // Add event listener for delete buttons
+             // add event listener for delete buttons
             formArea.addEventListener('click', async (e) => {
                 if (e.target.classList.contains('delete-attr')) {
                     const attrName = e.target.dataset.attr;
@@ -54,7 +54,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 }
             });
 
-            // load combo box category
+            //load combo box category
             const categorySelect = document.getElementById("update-category");
             const resCat = await fetch(`${API_BASE_URL}/categories`);
             const categories = await resCat.json();
@@ -72,7 +72,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
             let currentProductId = null;
 
-            // chọn category -> load sản phẩm và category info
+            //choose category -> load prod and cat info
             categorySelect.onchange = async () => {
                 const catId = categorySelect.value;
                 if (!catId) {
@@ -80,7 +80,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     return;
                 }
 
-                // load products
+                //load products
                 const res = await fetch(`${API_BASE_URL}/products/by_category/${catId}`);
                 const data = await res.json();
 
@@ -93,7 +93,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 });
             };
 
-            // chọn product -> load product info
+            //choose product -> load product info
             productSelect.onchange = async () => {
                 const prodId = productSelect.value;
                 currentProductId = prodId;
@@ -108,14 +108,14 @@ document.addEventListener("DOMContentLoaded", () => {
                 return;
                 }
                 const product = await res.json();
-                console.log(product); // kiểm tra object trả về
+                console.log(product);
 
-                // Convert attributes from dict to array if needed
+                //convert attributes from dict to array
                 if (product.attributes && typeof product.attributes === 'object' && !Array.isArray(product.attributes)) {
                     product.attributes = Object.entries(product.attributes).map(([name, value]) => ({ name, value }));
                 }
 
-                // populate product fields
+                //populate product fields
                 document.getElementById("prod-name").value = product.pro_name || "";
                 document.getElementById("prod-brand").value = product.brand || "";
                 document.getElementById("prod-price").value = product.price || "";
@@ -123,7 +123,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 document.getElementById("prod-description").value = product.description || "";
                 updateForm.style.display = "block";
 
-                // populate attributes
+                //populate attributes
                 const attrList = document.getElementById("attributes-list");
                 attrList.innerHTML = "";
                 if (product.attributes && Array.isArray(product.attributes)) {
@@ -138,7 +138,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     });
                 }
                 
-                // populate reviews
+                //populate reviews
                 const revList = document.getElementById("reviews-list");
                 revList.innerHTML = "";
                 if (product.reviews) {
@@ -155,7 +155,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 }
             };
 
-            // Cancel
+            //Cancel
             const cancelBtn = document.querySelector('.bottom-actions .btn:nth-child(1)');
             cancelBtn.onclick = () => {
                 formArea.innerHTML = "";
@@ -163,7 +163,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 update_reviewsArray = [];
             };
 
-            // Add Attribute
+            //add attribute
             const addAttrBtn = document.getElementById("btn-add-attribute");
             addAttrBtn.onclick = () => {
                 const attrName = document.getElementById("name").value.trim();
@@ -188,7 +188,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 }
             };
 
-            // Add Review
+            //add review
             const addReviewBtn = document.getElementById("btn-add-review");
             addReviewBtn.onclick = () => {
                 const reviewer = document.getElementById("reviewer").value.trim();
@@ -215,18 +215,18 @@ document.addEventListener("DOMContentLoaded", () => {
                 } else {
                     alert("Please fill all review fields!");
                 }
-            };          
+            };
             
             const confirmBtn = document.querySelector('.bottom-actions .btn:nth-child(2)');
             confirmBtn.onclick = async () => {
-                // 1. Lấy thông tin sản phẩm
+                //1. get prod info
                 const name = document.getElementById("prod-name").value.trim();
                 const brand = document.getElementById("prod-brand").value.trim();
                 const price = parseFloat(document.getElementById("prod-price").value);
                 const stock = parseInt(document.getElementById("prod-stock").value);
                 const description = document.getElementById("prod-description").value.trim();
             
-                // 2. Lấy attributes
+                //2. get attributes
                 const attributes = [];
                 document.querySelectorAll("#attributes-list input").forEach(input => {
                     const key = input.id.replace("attr-", ""); // lấy tên attr từ id
@@ -234,7 +234,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     attributes.push({ name: key, value: value });
                 });
             
-                // 3. Lấy reviews
+                //3. get reviews
                 const reviews = [];
                 document.querySelectorAll("#reviews-list div").forEach(div => {
                     const reviewerInput = div.querySelector("[id^='rev-reviewer']");
@@ -252,7 +252,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     }
                 });
             
-                // 4. Gom tất cả vào object
+                //4. gather all into object
                 if (confirm("Do you want to update this product?")) {
                     const updateData = {
                         pro_name: name,
@@ -264,7 +264,7 @@ document.addEventListener("DOMContentLoaded", () => {
                         reviews
                     };
             
-                    // 5. Gửi lên API
+                    //5. send API
                     const res = await fetch(`${API_BASE_URL}/products/${currentProductId}`, {
                         method: "PUT",
                         headers: { "Content-Type": "application/json" },

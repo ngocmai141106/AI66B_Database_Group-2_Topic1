@@ -1,14 +1,14 @@
-// ================= SEARCH MODULE =================
+//seach module
 
 let debounceTimer = null;
 let selectedSuggestion = null;
 let lastQuery = "";
 
-// ================= INIT =================
+//init
 window.addEventListener("DOMContentLoaded", () => {
     const input = document.querySelector(".search-box input");
 
-    // FIX: đúng selector icon
+    //fix: đúng selector icon
     const searchIcon = document.querySelector(".right-group .icon-box");
 
     if (!input) return;
@@ -28,12 +28,12 @@ window.addEventListener("DOMContentLoaded", () => {
     }
 });
 
-// ================= INPUT =================
+//input
 function onInputSearch(e) {
     const value = e.target.value.trim();
     lastQuery = value;
 
-    // reset suggestion khi user gõ lại
+    // reset suggestion when user type again
     selectedSuggestion = null;
 
     clearTimeout(debounceTimer);
@@ -43,11 +43,11 @@ function onInputSearch(e) {
     }, 250);
 }
 
-// ================= CORE =================
+//core
 function handleSearch(query) {
     const panel = document.getElementById("right-panel");
 
-    // CASE 3: empty → reset
+    //case 3: empty -> reset
     if (!query) {
         resetToCategory();
         return;
@@ -56,7 +56,7 @@ function handleSearch(query) {
     fuzzySearch(query);
 }
 
-// ================= FUZZY SEARCH =================
+//fuzzy search
 function fuzzySearch(query) {
     const panel = document.getElementById("right-panel");
 
@@ -90,7 +90,7 @@ function fuzzySearch(query) {
     window.renderProducts(panel, results);
 }
 
-// ================= RESET =================
+//reset
 function resetToCategory() {
     const panel = document.getElementById("right-panel");
 
@@ -102,21 +102,21 @@ function resetToCategory() {
     }
 }
 
-// ================= SUGGESTION =================
+//suggestion
 function selectSuggestion(product) {
     selectedSuggestion = product;
 
     const panel = document.getElementById("right-panel");
 
-    // click suggestion = show 1 product (OK logic của bạn)
+    //click suggestion = show 1 product
     window.renderProducts(panel, [product]);
 
-    // optional: sync input
+    //sync input
     const input = document.querySelector(".search-box input");
     if (input) input.value = product.pro_name || "";
 }
 
-// ================= CATEGORY CHANGE =================
+//category change
 function onCategoryChanged(newProducts) {
     window.currentProducts = newProducts;
 
@@ -129,7 +129,7 @@ function onCategoryChanged(newProducts) {
     resetToCategory();
 }
 
-// ================= GLOBAL =================
+//global
 window.selectSuggestion = selectSuggestion;
 window.onCategoryChanged = onCategoryChanged;
 

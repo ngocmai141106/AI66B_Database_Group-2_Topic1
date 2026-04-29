@@ -1,18 +1,3 @@
-#ok file này để viết các endpoint chức năng đồ ơ
-#cop tn ngày 7/4:
-#-C: Tạo product mới, tạo thêm attribute hoặc review cho 1 product đã tồn tại
-#-R: Xem 2 bảng dữ liệu (phiên bản thường), sort theo brand, category, mức giá, hoặc từ khóa tên spham. Đồng thời thì đánh giá (0-5 sao) cũng phải luôn hiển thị
-#-U: Update tất cả các trường ttin (trừ id) cho spham; update mô tả một category
-#-D: Xóa 1 sản phẩm, hoặc 1 attribute hoặc review của 1 spham
-#chốt chế độ hiển thị mặc định là 3 bảng nhé ! nào bấm vào glb search thì mới trộn một (trừ khi search theo cat)
-
-#lần đầu tiên chạy file, ae chạy các dòng sau trong terminal:
-#pip install fastapi
-#pip install pymongo
-#cd code\API
-#uvicorn endpoints:app --reload
-#báo application startup complete là thành công.
-
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from uuid import uuid4
@@ -387,9 +372,6 @@ def search_text(query: str):
     return {"products": products}
 
 
-#ae có phải chạy uvicorn trong terminal trước rồi mới chạy file này thì mới được không?
-#giờ tao thêm đoạn này vào thì sẽ không phải vậy nữa
-#ae cứ bấm chạy file endpoints.py này thôi, sau đó mở html bằng live server thì sẽ ngon nhé
 if __name__ == "__main__":
     import uvicorn
     uvicorn.run(app, host="127.0.0.1", port=8000)

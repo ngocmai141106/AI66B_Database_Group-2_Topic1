@@ -39,4 +39,4 @@ and delete the "unique = True," part, then run endpoints.py again. That must do 
 3. Click Confirm -> OK to confirm the changes on the products. Or click Cancel to empty the left screen if you don't want to update anymore.
 ### 4. Delete
 1. Select the category of the product you want to delete, and its product name. Its information will appear for you to view.
-2. 3. Click Confirm -> OK to delete the products. Or click Cancel to empty the left screen if you don't want to delete anymore.
+2. Click Confirm -> OK to delete the products. Or click Cancel to empty the left screen if you don't want to delete anymore.

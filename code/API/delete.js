@@ -1,4 +1,4 @@
-//dlt ở đây
+//dlt
 
 document.addEventListener("DOMContentLoaded", () => {
     const deleteBtn = document.querySelector('.left-group .btn-tab:nth-child(3)');
@@ -27,7 +27,7 @@ document.addEventListener("DOMContentLoaded", () => {
             const productSelect = document.getElementById("delete-product");
             const infoDiv = document.getElementById("delete-product-info");
 
-            // chọn category -> load sản phẩm
+            // select category -> load product
             categorySelect.onchange = async () => {
                 const catId = categorySelect.value;
                 if (!catId) return;
@@ -38,13 +38,13 @@ document.addEventListener("DOMContentLoaded", () => {
                 productSelect.innerHTML = "<option value=''>--Select Product--</option>";
                 data.products.forEach(p => {
                     const opt = document.createElement("option");
-                    opt.value = p._id; // dùng _id để xóa
+                    opt.value = p._id;
                     opt.textContent = p.pro_name;
                     productSelect.appendChild(opt);
                 });
             };
 
-            // chọn sản phẩm -> hiện chi tiết
+            // select prod -> show detail
             productSelect.onchange = async () => {
                 const productId = productSelect.value;
                 if (!productId) return;
@@ -84,7 +84,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 infoDiv.appendChild(reviewContainer);
             };
 
-            // Cancel & Confirm
+            //Cancel & Confirm
             const cancelBtn = document.querySelector('.bottom-actions .btn:nth-child(1)');
             const confirmBtn = document.querySelector('.bottom-actions .btn:nth-child(2)');
 

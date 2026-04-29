@@ -22,7 +22,7 @@
         color: #243248;
     }
 
-    /* ================= TOPBAR ================= */
+    /* top bar */
     .topbar {
         display: flex;
         justify-content: space-between;
@@ -32,7 +32,7 @@
         border-bottom: 1px solid #d7e0ef;
     }
 
-    /* SEGMENT BUTTON GROUP */
+    /* segment button group */
     .left-group {
         display: flex;
         width: 320px;
@@ -61,7 +61,7 @@
         background: #dbe7ff;
     }
 
-    /* RIGHT AREA */
+    /* right area */
     .right-group {
         display: flex;
         align-items: center;
@@ -96,7 +96,7 @@
         cursor: pointer;
     }
 
-    /* ================= SUBBAR ================= */
+    /* sub bar */
     .subbar {
         display: flex;
         justify-content: space-between;
@@ -132,7 +132,7 @@
         background: #dbe7ff;
     }
 
-    /* ================= MAIN ================= */
+    /* main screen */
     .main {
         flex: 1;
         display: flex;
@@ -215,7 +215,7 @@
 
 <body>
 
-    <!-- ================= TOP BAR ================= -->
+    <!-- top bar -->
     <div class="topbar">
 
         <div class="left-group">
@@ -234,7 +234,7 @@
 
     </div>
 
-    <!-- ================= SUB BAR ================= -->
+    <!-- sub bar -->
     <div class="subbar">
 
         <div></div>
@@ -247,7 +247,7 @@
 
     </div>
 
-    <!-- ================= MAIN ================= -->
+    <!-- main -->
     <div class="main">
 
         <div class="left-panel">
@@ -273,7 +273,7 @@
         let currentProducts = [];
         let currentCategoryId = null;
 
-        // gọi hàm ist_products_by_category, hiện sản phẩm theo category id, mặc định là Phone
+
         async function fetchProductsByCategory(catId) {
             currentCategoryId = catId;
             const panel = document.getElementById("right-panel");
@@ -296,7 +296,7 @@
             }
         }
 
-        // đổi rating số thành sao
+        // rating to star
         function renderStars(rating) {
             if (rating === undefined || rating === null) return "-";
             const fullStar = "★";
@@ -306,7 +306,7 @@
             return `<span style="color: gold; font-size: 18px;">${fullStar.repeat(safeRating)}${emptyStar.repeat(maxStars - safeRating)}</span>`;
         }
 
-        // hiển thị sản phẩm lên panel-right
+        // show prod to panel-right
         function renderProducts(panel, products) {
             if (products.length === 0) {
                 panel.innerHTML = "No matching products found.";
@@ -368,7 +368,7 @@
                 return;
             }
 
-            // Convert attributes to array if dict
+            //convert attributes to array if dict
             if (product.attributes && typeof product.attributes === 'object' && !Array.isArray(product.attributes)) {
                 product.attributes = Object.entries(product.attributes).map(([name, value]) => ({ name, value }));
             }
@@ -409,7 +409,7 @@
             await fetchProductsByCategory("c1a7f2b0-9d3a-4e1f-8a2a-1f9d8a7b1234");
         });
 
-        //tạo const mapping category
+        //make const mapping category
         const categoryMap = {
             "Phone": "c1a7f2b0-9d3a-4e1f-8a2a-1f9d8a7b1234",
             "Fashion": "f2b9c4d1-7e6a-4a3b-9c2b-5d7e8f9a5678",
@@ -418,7 +418,7 @@
 
     </script>
 
-    <!--Đặt các file js chức năng ở đây-->
+    <!--put CUD scirpt here-->
     <script src="insert.js"></script>
     <script src="delete.js"></script>
     <script src="update.js"></script>

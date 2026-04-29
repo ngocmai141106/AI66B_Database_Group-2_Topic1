@@ -1,4 +1,4 @@
-//được rồi tách phần insert ra đây nhé
+//insert
 
 let attributesArray = [];
 let reviewsArray = [];
@@ -14,7 +14,7 @@ document.addEventListener("DOMContentLoaded", () => {
             const html = await response.text();
             formArea.innerHTML = html;
 
-            // Cancel
+            //Cancel
             const cancelBtn = document.querySelector('.bottom-actions .btn:nth-child(1)');
             cancelBtn.onclick = () => {
                 formArea.innerHTML = "";
@@ -22,7 +22,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 reviewsArray = [];
             };
 
-            // Add Attribute
+            //add attribute
             const addAttrBtn = document.getElementById("btn-add-attribute");
             addAttrBtn.onclick = () => {
                 const attrName = document.getElementById("name").value.trim();
@@ -37,7 +37,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 }
             };
 
-            // Add Review
+            //add review
             const addReviewBtn = document.getElementById("btn-add-review");
             addReviewBtn.onclick = () => {
                 const reviewer = document.getElementById("reviewer").value.trim();
@@ -54,7 +54,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 }
             };
 
-            // Confirm
+            //Confirm
             const confirmBtn = document.querySelector('.bottom-actions .btn:nth-child(2)');
             confirmBtn.onclick = async () => {
                 const nameInput = document.getElementById("input-name");

@@ -1,5 +1,3 @@
-/*format màu xay ganh*/
-/*top bar nền*/
 .topbar .right-group .icon-box{
   background-color: #26CEAA;
   color: white;
@@ -7,12 +5,12 @@
   height: 40px;
   font-size: 22px;
 }
-/*thanh search*/
+/*search bar*/
 .topbar .right-group .search-box input {
   height: 30px;
   font-size: 18px;
   padding: 0 12px;
-  margin-left: 10px;  /*cách cái kính lúp ra*/
+  margin-left: 10px;
 }
 .topbar .left-group .btn-tab{
   background-color: #26CEAA;
@@ -25,10 +23,9 @@
 }
 
 
-/*format hiển thị in4 chi tiết bảng bên phải
-/*thụt lề cho phần attribute và giãn cách từng cái nè*/
-.detail-row ul {   /* bỏ chấm đầu dòng */
-  padding-left: 20px;      /* thụt lề toàn bộ nội dung */
+/*format show detail information*/
+.detail-row ul {
+  padding-left: 20px;
   margin: 0;
 }
 .detail-row li {
@@ -36,7 +33,6 @@
 }
 
 
-/*thụt lề review và tách từng cái*/
 .reviews {
   margin-left: 20px;
 }
@@ -45,40 +41,39 @@
   padding: 10px;
   border-left: 2px solid #ccc;
 }
-/*điều chỉnh thông số ở line height để thu giãn kc dòng nhé*/
 body {
   font-family: Arial, sans-serif;
   line-height: 1.6;
 }
 
 
-/*format insert tổng thể */
+/*format insert*/
 #insert-form {
-  margin-left: 20px;  /*thụt lề trái*/
-  max-width: 675px;  /*limit chiều ngang*/
+  margin-left: 20px;
+  max-width: 675px;
 }
-/*đống label và trường nhập*/
+/*label and entry bar*/
 #insert-form label {
-  display: block;  /*đặt label nằm trên trường nhập*/
-  margin-bottom: 2px;  /*kc label với trường nhập*/
+  display: block;
+  margin-bottom: 2px;
   font-weight: bold;
 }
 #insert-form input,
 #insert-form select,
 #insert-form textarea {
-  width: 100%;  /*kéo dài ngang trường nhập*/
+  width: 100%;
   padding: 8px;
-  margin-bottom: 10px; /*giãn cách giữa các trường*/
+  margin-bottom: 10px;
   border: 1px solid #ccc;
   border-radius: 4px;
-  box-sizing: border-box; /*chống tràn khung*/
+  box-sizing: border-box;
 }
-/*mở rộng description và xuống dưới*/
+/*expand description zone*/
 #insert-form textarea#input-description {
-  min-height: 100px;  /*ae set nhiêu thì set, cao hơn input là được nhé*/
-  resize: vertical;  /*allow mở xuống dưới*/
+  min-height: 100px;
+  resize: vertical;
 }
-/*2 nút*/
+
 #insert-form button {
   padding: 8px 16px;
   border: none;
@@ -93,16 +88,16 @@ body {
 }
 #attributes-section {
   display: flex;
-  gap: 10px;  /*kc giữa 2 ô*/
+  gap: 10px;
 }
 #attributes-section input {
-  flex: 1;  /*này để 2 ô chiếm size đều nhau*/
+  flex: 1;
 }
 #reviews-section {
   display: flex;
   gap: 10px;
 }
-/*điều chỉnh tỉ lệ 3 trường trong rv ở đây*/
+
 #reviews-section input#reviewer {flex: 1;}
 #reviews-section input#rating {flex: 0.5;}
 #reviews-section input#content {flex: 2;}
@@ -114,7 +109,7 @@ body {
   box-sizing: border-box;
 }
 
-/*chỉnh màu cho 2 nút cancel cf*/
+
 .btn {
   background-color: #5049CC;
   color: white;
@@ -124,13 +119,13 @@ body {
 }
 
 
-/* format update tổng thể */
+/* format update*/
 #update-form {
   margin-left: 20px;
   max-width: 675px;
 }
 
-/* label và trường nhập */
+/* label and entry bar */
 #update-form label {
   display: block;
   margin-bottom: 2px;
@@ -148,13 +143,12 @@ body {
   box-sizing: border-box;
   line-height: 1.4;
 }
-/* description mở rộng xún*/
+
 #update-form textarea#prod-description {
   min-height: 120px;
   resize: vertical;
 }
 
-/* nút hành động */
 #update-form button {
   padding: 8px 16px;
   border: none;
@@ -215,7 +209,7 @@ body {
   margin-bottom: 5px;
 }
 .attributes .attribute-item::before {
-  content: "•"; /*kí tự bullet... hết cách rồi nên phải làm ntn*/
+  content: "•";
   position: absolute;
   left: 0;
   color: #333;
