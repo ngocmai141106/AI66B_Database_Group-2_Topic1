@@ -52,8 +52,7 @@ app.add_middleware(
 client = MongoClient("mongodb://localhost:27017")
 db = client["ecommerce_catalog"]
 
-#create unique index as starting the app
-#create text index on prd's name and description too
+
 @app.on_event("startup")
 def startup_event():# event cho nút confirm if insert
     db.products.create_index("reviews.rev_id", unique = True, sparse=True)
