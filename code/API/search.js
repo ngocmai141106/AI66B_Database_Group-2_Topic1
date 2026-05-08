@@ -57,40 +57,37 @@ function handleSearch(query) {
 }
 
 //fuzzy search
-async function fuzzySearch(query) {
+function fuzzySearch(query) {
     const panel = document.getElementById("right-panel");
 
-    try {
-        const res = await fetch(
-            `/products/search/global?keyword=${encodeURIComponent(query)}`
+    const products = window.currentProducts || [];
+
+    if (!Array.isArray(products) || products.length === 0) {
+        console.warn("Products not ready yet");
+        return;
+    }
+
+    const q = query.toLowerCase();
+
+    const results = products.filter(p => {
+        return (
+            (p.pro_name || "").toLowerCase().includes(q) ||
+            (p.description || "").toLowerCase().includes(q) ||
+            (p.brand || "").toLowerCase().includes(q) ||
+            (p.price + "").includes(q) ||
+            (p.stock + "").includes(q) ||
+            (p.attributes || []).some(a =>
+                (a.name || "").toLowerCase().includes(q) ||
+                (a.value || "").toLowerCase().includes(q)
+            ) ||
+            (p.reviews || []).some(r =>
+                (r.content || "").toLowerCase().includes(q) ||
+                (r.reviewer || "").toLowerCase().includes(q)
+            )
         );
+    });
 
-        if (!res.ok) {
-            throw new Error("Search request failed");
-        }
-
-        const data = await res.json();
-
-        window.renderProducts(panel, data.products || []);
-    }
-    catch(err) {
-        console.error("MongoDB search failed:", err);
-
-        // fallback local search
-        const products = window.currentProducts || [];
-
-        const q = query.toLowerCase();
-
-        const results = products.filter(p => {
-            return (
-                (p.pro_name || "").toLowerCase().includes(q) ||
-                (p.description || "").toLowerCase().includes(q) ||
-                (p.brand || "").toLowerCase().includes(q)
-            );
-        });
-
-        window.renderProducts(panel, results);
-    }
+    window.renderProducts(panel, results);
 }
 
 //reset
